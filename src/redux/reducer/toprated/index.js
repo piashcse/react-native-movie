@@ -1,19 +1,19 @@
-import {MOVIE_LIST} from '../../constants';
+import {TOP_RATED_MOVIE_LIST} from '../../constants';
 
 const initialState = {
     movie: {}, isLoading: false,
 };
-const movieListReducer = (state = initialState, action) => {
+const topRatedMovieReducer = (state = initialState, action) => {
     switch (action.type) {
-        case MOVIE_LIST.MOVIE_LIST_START:
+        case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_START:
             return {
                 ...state, movie: {}, movieList: [], isLoading: true,
             };
-        case MOVIE_LIST.MOVIE_LIST_SUCCESS:
+        case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_SUCCESS:
             return {
                 ...state, movie: action.result, movieList: action.result?.results, isLoading: false,
             };
-        case MOVIE_LIST.MOVIE_LIST_FAILURE:
+        case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_FAILURE:
             return {
                 ...state, movie: {}, movieList: [], isLoading: false,
             };
@@ -21,4 +21,5 @@ const movieListReducer = (state = initialState, action) => {
             return state;
     }
 }
-export default movieListReducer
+
+export default topRatedMovieReducer

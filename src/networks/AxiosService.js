@@ -3,15 +3,9 @@ import axios from 'axios';
 import {Alert} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 
-let config = {};
-let mainError;
-let count = 1;
-
-class AxiosService {
+// Singleton class
+const AxiosService = {
     async getServiceData(url, parameter) {
-        config = {};
-        mainError = undefined;
-        count = 1;
         const connectionInfo = await NetInfo.fetch();
         if (connectionInfo.type === 'none') {
             Alert('LOGIN_MODULE.PLEASE_CONNECT_TO_INTERNET');
@@ -22,16 +16,12 @@ class AxiosService {
                 'Content-Type': 'application/json',
             };
             return axios.get(ApiUrls.BASE_URL + url, {
-                params: parameter,
-                headers: requestHeader,
+                params: parameter, headers: requestHeader,
             });
         }
-    }
+    },
 
     async postServiceData(url, body) {
-        config = {};
-        mainError = undefined;
-        count = 1;
         const connectionInfo = await NetInfo.fetch();
         if (connectionInfo.type === 'none') {
             Alert('LOGIN_MODULE.PLEASE_CONNECT_TO_INTERNET');
@@ -46,13 +36,10 @@ class AxiosService {
                 headers: requestHeader,
             });
         }
-    }
+    },
 
     // update
     async putServiceData(url, body) {
-        config = {};
-        mainError = undefined;
-        count = 1;
         const connectionInfo = await NetInfo.fetch();
         if (connectionInfo.type === 'none') {
             Alert('LOGIN_MODULE.PLEASE_CONNECT_TO_INTERNET');
@@ -67,13 +54,10 @@ class AxiosService {
                 headers: requestHeader,
             });
         }
-    }
+    },
 
     //delete
     async deleteServiceData(url, body) {
-        config = {};
-        mainError = undefined;
-        count = 1;
         const connectionInfo = await NetInfo.fetch();
         if (connectionInfo.type === 'none') {
             Alert('LOGIN_MODULE.PLEASE_CONNECT_TO_INTERNET');
@@ -85,11 +69,9 @@ class AxiosService {
                 'Content-Type': 'application/json',
             };
             return axios.delete(serverUrl + url, {
-                data: body,
-                headers: requestHeader,
+                data: body, headers: requestHeader,
             });
         }
     }
-}
-
-module.exports = new AxiosService();
+};
+export default AxiosService

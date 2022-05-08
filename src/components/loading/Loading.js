@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ActivityIndicator, Text} from 'react-native';
 import styles from './LoadingStyle';
-import {COLOR} from '../appconstants/Colors';
+import {COLOR} from '../../appconstants/Colors';
 
 const Loading = () => {
     return (<View style={styles.containerLoading}>
