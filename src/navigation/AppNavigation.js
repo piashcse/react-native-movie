@@ -9,7 +9,7 @@ const AppNavigation = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Movie World" component={Home} />
             </Stack.Navigator>
         </NavigationContainer>
     );

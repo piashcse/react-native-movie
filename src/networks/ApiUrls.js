@@ -1,4 +1,4 @@
-import {Constants} from "../components/AppConstants";
+import {Constants} from "../appconstants/AppConstants";
 
 export const ApiUrls = {
     BASE_URL: 'https://api.themoviedb.org/3/',

@@ -1,22 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {Text, View, Image, FlatList, useWindowDimensions} from "react-native";
+import React, {useEffect} from 'react';
+import {View, Image, FlatList} from "react-native";
 import {useSelector, useDispatch} from 'react-redux';
 import {getMovieList} from '../redux/actions';
 import styles from "./HomeStyle";
-import {Constants} from '../components/AppConstants'
+import {Constants} from '../appconstants/AppConstants'
+import Loading from "../components/Loading";
 
 
 const Home = ({navigation}) => {
-    const {height, width} = useWindowDimensions();
     //communicate with redux
     const movieListState = useSelector(state => state.movieListReducer);
+    const isLoading = useSelector(state => state.movieListReducer.isLoading);
     const dispatch = useDispatch();
+
+    // Api call
     useEffect(() => {
         dispatch(getMovieList({}))
     }, [])
 
+    // movie items for movie list
     const movieItem = ({item}) => {
-        return (<View>
+        return (<View style={styles.movieItemContainer}>
             <Image
                 style={styles.imageView}
                 source={{
@@ -24,7 +28,8 @@ const Home = ({navigation}) => {
                 }}/>
         </View>)
     };
-    return (<View style={styles.mainView}>
+    // main view with loading while api call is going one
+    return isLoading ? <Loading/> : <View style={styles.mainView}>
         <FlatList
             style={styles.flatListContainer}
             data={movieListState.movieList}
@@ -32,6 +37,6 @@ const Home = ({navigation}) => {
             numColumns={2}
             keyExtractor={(item, index) => index}
         />
-    </View>)
+    </View>;
 }
 export default Home
