@@ -8,8 +8,7 @@ import styles from './TopRatedStyle'
 
 const TopRated = ({navigation}) => {
     //communicate with redux
-    const movieListState = useSelector(state => state.topRatedMovieReducer);
-    const isLoading = useSelector(state => state.topRatedMovieReducer.isLoading);
+    const {isLoading, movieList} = useSelector(state => state.topRatedMovieReducer);
     const dispatch = useDispatch();
 
     // Api call
@@ -18,6 +17,6 @@ const TopRated = ({navigation}) => {
     }, [])
 
     // main view with loading while api call is going one
-    return isLoading ? <Loading/> : <MovieList movies={movieListState.movieList}/>;
+    return isLoading ? <Loading/> : <MovieList movies={movieList} onPress={(item) => navigation.navigate('MovieDetail', {movieId:item.id})}/>;
 }
 export default TopRated

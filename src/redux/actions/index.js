@@ -1,4 +1,11 @@
-import {MOVIE_LIST, POPULAR_MOVIE_LIST, TOP_RATED_MOVIE_LIST, UP_COMING_MOVIE_LIST} from "../constants";
+import {
+    MOVIE_DETAIL,
+    MOVIE_LIST,
+    POPULAR_MOVIE_LIST,
+    SIMILAR_MOVIE,
+    TOP_RATED_MOVIE_LIST,
+    UP_COMING_MOVIE_LIST
+} from "../constants";
 
 export const getMovieList = (requestBody) => {
     return {
@@ -18,5 +25,15 @@ export const getTopRatedMovieList = (requestBody) => {
 export const getUpComingMovieList = (requestBody) => {
     return {
         type: UP_COMING_MOVIE_LIST.UP_COMING_MOVIE_LIST_START, requestBody
+    };
+}
+export const getMovieDetail = (requestBody) => {
+    return {
+        type: MOVIE_DETAIL.MOVIE_DETAIL_START, requestBody
+    };
+}
+export const getSimilarMovie = (requestBody) => {
+    return {
+        type: SIMILAR_MOVIE.SIMILAR_MOVIE_START, requestBody
     };
 }

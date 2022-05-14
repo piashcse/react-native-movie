@@ -1,19 +1,19 @@
 import React from 'react';
-import {FlatList, Image, View} from "react-native";
+import {FlatList, Image, View, TouchableOpacity} from "react-native";
 import styles from "./MovieListStyle";
 import {Constants} from "../../appconstants/AppConstants";
 
 
-const MovieList = ({movies}) => {
+const MovieList = ({movies, onPress}) => {
     // movie items for movie list
     const movieItem = ({item}) => {
-        return (<View style={styles.movieItemContainer}>
+        return (<TouchableOpacity style={styles.movieItemContainer} onPress={()=>onPress(item)}>
             <Image
                 style={styles.imageView}
                 source={{
                     uri: `${Constants.IMAGE_URL}${item.poster_path}`,
                 }}/>
-        </View>)
+        </TouchableOpacity>)
     };
     // main view with loading while api call is going one
     return (<View style={styles.mainView}>

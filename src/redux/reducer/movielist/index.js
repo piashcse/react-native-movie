@@ -7,7 +7,7 @@ const movieListReducer = (state = initialState, action) => {
     switch (action.type) {
         case MOVIE_LIST.MOVIE_LIST_START:
             return {
-                ...state, movie: {}, movieList: [], isLoading: true,
+                ...state, isLoading: true,
             };
         case MOVIE_LIST.MOVIE_LIST_SUCCESS:
             return {
@@ -15,7 +15,7 @@ const movieListReducer = (state = initialState, action) => {
             };
         case MOVIE_LIST.MOVIE_LIST_FAILURE:
             return {
-                ...state, movie: {}, movieList: [], isLoading: false,
+                ...state, isLoading: false,
             };
         default:
             return state;

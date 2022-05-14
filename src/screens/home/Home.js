@@ -7,8 +7,7 @@ import MovieList from '../../components/movielist/MovieList';
 
 const Home = ({navigation}) => {
     //communicate with redux
-    const movieListState = useSelector(state => state.movieListReducer);
-    const isLoading = useSelector(state => state.movieListReducer.isLoading);
+    const {isLoading, movieList} = useSelector(state => state.movieListReducer);
     const dispatch = useDispatch();
 
     // Api call
@@ -17,6 +16,7 @@ const Home = ({navigation}) => {
     }, [])
 
     // main view with loading while api call is going one
-    return isLoading ? <Loading/> : <MovieList movies={movieListState.movieList}/>;
+    return isLoading ? <Loading/> :
+        <MovieList movies={movieList} onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>;
 }
 export default Home

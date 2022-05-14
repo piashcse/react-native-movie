@@ -8,8 +8,7 @@ import styles from './PopularStyle'
 
 const Popular = ({navigation}) => {
     //communicate with redux
-    const movieListState = useSelector(state => state.popularMovieReducer);
-    const isLoading = useSelector(state => state.popularMovieReducer.isLoading);
+    const {isLoading, movieList} = useSelector(state => state.popularMovieReducer);
     const dispatch = useDispatch();
 
     // Api call
@@ -18,6 +17,6 @@ const Popular = ({navigation}) => {
     }, [])
 
     // main view with loading while api call is going one
-    return isLoading ? <Loading/> : <MovieList movies={movieListState.movieList}/>;
+    return isLoading ? <Loading/> : <MovieList movies={movieList} onPress={(item) => navigation.navigate('MovieDetail',{movieId:item.id})}/>;
 }
 export default Popular
