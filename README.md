@@ -4,8 +4,17 @@
 
 A simple project using [The Movie DB](https://www.themoviedb.org) Api build with react-native and redux-base architecture<br>
 
+<p float="left">
+  <img width="29.2%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103102.png" />
+  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103440.png" />
+  <img width="32.4%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103130.png" />
+  <img width="32%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103631.png" />
+</p>
+
 # Main Features
 1. Movie list 
+2. Movie detail
+3. Bottom navigation
 
 ## Architecture
   - Redux-based Architecture (action - reducer - sagas)
