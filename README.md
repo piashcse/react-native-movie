@@ -26,6 +26,7 @@ A simple project using [The Movie DB](https://www.themoviedb.org) Api build with
 - [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
 - [Redux-Saga](https://redux-saga.js.org/) - An intuitive Redux side effect manager.
 - [React-Navigation 6](https://reactnavigation.org/) - Routing and navigation for your React Native apps.
+- [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
 
 ## 👨 Developed By
 
