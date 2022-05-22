@@ -21,7 +21,9 @@ const MovieDetail = ({navigation, route}) => {
     }, [])
 
     const similarItem = ({item}) => {
-        return (<TouchableOpacity style={styles.movieItemContainer}>
+        return (<TouchableOpacity
+            style={styles.movieItemContainer}
+            onPress={() => navigation.replace('MovieDetail', {movieId: item.id})}>
             <Image
                 style={styles.similarImageView}
                 source={{
@@ -30,7 +32,7 @@ const MovieDetail = ({navigation, route}) => {
         </TouchableOpacity>)
     }
 
-    // main view with loading while api call is going one
+    // main view with loading while api call is going on
     return isLoading ? <Loading/> : (<ScrollView style={styles.mainView}>
         <Image
             style={styles.imageView}

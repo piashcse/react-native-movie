@@ -1,7 +1,7 @@
 import {TOP_RATED_MOVIE_LIST} from '../../constants';
 
 const initialState = {
-    movie: {}, isLoading: false,
+    movie: {}, movieList: [], isLoading: false,
 };
 const topRatedMovieReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -11,7 +11,10 @@ const topRatedMovieReducer = (state = initialState, action) => {
             };
         case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_SUCCESS:
             return {
-                ...state, movie: action.result, movieList: action.result?.results, isLoading: false,
+                ...state,
+                movie: action.result,
+                movieList: [...state.movieList, ...action.result?.results],
+                isLoading: false,
             };
         case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_FAILURE:
             return {
