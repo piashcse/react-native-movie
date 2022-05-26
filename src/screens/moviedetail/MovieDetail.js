@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getMovieDetail, getSimilarMovie} from '../../redux/actions';
 import Loading from '../../components/loading/Loading';
 import styles from './MovieDetailStyle'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../appconstants/AppConstants";
-
+import {getMovieDetail} from './../../redux/reducer/moviedetail'
+import {getSimilarMovie} from './../../redux/reducer/similarmovie'
 
 const MovieDetail = ({navigation, route}) => {
     const {movieId} = route.params
@@ -16,7 +16,7 @@ const MovieDetail = ({navigation, route}) => {
 
     // Api call
     useEffect(() => {
-        dispatch(getMovieDetail({movieId: movieId}))
+        dispatch(getMovieDetail({movieId}))
         dispatch(getSimilarMovie({movieId: movieId}))
     }, [])
 

@@ -1,25 +1,20 @@
-import {SIMILAR_MOVIE} from '../../constants';
+import {createSlice} from '@reduxjs/toolkit'
 
-const initialState = {
-    movie: {}, isLoading: false,
-};
-const similarMovieReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SIMILAR_MOVIE.SIMILAR_MOVIE_START:
-            return {
-                ...state, isLoading: true,
-            };
-        case SIMILAR_MOVIE.SIMILAR_MOVIE_SUCCESS:
-            return {
-                ...state, movie: action.result, movieList: action.result?.results, isLoading: false,
-            };
-        case SIMILAR_MOVIE.SIMILAR_MOVIE_FAILURE:
-            return {
-                ...state, isLoading: false,
-            };
-        default:
-            return state;
+const similarMovieState = createSlice({
+    name: 'similarMovie', initialState: {
+        movie: {}, movieList: [], isLoading: false,
+    }, reducers: {
+        getSimilarMovie: (state, action) => {
+            state.isLoading = true
+        }, similarMovieSuccess: (state, action) => {
+            state.movie = action.payload;
+            state.movieList = [...state.movieList, ...action.payload?.results];
+            state.isLoading = false
+        }, similarMovieFailure: (state) => {
+            state.isLoading = false
+        }
     }
-}
+});
+export const {getSimilarMovie, similarMovieSuccess, similarMovieFailure} = similarMovieState.actions;
+export default similarMovieState.reducer
 
-export default similarMovieReducer

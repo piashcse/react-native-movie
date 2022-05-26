@@ -1,28 +1,20 @@
-import {TOP_RATED_MOVIE_LIST} from '../../constants';
+import {createSlice} from '@reduxjs/toolkit'
 
-const initialState = {
-    movie: {}, movieList: [], isLoading: false,
-};
-const topRatedMovieReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_START:
-            return {
-                ...state, isLoading: true,
-            };
-        case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_SUCCESS:
-            return {
-                ...state,
-                movie: action.result,
-                movieList: [...state.movieList, ...action.result?.results],
-                isLoading: false,
-            };
-        case TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_FAILURE:
-            return {
-                ...state, isLoading: false,
-            };
-        default:
-            return state;
+const topRatedMovieState = createSlice({
+    name: 'topRatedMovie', initialState: {
+        movie: {}, movieList: [], isLoading: false,
+    }, reducers: {
+        getTopRatedMovie: (state, action) => {
+            state.isLoading = true
+        }, topRatedMovieSuccess: (state, action) => {
+            state.movie = action.payload;
+            state.movieList = [...state.movieList, ...action.payload?.results];
+            state.isLoading = false
+        }, topRatedMovieFailure: (state) => {
+            state.isLoading = false
+        }
     }
-}
+});
+export const {getTopRatedMovie, topRatedMovieSuccess, topRatedMovieFailure} = topRatedMovieState.actions;
+export default topRatedMovieState.reducer
 
-export default topRatedMovieReducer

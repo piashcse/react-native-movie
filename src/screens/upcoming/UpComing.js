@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getUpComingMovieList} from '../../redux/actions';
 import Loading from '../../components/loading/Loading';
 import MovieList from '../../components/movielist/MovieList';
 import styles from './UpComingStyle'
 import {View} from "react-native";
+import {getUpComingMovie} from "../../redux/reducer/upcoming";
 
 let pageNum = 1
 const UpComing = ({navigation}) => {
@@ -14,7 +14,7 @@ const UpComing = ({navigation}) => {
 
     // Api call
     useEffect(() => {
-        dispatch(getUpComingMovieList({pageNum: pageNum}))
+        dispatch(getUpComingMovie({pageNum: pageNum}))
     }, [])
 
     // main view with loading while api call is going on
@@ -22,7 +22,7 @@ const UpComing = ({navigation}) => {
         <MovieList
             movies={movieList}
             loadMoreData={() => {
-                dispatch(getUpComingMovieList({page: ++pageNum}))
+                dispatch(getUpComingMovie({page: ++pageNum}))
             }}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
         {isLoading && <Loading/>}

@@ -1,28 +1,20 @@
-import {UP_COMING_MOVIE_LIST} from '../../constants';
+import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = {
-    movie: {}, movieList: [], isLoading: false,
-};
-const upComingMovieReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case UP_COMING_MOVIE_LIST.UP_COMING_MOVIE_LIST_START:
-            return {
-                ...state, isLoading: true,
-            };
-        case UP_COMING_MOVIE_LIST.UP_COMING_MOVIE_LIST_SUCCESS:
-            return {
-                ...state,
-                movie: action.result,
-                movieList: [...state.movieList, ...action.result?.results],
-                isLoading: false,
-            };
-        case UP_COMING_MOVIE_LIST.UP_COMING_MOVIE_LIST_FAILURE:
-            return {
-                ...state, isLoading: false,
-            };
-        default:
-            return state;
+const upComingMovieState = createSlice({
+    name: 'upComingMovie', initialState: {
+        movie: {}, movieList: [], isLoading: false,
+    }, reducers: {
+        getUpComingMovie: (state, action) => {
+            state.isLoading = true
+        }, upcomingMovieSuccess: (state, action) => {
+            state.movie = action.payload;
+            state.movieList = [...state.movieList, ...action.payload?.results];
+            state.isLoading = false
+        }, upComingMovieFailure: (state) => {
+            state.isLoading = false
+        }
     }
-}
+});
+export const {getUpComingMovie, upcomingMovieSuccess, upComingMovieFailure} = upComingMovieState.actions;
+export default upComingMovieState.reducer
 
-export default upComingMovieReducer

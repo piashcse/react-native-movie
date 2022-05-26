@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getPopularMovieList} from '../../redux/actions';
 import Loading from '../../components/loading/Loading';
 import MovieList from '../../components/movielist/MovieList';
 import styles from './PopularStyle'
 import {View} from "react-native";
+import {getPopularMovie} from "../../redux/reducer/popularmovie";
 
 let pageNum = 1
 const Popular = ({navigation}) => {
@@ -14,7 +14,7 @@ const Popular = ({navigation}) => {
 
     // Api call
     useEffect(() => {
-        dispatch(getPopularMovieList({page: pageNum}))
+        dispatch(getPopularMovie({page: pageNum}))
     }, [])
 
     // main view with loading while api call is going on
@@ -22,7 +22,7 @@ const Popular = ({navigation}) => {
         <MovieList
             movies={movieList}
             loadMoreData={() => {
-                dispatch(getPopularMovieList({page: ++pageNum}))
+                dispatch(getPopularMovie({page: ++pageNum}))
             }}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
         {isLoading && <Loading/>}

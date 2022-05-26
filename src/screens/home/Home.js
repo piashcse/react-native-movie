@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getMovieList} from '../../redux/actions';
 import Loading from '../../components/loading/Loading';
 import MovieList from '../../components/movielist/MovieList';
 import {View} from 'react-native';
 import styles from './HomeStyle'
+import {getMovieList} from "../../redux/reducer/movielist";
 
 let pageNum = 1
 const Home = ({navigation}) => {

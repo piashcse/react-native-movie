@@ -1,69 +1,72 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
 import AxiosService from '../../../networks/AxiosService';
 import {ApiUrls} from '../../../networks/ApiUrls';
-import {
-    MOVIE_DETAIL, MOVIE_LIST, POPULAR_MOVIE_LIST, SIMILAR_MOVIE, TOP_RATED_MOVIE_LIST, UP_COMING_MOVIE_LIST
-} from "../../constants";
+import {getMovieList, movieListSuccess, movieListFailure} from './../../reducer/movielist'
+import {movieDetailSuccess, movieDetailFailure, getMovieDetail} from './../../reducer/moviedetail'
+import {getPopularMovie, popularMovieSuccess, popularMovieFailure} from './../../reducer/popularmovie'
+import {getTopRatedMovie, topRatedMovieSuccess, topRatedMovieFailure} from './../../reducer/toprated'
+import {getUpComingMovie, upcomingMovieSuccess, upComingMovieFailure} from './../../reducer/upcoming'
+import {getSimilarMovie, similarMovieSuccess, similarMovieFailure} from './../../reducer/similarmovie'
 
 function* movieListApi(action) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_LIST, action.requestBody,);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_LIST, action.payload.page);
         const result = response.data;
-        yield put({type: MOVIE_LIST.MOVIE_LIST_SUCCESS, result});
+        yield put(movieListSuccess(result));
     } catch (error) {
-        yield put({type: MOVIE_LIST.MOVIE_LIST_FAILURE});
+        yield put(movieListFailure());
     }
 }
 
 function* popularMovieListApi(action) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.POPULAR_MOVIE_LIST, action.requestBody,);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.POPULAR_MOVIE_LIST, action.payload.page);
         const result = response.data;
-        yield put({type: POPULAR_MOVIE_LIST.POPULAR_MOVIE_LIST_SUCCESS, result});
+        yield put(popularMovieSuccess(result));
     } catch (error) {
-        yield put({type: POPULAR_MOVIE_LIST.POPULAR_MOVIE_LIST_FAILURE});
+        yield put(popularMovieFailure());
     }
 }
 
 function* topRatedMovieListApi(action) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.TOP_RATED_MOVIE_LIST, action.requestBody,);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.TOP_RATED_MOVIE_LIST, action.payload.movieId);
         const result = response.data;
-        yield put({type: TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_SUCCESS, result});
+        yield put(topRatedMovieSuccess(result));
     } catch (error) {
-        yield put({type: TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_FAILURE});
+        yield put(topRatedMovieFailure());
     }
 }
 
 function* upComingMovieListApi(action) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.UP_COMING_MOVIE_LIST, action.requestBody,);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.UP_COMING_MOVIE_LIST, action.payload.movieId);
         const result = response.data;
-        yield put({type: UP_COMING_MOVIE_LIST.UP_COMING_MOVIE_LIST_SUCCESS, result});
+        yield put(upcomingMovieSuccess(result));
     } catch (error) {
-        yield put({type: UP_COMING_MOVIE_LIST.UP_COMING_MOVIE_LIST_FAILURE});
+        yield put(upComingMovieFailure());
     }
 }
 
 function* movieDetailApi(action) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_DETAIL(action.requestBody.movieId), {});
+        const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_DETAIL(action.payload.movieId), {});
         const result = response.data;
-        yield put({type: MOVIE_DETAIL.MOVIE_DETAIL_SUCCESS, result});
+        yield put(movieDetailSuccess(result));
     } catch (error) {
-        yield put({type: MOVIE_DETAIL.MOVIE_DETAIL_FAILURE});
+        yield put(movieDetailFailure());
     }
 }
 
 function* similarMovieApi(action) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.SIMILAR_MOVIE(action.requestBody.movieId), {});
+        const response = yield call(AxiosService.getServiceData, ApiUrls.SIMILAR_MOVIE(action.payload.movieId));
         const result = response.data;
-        yield put({type: SIMILAR_MOVIE.SIMILAR_MOVIE_SUCCESS, result});
+        yield put(similarMovieSuccess(result));
     } catch (error) {
-        yield put({type: SIMILAR_MOVIE.SIMILAR_MOVIE_FAILURE});
+        yield put(similarMovieFailure());
     }
 }
 
-const combineSagas = [takeEvery(MOVIE_LIST.MOVIE_LIST_START, movieListApi), takeEvery(POPULAR_MOVIE_LIST.POPULAR_MOVIE_LIST_START, popularMovieListApi), takeEvery(TOP_RATED_MOVIE_LIST.TOP_RATED_MOVIE_LIST_START, topRatedMovieListApi), takeEvery(UP_COMING_MOVIE_LIST.UP_COMING_MOVIE_LIST_START, upComingMovieListApi), takeEvery(MOVIE_DETAIL.MOVIE_DETAIL_START, movieDetailApi), takeEvery(SIMILAR_MOVIE.SIMILAR_MOVIE_START, similarMovieApi)];
+const combineSagas = [takeEvery(getMovieList.type, movieListApi), takeEvery(getPopularMovie.type, popularMovieListApi), takeEvery(getTopRatedMovie.type, topRatedMovieListApi), takeEvery(getUpComingMovie.type, upComingMovieListApi), takeEvery(getMovieDetail.type, movieDetailApi), takeEvery(getSimilarMovie.type, similarMovieApi)];
 export default combineSagas

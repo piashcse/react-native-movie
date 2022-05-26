@@ -1,24 +1,18 @@
-import {MOVIE_DETAIL} from '../../constants';
+import {createSlice} from '@reduxjs/toolkit'
 
-const initialState = {
-    movieDetail: {}, isLoading: false,
-};
-const movieDetailReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case MOVIE_DETAIL.MOVIE_DETAIL_START:
-            return {
-                ...state, isLoading: true,
-            };
-        case MOVIE_DETAIL.MOVIE_DETAIL_SUCCESS:
-            return {
-                ...state, movieDetail: action.result, isLoading: false,
-            };
-        case MOVIE_DETAIL.MOVIE_DETAIL_FAILURE:
-            return {
-                ...state, isLoading: false,
-            };
-        default:
-            return state;
+const movieDetailState = createSlice({
+    name: 'movieDetail', initialState: {
+        movieDetail: {}, isLoading: false,
+    }, reducers: {
+        getMovieDetail: (state, action) => {
+            state.isLoading = true
+        }, movieDetailSuccess: (state, action) => {
+            state.movieDetail = action.payload;
+            state.isLoading = false
+        }, movieDetailFailure: (state) => {
+            state.isLoading = false
+        }
     }
-}
-export default movieDetailReducer
+});
+export const {getMovieDetail, movieDetailSuccess, movieDetailFailure} = movieDetailState.actions;
+export default movieDetailState.reducer

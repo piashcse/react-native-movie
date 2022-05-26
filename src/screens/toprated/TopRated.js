@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getTopRatedMovieList} from '../../redux/actions';
 import Loading from '../../components/loading/Loading';
 import MovieList from '../../components/movielist/MovieList';
 import styles from './TopRatedStyle'
 import {View} from "react-native";
+import {getTopRatedMovie} from "../../redux/reducer/toprated";
 
 let pageNum = 1
 const TopRated = ({navigation}) => {
@@ -14,7 +14,7 @@ const TopRated = ({navigation}) => {
 
     // Api call
     useEffect(() => {
-        dispatch(getTopRatedMovieList({page: pageNum}))
+        dispatch(getTopRatedMovie({page: pageNum}))
     }, [])
 
     // main view with loading while api call is going on
@@ -22,7 +22,7 @@ const TopRated = ({navigation}) => {
         <MovieList
             movies={movieList}
             loadMoreData={() => {
-                dispatch(getTopRatedMovieList({page: ++pageNum}))
+                dispatch(getTopRatedMovie({page: ++pageNum}))
             }}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
         {isLoading && <Loading/>}
