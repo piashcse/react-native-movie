@@ -6,18 +6,22 @@ import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-n
 import {Constants} from "../../appconstants/AppConstants";
 import {getMovieDetail} from './../../redux/reducer/moviedetail'
 import {getSimilarMovie} from './../../redux/reducer/similarmovie'
+import {getArtist} from './../../redux/reducer/artist'
 
 const MovieDetail = ({navigation, route}) => {
     const {movieId} = route.params
     //communicate with redux
+    const dispatch = useDispatch();
+
     const {isLoading, movieDetail} = useSelector(state => state.movieDetailReducer);
     const {movieList} = useSelector(state => state.similarMovieReducer);
-    const dispatch = useDispatch();
+    const {cast} = useSelector(state => state.artistReducer);
 
     // Api call
     useEffect(() => {
         dispatch(getMovieDetail({movieId}))
         dispatch(getSimilarMovie({movieId: movieId}))
+        dispatch(getArtist({movieId: movieId}))
     }, [])
 
     const similarItem = ({item}) => {
@@ -28,6 +32,15 @@ const MovieDetail = ({navigation, route}) => {
                 style={styles.similarImageView}
                 source={{
                     uri: `${Constants.IMAGE_URL}${item.poster_path}`,
+                }}/>
+        </TouchableOpacity>)
+    }
+    const artistItem = ({item}) => {
+        return (<TouchableOpacity>
+            <Image
+                style={styles.artistImageView}
+                source={{
+                    uri: `${Constants.IMAGE_URL}${item.profile_path}`,
                 }}/>
         </TouchableOpacity>)
     }
@@ -66,6 +79,14 @@ const MovieDetail = ({navigation, route}) => {
                 style={styles.flatListContainer}
                 data={movieList}
                 renderItem={similarItem}
+                keyExtractor={(item, index) => index}
+                horizontal={true}
+            />
+            <Text style={styles.description}>Artist</Text>
+            <FlatList
+                style={styles.flatListContainer}
+                data={cast}
+                renderItem={artistItem}
                 keyExtractor={(item, index) => index}
                 horizontal={true}
             />

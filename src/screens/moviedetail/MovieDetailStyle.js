@@ -31,6 +31,15 @@ const styles = StyleSheet.create({
     movieItemContainer: {margin: 4},
     similarImageView: {
         height: 150, width: 120, borderRadius: 12, resizeMode: 'cover'
+    },
+    artistImageView: {
+        height: 80,
+        width: 80,
+        borderRadius: 40,
+        marginHorizontal: 4,
+        borderWidth: 1.5,
+        borderColor: COLOR.inputTextBorderColor,
+        resizeMode: 'cover'
     }
 });
 export default styles;

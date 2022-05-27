@@ -7,6 +7,7 @@ import {getPopularMovie, popularMovieSuccess, popularMovieFailure} from './../..
 import {getTopRatedMovie, topRatedMovieSuccess, topRatedMovieFailure} from './../../reducer/toprated'
 import {getUpComingMovie, upcomingMovieSuccess, upComingMovieFailure} from './../../reducer/upcoming'
 import {getSimilarMovie, similarMovieSuccess, similarMovieFailure} from './../../reducer/similarmovie'
+import {getArtist, artistSuccess, artistFailure} from './../../reducer/artist'
 
 function* movieListApi(action) {
     try {
@@ -68,5 +69,15 @@ function* similarMovieApi(action) {
     }
 }
 
-const combineSagas = [takeEvery(getMovieList.type, movieListApi), takeEvery(getPopularMovie.type, popularMovieListApi), takeEvery(getTopRatedMovie.type, topRatedMovieListApi), takeEvery(getUpComingMovie.type, upComingMovieListApi), takeEvery(getMovieDetail.type, movieDetailApi), takeEvery(getSimilarMovie.type, similarMovieApi)];
+function* artistApi(action) {
+    try {
+        const response = yield call(AxiosService.getServiceData, ApiUrls.ARTIST(action.payload.movieId), {});
+        const result = response.data;
+        yield put(artistSuccess(result));
+    } catch (error) {
+        yield put(artistFailure());
+    }
+}
+
+const combineSagas = [takeEvery(getMovieList.type, movieListApi), takeEvery(getPopularMovie.type, popularMovieListApi), takeEvery(getTopRatedMovie.type, topRatedMovieListApi), takeEvery(getUpComingMovie.type, upComingMovieListApi), takeEvery(getMovieDetail.type, movieDetailApi), takeEvery(getSimilarMovie.type, similarMovieApi), takeEvery(getArtist.type, artistApi)];
 export default combineSagas
