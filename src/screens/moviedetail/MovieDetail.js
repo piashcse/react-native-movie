@@ -4,9 +4,9 @@ import Loading from '../../components/loading/Loading';
 import styles from './MovieDetailStyle'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../appconstants/AppConstants";
-import {getMovieDetail} from './../../redux/reducer/moviedetail'
-import {getSimilarMovie} from './../../redux/reducer/similarmovie'
-import {getArtist} from './../../redux/reducer/artist'
+import {getMovieDetail} from '../../redux/reducer/moviedetail'
+import {getSimilarMovie} from '../../redux/reducer/similarmovie'
+import {getArtist} from '../../redux/reducer/artist'
 
 const MovieDetail = ({navigation, route}) => {
     const {movieId} = route.params
@@ -36,7 +36,11 @@ const MovieDetail = ({navigation, route}) => {
         </TouchableOpacity>)
     }
     const artistItem = ({item}) => {
-        return (<TouchableOpacity>
+        return (<TouchableOpacity
+            style={styles.movieItemContainer}
+            onPress={() => {
+                navigation.navigate('ArtistDetail', {personId: item.id})
+            }}>
             <Image
                 style={styles.artistImageView}
                 source={{

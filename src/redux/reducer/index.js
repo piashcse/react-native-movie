@@ -6,6 +6,7 @@ import upComingMovieReducer from './upcoming'
 import movieDetailReducer from "./moviedetail";
 import similarMovieReducer from "./similarmovie";
 import artistReducer from "./artist";
+import artistDetailReducer from "./artistdetail";
 
 export default combineReducers({
     movieListReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     upComingMovieReducer,
     movieDetailReducer,
     similarMovieReducer,
-    artistReducer
+    artistReducer,
+    artistDetailReducer
 });
