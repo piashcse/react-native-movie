@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/skydoves/TheMovies2.svg?branch=master)](https://travis-ci.org/piashcse/Hilt-MVVM-Compose-Movie)
 <a href="https://github.com/piashcse"><img alt="License" src="https://img.shields.io/static/v1?label=GitHub&message=piashcse&color=C51162"/></a>
 
-A simple project using [The Movie DB](https://www.themoviedb.org) Api build with react-native and redux-base architecture<br>
+Movie App using [The Movie DB](https://www.themoviedb.org) and build with react-native and redux based architecture<br>
 
 <p float="left">
   <img width="29.2%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103102.png" />
