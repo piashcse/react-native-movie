@@ -10,7 +10,7 @@ import {getSimilarMovie, similarMovieSuccess, similarMovieFailure} from '../../r
 import {getArtist, artistSuccess, artistFailure} from '../../reducer/artist'
 import {getArtistDetail, artistDetailSuccess, artistDetailFailure} from '../../reducer/artistdetail'
 
-function* movieListApi(action) {
+function* movieListApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_LIST, action.payload.page);
         const result = response.data;
@@ -20,7 +20,7 @@ function* movieListApi(action) {
     }
 }
 
-function* popularMovieListApi(action) {
+function* popularMovieListApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.POPULAR_MOVIE_LIST, action.payload.page);
         const result = response.data;
@@ -30,7 +30,7 @@ function* popularMovieListApi(action) {
     }
 }
 
-function* topRatedMovieListApi(action) {
+function* topRatedMovieListApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.TOP_RATED_MOVIE_LIST, action.payload.movieId);
         const result = response.data;
@@ -40,7 +40,7 @@ function* topRatedMovieListApi(action) {
     }
 }
 
-function* upComingMovieListApi(action) {
+function* upComingMovieListApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.UP_COMING_MOVIE_LIST, action.payload.movieId);
         const result = response.data;
@@ -50,7 +50,7 @@ function* upComingMovieListApi(action) {
     }
 }
 
-function* movieDetailApi(action) {
+function* movieDetailApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_DETAIL(action.payload.movieId), {});
         const result = response.data;
@@ -60,7 +60,7 @@ function* movieDetailApi(action) {
     }
 }
 
-function* similarMovieApi(action) {
+function* similarMovieApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.SIMILAR_MOVIE(action.payload.movieId));
         const result = response.data;
@@ -70,7 +70,7 @@ function* similarMovieApi(action) {
     }
 }
 
-function* artistApi(action) {
+function* artistApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.ARTIST(action.payload.movieId), {});
         const result = response.data;
@@ -79,7 +79,8 @@ function* artistApi(action) {
         yield put(artistFailure());
     }
 }
-function* artistDetailApi(action) {
+
+function* artistDetailApi(action: any) {
     try {
         const response = yield call(AxiosService.getServiceData, ApiUrls.ARTIST_DETAIL(action.payload.personId), {});
         const result = response.data;
@@ -89,5 +90,5 @@ function* artistDetailApi(action) {
     }
 }
 
-const combineSagas = [takeEvery(getMovieList.type, movieListApi), takeEvery(getPopularMovie.type, popularMovieListApi), takeEvery(getTopRatedMovie.type, topRatedMovieListApi), takeEvery(getUpComingMovie.type, upComingMovieListApi), takeEvery(getMovieDetail.type, movieDetailApi), takeEvery(getSimilarMovie.type, similarMovieApi), takeEvery(getArtist.type, artistApi),takeEvery(getArtistDetail.type, artistDetailApi)];
+const combineSagas = [takeEvery(getMovieList.type, movieListApi), takeEvery(getPopularMovie.type, popularMovieListApi), takeEvery(getTopRatedMovie.type, topRatedMovieListApi), takeEvery(getUpComingMovie.type, upComingMovieListApi), takeEvery(getMovieDetail.type, movieDetailApi), takeEvery(getSimilarMovie.type, similarMovieApi), takeEvery(getArtist.type, artistApi), takeEvery(getArtistDetail.type, artistDetailApi)];
 export default combineSagas

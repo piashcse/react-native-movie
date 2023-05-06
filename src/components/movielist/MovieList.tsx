@@ -1,4 +1,4 @@
-import React,{useRef} from 'react';
+import React from 'react';
 import {FlatList, Image, View, TouchableOpacity} from "react-native";
 import styles from "./MovieListStyle";
 import {Constants} from "../../appconstants/AppConstants";
@@ -15,7 +15,7 @@ const MovieList = ({movies, onPress, loadMoreData}) => {
                 }}/>
         </TouchableOpacity>)
     };
-    // main view with loading while api call is going one
+
     return (<View style={styles.mainView}>
         <FlatList
             style={styles.flatListContainer}

@@ -26,7 +26,7 @@ const BottomNavigation = () => {
         }}/>
         <Tab.Screen name="TopRated" component={TopRated} options={{
             tabBarLabel: 'Top Rated',
-            tabBarIcon: ({color, size}) => (<MaterialIcons name="settings" color={color} size={size}/>),
+            tabBarIcon: ({color, size}) => (<MaterialIcons name="star" color={color} size={size}/>),
         }}/>
         <Tab.Screen name="UpComing" component={UpComing} options={{
             tabBarLabel: 'UpComing',
