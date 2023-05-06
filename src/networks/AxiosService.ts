@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Singleton class
 const AxiosService = {
-    async getServiceData(url, parameter) {
+    async getServiceData(url: string, parameter: any) {
         let requestHeader = {
             'Content-Type': 'application/json',
         };
@@ -12,7 +12,7 @@ const AxiosService = {
         });
     },
 
-    async postServiceData(url, body) {
+    async postServiceData(url: string, body: any) {
         let requestHeader = {
             'Content-Type': 'application/json',
         };
@@ -23,7 +23,7 @@ const AxiosService = {
     },
 
     // update
-    async putServiceData(url, body) {
+    async putServiceData(url: string, body: any) {
         let requestHeader = {
             'Content-Type': 'application/json',
         };
@@ -34,7 +34,7 @@ const AxiosService = {
     },
 
     //delete
-    async deleteServiceData(url, body) {
+    async deleteServiceData(url: string, body: any) {
         let serverUrl = ApiUrls.BASE_URL;
         let requestHeader = {
             'Content-Type': 'application/json',
