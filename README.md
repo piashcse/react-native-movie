@@ -7,16 +7,19 @@
 Movie App using [The Movie DB](https://www.themoviedb.org) and build with react-native and redux based architecture<br>
 
 <p float="left">
-  <img width="29.2%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103102.png" />
-  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103440.png" />
-  <img width="32.4%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103130.png" />
-  <img width="32%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103631.png" />
+  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103102.png" />
+  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103440.png" />
+  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103130.png" />
+  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103631.png" />
 </p>
 
 # Main Features
-1. Movie list 
-2. Movie detail
-3. Bottom navigation
+- Movie List 
+- Pagination
+- Movie detail
+- Bottom navigation
+- Artist info and artist detail
+- Network connection state with SnackBar
 
 ## Architecture
   - Redux-based Architecture (action - reducer - sagas)
@@ -30,6 +33,21 @@ Movie App using [The Movie DB](https://www.themoviedb.org) and build with react-
 - [Redux-Saga](https://redux-saga.js.org/) - An intuitive Redux side effect manager.
 - [React-Navigation 6](https://reactnavigation.org/) - Routing and navigation for your React Native apps.
 - [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
+
+## Requirements
+
+- [Node.js](https://nodejs.org/) (latest)
+- [Yarn](https://yarnpkg.com/) (latest)
+
+## How to run
+
+- `git clone git@github.com:piashcse/react-native-movie.git` 
+- `yarn install`
+
+Now, you can choose a command to run the project:
+
+- `yarn ios` to run on iOS simulator
+- `yarn android` to run on Android simulator
 
 ## 👨 Developed By
 
