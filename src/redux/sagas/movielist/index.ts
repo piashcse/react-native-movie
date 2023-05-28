@@ -12,7 +12,8 @@ import {getArtistDetail, artistDetailSuccess, artistDetailFailure} from '../../r
 
 function* movieListApi(action: any) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_LIST, action.payload.page);
+        console.log('>> List >> ', action);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.MOVIE_LIST, action.payload);
         const result = response.data;
         yield put(movieListSuccess(result));
     } catch (error) {
@@ -22,7 +23,7 @@ function* movieListApi(action: any) {
 
 function* popularMovieListApi(action: any) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.POPULAR_MOVIE_LIST, action.payload.page);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.POPULAR_MOVIE_LIST, action.payload);
         const result = response.data;
         yield put(popularMovieSuccess(result));
     } catch (error) {
@@ -32,7 +33,7 @@ function* popularMovieListApi(action: any) {
 
 function* topRatedMovieListApi(action: any) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.TOP_RATED_MOVIE_LIST, action.payload.movieId);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.TOP_RATED_MOVIE_LIST, action.payload);
         const result = response.data;
         yield put(topRatedMovieSuccess(result));
     } catch (error) {
@@ -42,7 +43,7 @@ function* topRatedMovieListApi(action: any) {
 
 function* upComingMovieListApi(action: any) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.UP_COMING_MOVIE_LIST, action.payload.movieId);
+        const response = yield call(AxiosService.getServiceData, ApiUrls.UP_COMING_MOVIE_LIST, action.payload);
         const result = response.data;
         yield put(upcomingMovieSuccess(result));
     } catch (error) {
@@ -62,7 +63,7 @@ function* movieDetailApi(action: any) {
 
 function* similarMovieApi(action: any) {
     try {
-        const response = yield call(AxiosService.getServiceData, ApiUrls.SIMILAR_MOVIE(action.payload.movieId));
+        const response = yield call(AxiosService.getServiceData, ApiUrls.SIMILAR_MOVIE(action.payload.movieId), {});
         const result = response.data;
         yield put(similarMovieSuccess(result));
     } catch (error) {
