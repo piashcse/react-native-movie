@@ -26,6 +26,11 @@ Movie App using [The Movie DB](https://www.themoviedb.org) and build with react-
   - Redux-based Architecture (action - reducer - sagas)
   - Hooks
   - Redux-Saga
+<p float="left">
+<a href='http://redux.js.org'><img src='https://camo.githubusercontent.com/f28b5bc7822f1b7bb28a96d8d09e7d79169248fc/687474703a2f2f692e696d6775722e636f6d2f4a65567164514d2e706e67' height='25' alt='Redux Logo' aria-label='redux.js.org' /></a>
+ 
+<a href='https://redux-saga.js.org/'><img src='https://redux-saga.js.org/img/Redux-Saga-Logo-Landscape.png' height='25' alt='Redux Logo' aria-label='redux-saga.js.org/' /></a>
+</p>
 
 ## Built With 🛠
 - [React-Native](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform..
