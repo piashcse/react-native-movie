@@ -17,7 +17,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "react": "18.2.0",
-    "react-native": "0.71.10",
+    "react-native": "0.72.3",
     "react-native-gesture-handler": "^2.11.0",
     "react-native-paper": "^5.8.0",
     "react-native-safe-area-context": "^4.5.3",
@@ -33,9 +33,9 @@
     "@babel/core": "^7.22.1",
     "@babel/preset-env": "^7.22.1",
     "@babel/runtime": "^7.22.1",
-    "@react-native-community/eslint-config": "^3.0.0",
-    "@tsconfig/react-native": "^2.0.2",
-    "@types/jest": "^29.2.1",
+    "@react-native/eslint-config": "^0.72.2",
+    "@react-native/metro-config": "^0.72.9",
+    "@tsconfig/react-native": "^3.0.0",
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
@@ -46,7 +46,7 @@
     "react-test-renderer": "18.2.0",
     "typescript": "4.8.4"
   },
-  "jest": {
-    "preset": "react-native"
+  "engines": {
+    "node": ">=16"
   }
 }
