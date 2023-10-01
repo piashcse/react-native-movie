@@ -1,5 +1,5 @@
 # Movie World (React Native) 
-[![React Native](https://img.shields.io/badge/React%20Native-v0.72.3-green.svg)](https://facebook.github.io/react-native/)
+[![React Native](https://img.shields.io/badge/React%20Native-v0.72.5-green.svg)](https://facebook.github.io/react-native/)
 ![badge-Android](https://img.shields.io/badge/Platform-Android-brightgreen)
 ![badge-iOS](https://img.shields.io/badge/Platform-iOS-lightgray)
 [![Redux](https://img.shields.io/badge/Redux-4.2.1-764ABC?logo=redux)](https://redux.js.org/)
