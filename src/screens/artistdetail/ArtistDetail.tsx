@@ -6,7 +6,7 @@ import {Image, Text, View, ScrollView} from "react-native";
 import {Constants} from "../../appconstants/AppConstants";
 import {getArtistDetail} from '../../redux/reducer/artistdetail'
 
-const ArtistDetail = ({route}) => {
+const ArtistDetail = ({route}:{route:any}) => {
     const {personId} = route.params
     //communicate with redux
     const dispatch = useDispatch();

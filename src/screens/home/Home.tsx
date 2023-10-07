@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
         <MovieList
             movies={movieList}
             loadMoreData={() => {
-                setPageNumber( pageNumber + 1)
+                setPageNumber(pageNumber + 1)
             }}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
         {isLoading && <Loading/>}

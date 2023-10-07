@@ -21,10 +21,10 @@ const Popular = ({navigation}) => {
     return (<View style={styles.mainView}>
         <MovieList
             movies={movieList}
+            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
             loadMoreData={() => {
-                setPageNumber( pageNumber + 1)
-            }}
-            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
+                setPageNumber(pageNumber + 1)
+            }}/>
         {isLoading && <Loading/>}
     </View>);
 }
