@@ -5,10 +5,10 @@ import MovieList from '../../components/movielist/MovieList';
 import styles from './PopularStyle'
 import {View} from "react-native";
 import {getPopularMovie} from "../../redux/reducer/popularmovie";
+import { useGetPopularMovieQuery} from "../../redux/query/RTKQuery.ts";
 
 const Popular = ({navigation}) => {
-    //communicate with redux
-    const {isLoading, movieList} = useSelector(state => state.popularMovieReducer);
+    const { data = [], error, isLoading } = useGetPopularMovieQuery('1')
     const [pageNumber, setPageNumber] = useState(1)
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const Popular = ({navigation}) => {
     // main view with loading while api call is going on
     return (<View style={styles.mainView}>
         <MovieList
-            movies={movieList}
+            movies={data}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
             loadMoreData={() => {
                 setPageNumber(pageNumber + 1)

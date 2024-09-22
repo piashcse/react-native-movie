@@ -5,10 +5,10 @@ import MovieList from '../../components/movielist/MovieList';
 import styles from './TopRatedStyle'
 import {View} from "react-native";
 import {getTopRatedMovie} from "../../redux/reducer/toprated";
+import {useGetPopularMovieQuery, useGetTopRatedMovieQuery} from "../../redux/query/RTKQuery.ts";
 
 const TopRated = ({navigation}) => {
-    //communicate with redux
-    const {isLoading, movieList} = useSelector(state => state.topRatedMovieReducer);
+    const { data = [], error, isLoading } = useGetTopRatedMovieQuery('1')
     const [pageNumber, setPageNumber] = useState(1)
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const TopRated = ({navigation}) => {
     // main view with loading while api call is going on
     return (<View style={styles.mainView}>
         <MovieList
-            movies={movieList}
+            movies={data}
             loadMoreData={() => {
                 setPageNumber( pageNumber + 1)
             }}

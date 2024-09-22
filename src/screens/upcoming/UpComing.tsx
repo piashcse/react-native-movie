@@ -5,10 +5,10 @@ import MovieList from '../../components/movielist/MovieList';
 import styles from './UpComingStyle'
 import {View} from "react-native";
 import {getUpComingMovie} from "../../redux/reducer/upcoming";
+import {useGetTopRatedMovieQuery, useGetUpcomingMovieQuery} from "../../redux/query/RTKQuery.ts";
 
 const UpComing = ({navigation}) => {
-    //communicate with redux
-    const {isLoading, movieList} = useSelector(state => state?.upComingMovieReducer);
+    const { data = [], error, isLoading } = useGetUpcomingMovieQuery('1')
     const [pageNumber, setPageNumber] = useState(1)
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const UpComing = ({navigation}) => {
     // main view with loading while api call is going on
     return (<View style={styles.mainView}>
         <MovieList
-            movies={movieList}
+            movies={data}
             loadMoreData={() => {
                 setPageNumber( pageNumber + 1)
             }}

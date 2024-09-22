@@ -1,26 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import Loading from '../../components/loading/Loading';
 import MovieList from '../../components/movielist/MovieList';
 import {View} from 'react-native';
 import styles from './HomeStyle'
-import {getMovieList} from "../../redux/reducer/movielist";
+import {useGetNowPlayingMovieQuery} from "../../redux/query/RTKQuery.ts";
 
-let pageNum = 1
+
 const Home = ({navigation}) => {
-    //communicate with redux
-    const {isLoading, movieList} = useSelector(state => state.movieListReducer);
     const [pageNumber, setPageNumber] = useState(1)
+    const { data: movies = [], error, isLoading } = useGetNowPlayingMovieQuery(pageNumber.toString())
     const dispatch = useDispatch();
 
     // Api call
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(getMovieList({page: pageNumber}))
-    }, [pageNumber])
+    }, [pageNumber])*/
 
     return (<View style={styles.mainView}>
         <MovieList
-            movies={movieList}
+            movies={movies}
             loadMoreData={() => {
                 setPageNumber(pageNumber + 1)
             }}
