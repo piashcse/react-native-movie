@@ -1,25 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState} from 'react';
 import Loading from '../../components/loading/Loading';
-import MovieList from '../../components/movielist/MovieList';
+import MovieItem from '../../components/movielist/MovieItem.tsx';
 import styles from './TopRatedStyle'
 import {View} from "react-native";
-import {getTopRatedMovie} from "../../redux/reducer/toprated";
-import {useGetPopularMovieQuery, useGetTopRatedMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {useGetTopRatedMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {useNavigation} from "@react-navigation/native";
 
-const TopRated = ({navigation}) => {
-    const { data = [], error, isLoading } = useGetTopRatedMovieQuery('1')
+const TopRated = () => {
+    const navigation = useNavigation();
     const [pageNumber, setPageNumber] = useState(1)
-    const dispatch = useDispatch();
-
-    // Api call
-    useEffect(() => {
-        dispatch(getTopRatedMovie({page: pageNumber}))
-    }, [pageNumber])
-
+    const { data = [], error, isLoading } = useGetTopRatedMovieQuery(pageNumber.toString())
     // main view with loading while api call is going on
     return (<View style={styles.mainView}>
-        <MovieList
+        <MovieItem
             movies={data}
             loadMoreData={() => {
                 setPageNumber( pageNumber + 1)

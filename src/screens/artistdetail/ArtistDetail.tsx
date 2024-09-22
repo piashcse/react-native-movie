@@ -1,23 +1,20 @@
-import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React from 'react';
+
 import Loading from '../../components/loading/Loading';
 import styles from './ArtistDetailStyle'
 import {Image, Text, View, ScrollView} from "react-native";
 import {Constants} from "../../appconstants/AppConstants";
-import {getArtistDetail} from '../../redux/reducer/artistdetail'
+import {useGetAristDetailQuery} from "../../redux/query/RTKQuery.ts";
+import {RouteProp, useRoute} from "@react-navigation/native";
+// Define the type for the route parameters
+type RouteParams = {
+    personId: string;
+};
 
-const ArtistDetail = ({route}:{route:any}) => {
-    const {personId} = route.params
-    //communicate with redux
-    const dispatch = useDispatch();
-
-    const {isLoading, artistDetail} = useSelector(state => state.artistDetailReducer);
-
-    // Api call
-    useEffect(() => {
-        dispatch(getArtistDetail({personId}))
-    }, [])
-
+const ArtistDetail = () => {
+    const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
+    const { personId } = route.params;
+    const { data: artistDetail, isLoading, error } = useGetAristDetailQuery(personId)
 
     // main view with loading while api call is going on
     return isLoading ? <Loading/> : (<ScrollView style={styles.mainView}>

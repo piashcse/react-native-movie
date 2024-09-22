@@ -3,12 +3,15 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import logger from 'redux-logger';
 import {
+    artistAndCrewApi,
+    artistDetailApi,
     movieDetailApi,
     nowPlayingMovieApi,
-    popularMovieApi, similarMovieApi,
+    popularMovieApi,
+    similarMovieApi,
     topRatedMovieApi,
     upcomingMovieApi
-} from '../redux/query/RTKQuery.ts'
+} from './query/RTKQuery.ts'
 import {setupListeners} from "@reduxjs/toolkit/query";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -23,6 +26,8 @@ const configurationAppStore = () => {
             [upcomingMovieApi.reducerPath]: upcomingMovieApi.reducer,
             [movieDetailApi.reducerPath]: movieDetailApi.reducer,
             [similarMovieApi.reducerPath]: similarMovieApi.reducer,
+            [artistAndCrewApi.reducerPath]: artistAndCrewApi.reducer,
+            [artistDetailApi.reducerPath]: artistDetailApi.reducer,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([...middleware, logger,
             nowPlayingMovieApi.middleware,
@@ -30,7 +35,9 @@ const configurationAppStore = () => {
             topRatedMovieApi.middleware,
             upcomingMovieApi.middleware,
             movieDetailApi.middleware,
-            similarMovieApi.middleware
+            similarMovieApi.middleware,
+            artistAndCrewApi.middleware,
+            artistDetailApi.middleware
         ]),
         devTools: process.env.NODE_ENV === 'development'
     })

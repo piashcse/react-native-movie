@@ -1,33 +1,31 @@
-import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React from 'react';
 import Loading from '../../components/loading/Loading';
 import styles from './MovieDetailStyle'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../appconstants/AppConstants";
-import {getMovieDetail} from '../../redux/reducer/moviedetail'
-import {getSimilarMovie} from '../../redux/reducer/similarmovie'
-import {getArtist} from '../../redux/reducer/artist'
-import {useGetMovieDetailQuery, useGetSimilarMovieQuery, useGetUpcomingMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {
+    useGetArtistAndCrewQuery,
+    useGetMovieDetailQuery,
+    useGetSimilarMovieQuery,
+} from "../../redux/query/RTKQuery.ts";
+import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
+type RouteParams = {
+    movieId: string;
+};
+const MovieDetail = () => {
+    const navigation = useNavigation();
+    const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
+    const { movieId } = route.params;
+    const { data: movieDetail, isLoading: isLoadingMovieDetail } = useGetMovieDetailQuery(movieId)
+    const { data: similarMovies, isLoading: isLoadingSimilarMovies } = useGetSimilarMovieQuery(movieId)
+    const { data: castAndCrew, isLoading: isLoadingCastAndCrew } = useGetArtistAndCrewQuery(movieId)
 
-const MovieDetail = ({navigation, route}) => {
-    const {movieId} = route.params
-    //communicate with redux
-    const dispatch = useDispatch();
-    const { data: movieDetail, error, isLoading } = useGetMovieDetailQuery(movieId.toString())
-    const { data: similarMovies } = useGetSimilarMovieQuery(movieId)
-   //  const {cast} = useSelector(state => state.artistReducer);
-
-    // Api call
-    useEffect(() => {
-       /* dispatch(getMovieDetail({movieId}))
-        dispatch(getSimilarMovie({movieId: movieId}))
-        dispatch(getArtist({movieId: movieId}))*/
-    }, [])
+    const isLoading = isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew
 
     const similarItem = ({item}) => {
         return (<TouchableOpacity
             style={styles.movieItemContainer}
-            onPress={() => navigation.replace('MovieDetail', {movieId: item.id})}>
+            onPress={() => navigation.navigate('MovieDetail', {movieId: item.id})}>
             <Image
                 style={styles.similarImageView}
                 source={{
@@ -87,13 +85,13 @@ const MovieDetail = ({navigation, route}) => {
                 horizontal={true}
             />
             <Text style={styles.description}>Artist</Text>
-            {/*<FlatList
+            <FlatList
                 style={styles.flatListContainer}
-                data={cast}
+                data={castAndCrew?.cast}
                 renderItem={artistItem}
                 keyExtractor={(item, index) => index}
                 horizontal={true}
-            />*/}
+            />
         </View>
     </ScrollView>)
 }

@@ -3,6 +3,8 @@ import {Constants} from "../../appconstants/AppConstants.ts";
 import {MovieResult} from "../../types/MovieResult.ts";
 import {MovieItem} from "../../types/MovieItem.ts";
 import {MovieDetail} from "../../types/MovieDetail.ts";
+import {CastAndCrew} from "../../types/ArtistAndCrew.ts";
+import {ArtistDetail} from "../../types/ArtistDetail.ts";
 
 export const nowPlayingMovieApi = createApi({
     reducerPath: 'nowPlayingMovieApi',
@@ -84,14 +86,27 @@ export const similarMovieApi = createApi({
 export const {useGetSimilarMovieQuery} = similarMovieApi;
 
 export const artistAndCrewApi = createApi({
-    reducerPath: 'artistDetailApi',
+    reducerPath: 'artistAndCrewApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
-        getArtistAndCrew: builder.query<MovieItem[], string>({
-            query: (movieId) => `movie/${movieId}/recommendations?api_key=${Constants.API_KEY}&language=en-US`,
-            transformResponse: (response: MovieResult) => response.results
+        getArtistAndCrew: builder.query<CastAndCrew, string>({
+            query: (movieId) => `movie/${movieId}/credits?api_key=${Constants.API_KEY}&language=en-US`,
+            transformResponse: (response: CastAndCrew) => response
         }),
     }),
 })
 
 export const {useGetArtistAndCrewQuery} = artistAndCrewApi;
+
+export const artistDetailApi = createApi({
+    reducerPath: 'artistDetailApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        getAristDetail: builder.query<ArtistDetail, string>({
+            query: (personId) => `person/${personId}?api_key=${Constants.API_KEY}&language=en-US`,
+            transformResponse: (response: ArtistDetail) => response
+        }),
+    }),
+})
+
+export const {useGetAristDetailQuery} = artistDetailApi;

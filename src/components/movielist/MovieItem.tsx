@@ -10,7 +10,7 @@ interface MovieListProps {
     loadMoreData: () => void
 }
 
-const MovieList = (props: MovieListProps) => {
+const MovieItem = (props: MovieListProps) => {
     const {movies, onPress, loadMoreData} = props;
     const [isLoading, setIsLoading] = useState(true)
     // movie items for movie list
@@ -47,4 +47,4 @@ const MovieList = (props: MovieListProps) => {
     </View>);
 }
 
-export default MovieList
+export default MovieItem

@@ -1,24 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import { useDispatch} from 'react-redux';
+import React, {useState} from 'react';
 import Loading from '../../components/loading/Loading';
-import MovieList from '../../components/movielist/MovieList';
+import MovieItem from '../../components/movielist/MovieItem.tsx';
 import {View} from 'react-native';
 import styles from './HomeStyle'
 import {useGetNowPlayingMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {useNavigation} from "@react-navigation/native";
 
 
-const Home = ({navigation}) => {
+const Home = () => {
+    const navigation = useNavigation();
     const [pageNumber, setPageNumber] = useState(1)
     const { data: movies = [], error, isLoading } = useGetNowPlayingMovieQuery(pageNumber.toString())
-    const dispatch = useDispatch();
-
-    // Api call
-    /*useEffect(() => {
-        dispatch(getMovieList({page: pageNumber}))
-    }, [pageNumber])*/
 
     return (<View style={styles.mainView}>
-        <MovieList
+        <MovieItem
             movies={movies}
             loadMoreData={() => {
                 setPageNumber(pageNumber + 1)
