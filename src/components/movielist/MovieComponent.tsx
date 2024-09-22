@@ -4,13 +4,13 @@ import styles from "./MovieListStyle";
 import {Constants} from "../../appconstants/AppConstants";
 import {MovieItem} from "../../types/MovieItem";
 
-interface MovieListProps {
+interface MovieItemProps {
     movies: Array<MovieItem>;
     onPress: (item: MovieItem) => void;
     loadMoreData: () => void
 }
 
-const MovieItem = (props: MovieListProps) => {
+const MovieComponent = (props: MovieItemProps) => {
     const {movies, onPress, loadMoreData} = props;
     const [isLoading, setIsLoading] = useState(true)
     // movie items for movie list
@@ -47,4 +47,4 @@ const MovieItem = (props: MovieListProps) => {
     </View>);
 }
 
-export default MovieItem
+export default MovieComponent

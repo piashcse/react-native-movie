@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Loading from '../../components/loading/Loading';
-import MovieItem from '../../components/movielist/MovieItem.tsx';
+import MovieComponent from '../../components/movielist/MovieComponent.tsx';
 import {View} from 'react-native';
 import styles from './HomeStyle'
 import {useGetNowPlayingMovieQuery} from "../../redux/query/RTKQuery.ts";
@@ -13,7 +13,7 @@ const Home = () => {
     const { data: movies = [], error, isLoading } = useGetNowPlayingMovieQuery(pageNumber.toString())
 
     return (<View style={styles.mainView}>
-        <MovieItem
+        <MovieComponent
             movies={movies}
             loadMoreData={() => {
                 setPageNumber(pageNumber + 1)

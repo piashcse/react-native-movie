@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import Loading from '../../components/loading/Loading';
-import MovieItem from '../../components/movielist/MovieItem.tsx';
+import MovieComponent from '../../components/movielist/MovieComponent.tsx';
 import styles from './PopularStyle'
 import {View} from "react-native";
 import { useGetPopularMovieQuery} from "../../redux/query/RTKQuery.ts";
@@ -14,7 +14,7 @@ const Popular = () => {
 
     // main view with loading while api call is going on
     return (<View style={styles.mainView}>
-        <MovieItem
+        <MovieComponent
             movies={data}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
             loadMoreData={() => {

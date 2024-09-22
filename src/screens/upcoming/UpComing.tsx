@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import Loading from '../../components/loading/Loading';
-import MovieItem from '../../components/movielist/MovieItem.tsx';
+import MovieComponent from '../../components/movielist/MovieComponent.tsx';
 import styles from './UpComingStyle'
 import {View} from "react-native";
 import { useGetUpcomingMovieQuery} from "../../redux/query/RTKQuery.ts";
@@ -13,7 +13,7 @@ const UpComing = () => {
 
     // main view with loading while api call is going on
     return (<View style={styles.mainView}>
-        <MovieItem
+        <MovieComponent
             movies={data}
             loadMoreData={() => {
                 setPageNumber( pageNumber + 1)
