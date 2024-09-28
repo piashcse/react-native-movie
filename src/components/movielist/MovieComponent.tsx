@@ -13,7 +13,6 @@ interface MovieItemProps {
 const MovieComponent = (props: MovieItemProps) => {
     const {movies, onPress, loadMoreData} = props;
     const [isLoading, setIsLoading] = useState(true)
-    // movie items for movie list
     const movieItem = ({item}: { item: MovieItem }) => {
         return (<TouchableOpacity style={styles.movieItemContainer} onPress={() => onPress(item)}>
             <ImageBackground
@@ -37,12 +36,11 @@ const MovieComponent = (props: MovieItemProps) => {
         <FlatList
             style={styles.flatListContainer}
             data={movies}
-            extraData={movies}
             renderItem={movieItem}
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
-            onEndReachedThreshold={0.2}
-            onEndReached={() => loadMoreData()}
+            onEndReachedThreshold={0.5}
+            onEndReached={loadMoreData}
         />
     </View>);
 }

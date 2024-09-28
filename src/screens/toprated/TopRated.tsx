@@ -1,22 +1,37 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Loading from '../../components/loading/Loading';
 import MovieComponent from '../../components/movielist/MovieComponent.tsx';
 import styles from './TopRatedStyle'
 import {View} from "react-native";
-import {useGetTopRatedMovieQuery} from "../../redux/query/RTKQuery.ts";
+import { useGetTopRatedMovieQuery} from "../../redux/query/RTKQuery.ts";
 import {useNavigation} from "@react-navigation/native";
+import {MovieItem} from "../../types/MovieItem.ts";
 
 const TopRated = () => {
     const navigation = useNavigation();
-    const [pageNumber, setPageNumber] = useState(1)
-    const { data = [], error, isLoading } = useGetTopRatedMovieQuery(pageNumber.toString())
-    // main view with loading while api call is going on
+    const [page, setPage] = useState(1);
+    const [movies, setMovies] = useState<Array<MovieItem>>([]);
+    const {data = [], error, isLoading, isFetching} = useGetTopRatedMovieQuery(page);
+
+    useEffect(() => {
+        if (data && page > 1) {
+            setMovies((prevMovies) => [...prevMovies, ...data]);
+        }else {
+            setMovies(data ?? []);
+        }
+    }, [page, data.length]);
+
+    const loadMoreMovies = () => {
+        if (!isFetching && !isLoading && !error) {
+            setPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    if (isLoading) return <Loading/>;
     return (<View style={styles.mainView}>
         <MovieComponent
-            movies={data}
-            loadMoreData={() => {
-                setPageNumber( pageNumber + 1)
-            }}
+            movies={movies}
+            loadMoreData={loadMoreMovies}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
         {isLoading && <Loading/>}
     </View>);
