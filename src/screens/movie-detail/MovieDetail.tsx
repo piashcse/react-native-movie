@@ -2,7 +2,7 @@ import React from 'react';
 import Loading from '../../components/loading/Loading';
 import styles from './MovieDetailStyle'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
-import {Constants} from "../../appconstants/AppConstants";
+import {Constants} from "../../constant/AppConstants";
 import {
     useGetArtistAndCrewQuery,
     useGetMovieDetailQuery,

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {FlatList, Image, View, TouchableOpacity, ImageBackground} from "react-native";
-import styles from "./MovieListStyle";
-import {Constants} from "../../appconstants/AppConstants";
+import styles from "./MovieItemStyle.ts";
+import {Constants} from "../../constant/AppConstants";
 import {MovieItem} from "../../types/MovieItem";
 
 interface MovieItemProps {
@@ -10,7 +10,7 @@ interface MovieItemProps {
     loadMoreData: () => void
 }
 
-const MovieComponent = (props: MovieItemProps) => {
+const MovieItemComponent = (props: MovieItemProps) => {
     const {movies, onPress, loadMoreData} = props;
     const [isLoading, setIsLoading] = useState(true)
     const movieItem = ({item}: { item: MovieItem }) => {
@@ -45,4 +45,4 @@ const MovieComponent = (props: MovieItemProps) => {
     </View>);
 }
 
-export default MovieComponent
+export default MovieItemComponent

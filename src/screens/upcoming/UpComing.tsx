@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Loading from '../../components/loading/Loading';
-import MovieComponent from '../../components/movielist/MovieComponent.tsx';
+import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
 import styles from './UpComingStyle'
 import {View} from "react-native";
 import {useGetUpcomingMovieQuery} from "../../redux/query/RTKQuery.ts";
@@ -28,7 +28,7 @@ const UpComing = () => {
 
     if (isLoading) return <Loading/>;
     return (<View style={styles.mainView}>
-        <MovieComponent
+        <MovieItemComponent
             movies={movies}
             loadMoreData={loadMoreMovies}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item?.id})}/>

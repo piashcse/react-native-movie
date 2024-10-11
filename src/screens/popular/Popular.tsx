@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Loading from '../../components/loading/Loading';
-import MovieComponent from '../../components/movielist/MovieComponent.tsx';
+import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
 import styles from './PopularStyle'
 import {View} from "react-native";
 import {useGetPopularMovieQuery} from "../../redux/query/RTKQuery.ts";
@@ -29,7 +29,7 @@ const Popular = () => {
 
     if (isLoading) return <Loading/>;
     return (<View style={styles.mainView}>
-        <MovieComponent
+        <MovieItemComponent
             movies={movies}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
             loadMoreData={loadMoreMovies}/>

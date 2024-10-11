@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import {Constants} from "../../appconstants/AppConstants.ts";
+import {Constants} from "../../constant/AppConstants.ts";
 import {MovieResult} from "../../types/MovieResult.ts";
 import {MovieItem} from "../../types/MovieItem.ts";
 import {MovieDetail} from "../../types/MovieDetail.ts";
