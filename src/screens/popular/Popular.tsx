@@ -1,31 +1,38 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 import Loading from '../../components/loading/Loading';
-import MovieList from '../../components/movielist/MovieList';
+import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
 import styles from './PopularStyle'
 import {View} from "react-native";
-import {getPopularMovie} from "../../redux/reducer/popularmovie";
+import {useGetPopularMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {useNavigation} from "@react-navigation/native";
+import {MovieItem} from "../../types/MovieItem.ts";
 
-const Popular = ({navigation}) => {
-    //communicate with redux
-    const {isLoading, movieList} = useSelector(state => state.popularMovieReducer);
-    const [pageNumber, setPageNumber] = useState(1)
-    const dispatch = useDispatch();
+const Popular = () => {
+    const navigation = useNavigation();
+    const [page, setPage] = useState(1);
+    const [movies, setMovies] = useState<Array<MovieItem>>([]);
+    const {data = [], error, isLoading, isFetching} = useGetPopularMovieQuery(page)
 
-    // Api call
     useEffect(() => {
-        dispatch(getPopularMovie({page: pageNumber}))
-    }, [pageNumber])
+        if (data && page > 1) {
+            setMovies((prevMovies) => [...prevMovies, ...data]);
+        }else {
+            setMovies(data ?? []);
+        }
+    }, [page, data.length]);
 
-    // main view with loading while api call is going on
+    const loadMoreMovies = () => {
+        if (!isFetching && !isLoading && !error) {
+            setPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    if (isLoading) return <Loading/>;
     return (<View style={styles.mainView}>
-        <MovieList
-            movies={movieList}
+        <MovieItemComponent
+            movies={movies}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
-            loadMoreData={() => {
-                setPageNumber(pageNumber + 1)
-            }}/>
-        {isLoading && <Loading/>}
+            loadMoreData={loadMoreMovies}/>
     </View>);
 }
 export default Popular

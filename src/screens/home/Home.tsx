@@ -1,31 +1,39 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 import Loading from '../../components/loading/Loading';
-import MovieList from '../../components/movielist/MovieList';
+import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
 import {View} from 'react-native';
 import styles from './HomeStyle'
-import {getMovieList} from "../../redux/reducer/movielist";
+import {useGetNowPlayingMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {useNavigation} from "@react-navigation/native";
+import {MovieItem} from "../../types/MovieItem.ts";
 
-let pageNum = 1
-const Home = ({navigation}) => {
-    //communicate with redux
-    const {isLoading, movieList} = useSelector(state => state.movieListReducer);
-    const [pageNumber, setPageNumber] = useState(1)
-    const dispatch = useDispatch();
 
-    // Api call
+const Home = () => {
+    const navigation = useNavigation();
+    const [page, setPage] = useState(1);
+    const [movies, setMovies] = useState<Array<MovieItem>>([]);
+    const {data, error, isLoading, isFetching} = useGetNowPlayingMovieQuery(page)
     useEffect(() => {
-        dispatch(getMovieList({page: pageNumber}))
-    }, [pageNumber])
+        if (data && page > 1) {
+            setMovies((prevMovies) => [...prevMovies, ...data]);
+        }else {
+            setMovies(data ?? []);
+        }
+    }, [page, data?.length]);
+
+    const loadMoreMovies = () => {
+        if (!isFetching && !isLoading && !error) {
+            setPage( page + 1);
+        }
+    };
+
+    if (isLoading) return <Loading/>;
 
     return (<View style={styles.mainView}>
-        <MovieList
-            movies={movieList}
-            loadMoreData={() => {
-                setPageNumber(pageNumber + 1)
-            }}
-            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
-        {isLoading && <Loading/>}
+        <MovieItemComponent
+            movies={movies}
+            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
+            loadMoreData={loadMoreMovies}/>
     </View>);
 }
 export default Home

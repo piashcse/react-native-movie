@@ -1,15 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {COLOR} from "../../appconstants/Colors";
+import {COLOR} from "../../constant/Colors";
 
 const styles = StyleSheet.create({
     mainView: {
-        flex: 1
+        flex: 1, margin: 8
     },
     imageView: {
-        height: 270, resizeMode: 'stretch'
+        height: 250, width: 190, resizeMode: 'stretch', borderRadius: 16
     },
     secondContainer: {
-        flex: 1, paddingHorizontal: 8, marginTop: 8
+        flexDirection: 'row'
     },
     title: {
         fontSize: 20, color: COLOR.black, fontWeight: 'bold'
@@ -40,6 +40,24 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderColor: COLOR.inputTextBorderColor,
         resizeMode: 'cover'
+    },
+    artistInfoContainer: {
+        paddingLeft: 16
+    },
+    artistName: {
+        fontSize: 24
+    },
+    otherInfoContainer: {
+        marginTop: 8
+    },
+    titleContent: {
+        fontSize: 13
+    },
+    titleData: {
+        fontSize: 16, color: COLOR.black
+    },
+    biography: {
+        fontSize: 24, marginTop: 16, marginBottom: 8, color: COLOR.black
     }
 });
 export default styles;

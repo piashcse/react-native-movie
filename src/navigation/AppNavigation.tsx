@@ -8,8 +8,8 @@ import Home from '../screens/home/Home';
 import Popular from "../screens/popular/Popular";
 import TopRated from "../screens/toprated/TopRated";
 import UpComing from "../screens/upcoming/UpComing";
-import MovieDetail from "../screens/moviedetail/MovieDetail";
-import ArtistDetail from "../screens/artistdetail/ArtistDetail";
+import MovieDetail from "../screens/movie-detail/MovieDetail";
+import ArtistDetail from "../screens/artist-detail/ArtistDetail";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

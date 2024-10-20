@@ -1,19 +1,18 @@
 import React, {useState} from 'react';
 import {FlatList, Image, View, TouchableOpacity, ImageBackground} from "react-native";
-import styles from "./MovieListStyle";
-import {Constants} from "../../appconstants/AppConstants";
+import styles from "./MovieItemStyle.ts";
+import {Constants} from "../../constant/AppConstants";
 import {MovieItem} from "../../types/MovieItem";
 
-interface MovieListProps {
+interface MovieItemProps {
     movies: Array<MovieItem>;
     onPress: (item: MovieItem) => void;
     loadMoreData: () => void
 }
 
-const MovieList = (props: MovieListProps) => {
+const MovieItemComponent = (props: MovieItemProps) => {
     const {movies, onPress, loadMoreData} = props;
     const [isLoading, setIsLoading] = useState(true)
-    // movie items for movie list
     const movieItem = ({item}: { item: MovieItem }) => {
         return (<TouchableOpacity style={styles.movieItemContainer} onPress={() => onPress(item)}>
             <ImageBackground
@@ -37,14 +36,13 @@ const MovieList = (props: MovieListProps) => {
         <FlatList
             style={styles.flatListContainer}
             data={movies}
-            extraData={movies}
             renderItem={movieItem}
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
-            onEndReachedThreshold={0.2}
-            onEndReached={() => loadMoreData()}
+            onEndReachedThreshold={0.5}
+            onEndReached={loadMoreData}
         />
     </View>);
 }
 
-export default MovieList
+export default MovieItemComponent

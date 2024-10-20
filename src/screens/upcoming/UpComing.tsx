@@ -1,31 +1,37 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 import Loading from '../../components/loading/Loading';
-import MovieList from '../../components/movielist/MovieList';
+import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
 import styles from './UpComingStyle'
 import {View} from "react-native";
-import {getUpComingMovie} from "../../redux/reducer/upcoming";
+import {useGetUpcomingMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {useNavigation} from "@react-navigation/native";
+import {MovieItem} from "../../types/MovieItem.ts";
 
-const UpComing = ({navigation}) => {
-    //communicate with redux
-    const {isLoading, movieList} = useSelector(state => state?.upComingMovieReducer);
-    const [pageNumber, setPageNumber] = useState(1)
-    const dispatch = useDispatch();
-
-    // Api call
+const UpComing = () => {
+    const navigation = useNavigation();
+    const [page, setPage] = useState(1);
+    const [movies, setMovies] = useState<Array<MovieItem>>([]);
+    const {data = [], error, isLoading, isFetching} = useGetUpcomingMovieQuery(page)
     useEffect(() => {
-        dispatch(getUpComingMovie({page: pageNumber}))
-    }, [pageNumber])
+        if (data && page > 1) {
+            setMovies((prevMovies) => [...prevMovies, ...data]);
+        }else {
+            setMovies(data ?? []);
+        }
+    }, [page, data.length]);
 
-    // main view with loading while api call is going on
+    const loadMoreMovies = () => {
+        if (!isFetching && !isLoading && !error) {
+            setPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    if (isLoading) return <Loading/>;
     return (<View style={styles.mainView}>
-        <MovieList
-            movies={movieList}
-            loadMoreData={() => {
-                setPageNumber( pageNumber + 1)
-            }}
+        <MovieItemComponent
+            movies={movies}
+            loadMoreData={loadMoreMovies}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item?.id})}/>
-        {isLoading && <Loading/>}
     </View>);
 }
 export default UpComing

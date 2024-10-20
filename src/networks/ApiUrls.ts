@@ -1,4 +1,4 @@
-import {Constants} from "../appconstants/AppConstants";
+import {Constants} from "../constant/AppConstants";
 
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const MOVIE_LIST = `movie/now_playing?api_key=${Constants.API_KEY}&language=en-US`;
