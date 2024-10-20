@@ -58,7 +58,6 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Build Android
-        working-directory: android
         run: |
           cd android && ./gradlew clean
           ./gradlew assembleDebug
