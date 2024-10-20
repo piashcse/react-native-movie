@@ -1,0 +1,78 @@
+name: CI for React Native
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  setup-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: setup-environment
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Run Unit Tests
+        run: npm test -- --coverage
+
+  android-build:
+    runs-on: ubuntu-latest
+    needs: setup-environment
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build Android
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+  ios-build:
+    runs-on: macos-latest
+    needs: setup-environment
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install CocoaPods Dependencies
+        run: |
+          cd ios
+          pod install
+
+      - name: Build iOS
+        run: xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -sdk iphonesimulator -configuration Debug build
