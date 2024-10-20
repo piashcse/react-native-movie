@@ -59,7 +59,7 @@ jobs:
 
       - name: Build Android
         run: |
-          cd android
+          cd android && ./gradlew clean
           ./gradlew assembleDebug
 
   ios-build:
