@@ -75,4 +75,4 @@ jobs:
           pod install
 
       - name: Build iOS
-        run: xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -sdk iphonesimulator -configuration Debug build
+        run: xcodebuild -workspace ios/react_native_movie.xcworkspace -scheme react_native_movie -sdk iphonesimulator -configuration Debug build
