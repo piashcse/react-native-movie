@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import Home from '../screens/home/Home';
+import NowPlaying from '../screens/nowplaying/NowPlaying.tsx';
 import Popular from "../screens/popular/Popular";
 import TopRated from "../screens/toprated/TopRated";
 import UpComing from "../screens/upcoming/UpComing";
@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
     return (<Tab.Navigator>
-        <Tab.Screen name="Home" component={Home} options={{
+        <Tab.Screen name="Home" component={NowPlaying} options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({color, size}) => (<MaterialIcons name="home" color={color} size={size}/>),
         }}/>

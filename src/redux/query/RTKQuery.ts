@@ -11,8 +11,8 @@ export const nowPlayingMovieApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
         getNowPlayingMovie: builder.query<MovieItem[], number>({
-            query: (page) => `movie/now_playing?api_key=${Constants.API_KEY}&language=en-US?page=${page}`,
-            transformResponse: (response: MovieResult) => response.results
+            query: (page) => `movie/now_playing?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+            transformResponse: (response: MovieResult) => response.results,
         }),
     }),
 })
@@ -24,8 +24,11 @@ export const popularMovieApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
         getPopularMovie: builder.query<MovieItem[], number>({
-            query: (page ) => `movie/popular?api_key=${Constants.API_KEY}&language=en-US?page=${page}`,
-            transformResponse: (response: MovieResult) => response.results
+            query: (page ) => `movie/popular?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+            transformResponse: (response: MovieResult) => {
+                console.log('transform ', response.results)
+                return response.results
+            }
         }),
     }),
 })
@@ -38,7 +41,7 @@ export const topRatedMovieApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
         getTopRatedMovie: builder.query<MovieItem[], number>({
-            query: (page) => `movie/top_rated?api_key=${Constants.API_KEY}&language=en-US?page=${page}`,
+            query: (page) => `movie/top_rated?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
             transformResponse: (response: MovieResult) => response.results
         }),
     }),
@@ -51,7 +54,7 @@ export const upcomingMovieApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
         getUpcomingMovie: builder.query<MovieItem[], number>({
-            query: (page) => `movie/upcoming?api_key=${Constants.API_KEY}&language=en-US?page=${page}`,
+            query: (page) => `movie/upcoming?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
             transformResponse: (response: MovieResult) => response.results
         }),
     }),
