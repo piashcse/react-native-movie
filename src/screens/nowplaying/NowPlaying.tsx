@@ -1,25 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import Loading from '../../components/loading/Loading';
 import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
-import styles from './TopRatedStyle'
-import {View} from "react-native";
-import { useGetTopRatedMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {View} from 'react-native';
+import styles from './NowPlayingStyle.ts'
+import {useGetNowPlayingMovieQuery} from "../../redux/query/RTKQuery.ts";
 import {useNavigation} from "@react-navigation/native";
 import {MovieItem} from "../../types/MovieItem.ts";
 
-const TopRated = () => {
+
+const NowPlaying = () => {
     const navigation = useNavigation();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching} = useGetTopRatedMovieQuery(page);
-
+    const {data = [], error, isLoading, isFetching} = useGetNowPlayingMovieQuery(page)
     useEffect(() => {
         if (data && page > 1) {
             setMovies((prevMovies) => [...prevMovies, ...data]);
         }else {
             setMovies(data ?? []);
         }
-    }, [page, data.length]);
+    }, [page, data?.length]);
 
     const loadMoreMovies = () => {
         if (!isFetching && !isLoading && !error) {
@@ -28,12 +28,12 @@ const TopRated = () => {
     };
 
     if (isLoading) return <Loading/>;
+
     return (<View style={styles.mainView}>
         <MovieItemComponent
             movies={movies}
-            loadMoreData={loadMoreMovies}
-            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
-        {isLoading && <Loading/>}
+            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
+            loadMoreData={loadMoreMovies}/>
     </View>);
 }
-export default TopRated
+export default NowPlaying
