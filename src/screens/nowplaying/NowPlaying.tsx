@@ -12,7 +12,7 @@ const NowPlaying = () => {
     const navigation = useNavigation();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data, error, isLoading, isFetching} = useGetNowPlayingMovieQuery(page)
+    const {data = [], error, isLoading, isFetching} = useGetNowPlayingMovieQuery(page)
     useEffect(() => {
         if (data && page > 1) {
             setMovies((prevMovies) => [...prevMovies, ...data]);
