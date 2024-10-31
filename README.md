@@ -1,4 +1,4 @@
-# Movie World (React Native) 
+# React Native Movie 🚀 
 [![React Native](https://img.shields.io/badge/React%20Native-v0.76.1-green.svg)](https://facebook.github.io/react-native/)
 ![badge-Android](https://img.shields.io/badge/Platform-Android-brightgreen)
 ![badge-iOS](https://img.shields.io/badge/Platform-iOS-lightgray)
@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 <a href="https://github.com/piashcse"><img alt="License" src="https://img.shields.io/static/v1?label=GitHub&message=piashcse&color=C51162"/></a>
 
-Movie App using [The Movie DB](https://www.themoviedb.org) and build with react-native and redux based architecture<br>
+React Native Movie App 🎬 - A cross-platform react native app for exploring [The Movie DB](https://www.themoviedb.org), built with React Native using RTK Query and Redux Toolkit for optimized state and API management.<br>
 
 <p float="left">
   <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/Screenshot_20220514_103102.png" />
@@ -16,11 +16,11 @@ Movie App using [The Movie DB](https://www.themoviedb.org) and build with react-
 </p>
 
 # Main Features
-- Movie List 
-- Pagination
+- Movie List with pagination
 - Movie detail
-- Bottom navigation
+- Recommended movie 
 - Artist info and artist detail
+- Bottom navigation
 - Network connection state with SnackBar
 
 ## Architecture
