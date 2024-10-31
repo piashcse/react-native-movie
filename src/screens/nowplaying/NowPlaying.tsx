@@ -23,7 +23,7 @@ const NowPlaying = () => {
 
     const loadMoreMovies = () => {
         if (!isFetching && !isLoading && !error) {
-            setPage( page + 1);
+            setPage((prevPage) => prevPage + 1);
         }
     };
 
