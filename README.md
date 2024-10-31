@@ -1,5 +1,5 @@
 # Movie World (React Native) 
-[![React Native](https://img.shields.io/badge/React%20Native-v0.74.1-green.svg)](https://facebook.github.io/react-native/)
+[![React Native](https://img.shields.io/badge/React%20Native-v0.76.1-green.svg)](https://facebook.github.io/react-native/)
 ![badge-Android](https://img.shields.io/badge/Platform-Android-brightgreen)
 ![badge-iOS](https://img.shields.io/badge/Platform-iOS-lightgray)
 [![Redux](https://img.shields.io/badge/Redux-5.0.1-764ABC?logo=redux)](https://redux.js.org/)
@@ -24,22 +24,21 @@ Movie App using [The Movie DB](https://www.themoviedb.org) and build with react-
 - Network connection state with SnackBar
 
 ## Architecture
-  - Redux-based Architecture (action - reducer - sagas)
+  - RKT Query-Based Architecture (RTK Query - Hooks - reducer)
   - Hooks
-  - Redux-Saga
-<p float="left">
-<a href='http://redux.js.org'><img src='https://camo.githubusercontent.com/f28b5bc7822f1b7bb28a96d8d09e7d79169248fc/687474703a2f2f692e696d6775722e636f6d2f4a65567164514d2e706e67' height='25' alt='Redux Logo' aria-label='redux.js.org' /></a>
- 
-<a href='https://redux-saga.js.org/'><img src='https://redux-saga.js.org/img/Redux-Saga-Logo-Landscape.png' height='25' alt='Redux Logo' aria-label='redux-saga.js.org/' /></a>
+  - Redux
+<p float="left"> 
+  <a href='https://redux-toolkit.js.org/rtk-query/overview'>
+  <img src='https://redux-toolkit.js.org/img/redux-logo-landscape.png' height='50' alt='RTK Query Logo' aria-label='redux-toolkit.js.org/rtk-query' />
+</a>
 </p>
 
 ## Built With 🛠
-- [React-Native](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform..
-- [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
+- [React-Native](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform.
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) RTK Query is a powerful data fetching and caching tool. It is designed to simplify common cases for loading data in a web application, eliminating the need to hand-write data fetching & caching logic yourself.
 - [Redux-toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development
-- [Redux-Saga](https://redux-saga.js.org/) - An intuitive Redux side effect manager.
+- [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
 - [React-Navigation 6](https://reactnavigation.org/) - Routing and navigation for your React Native apps.
-- [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
 
 ## Requirements
 
