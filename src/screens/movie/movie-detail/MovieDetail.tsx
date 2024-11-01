@@ -1,13 +1,13 @@
 import React from 'react';
-import Loading from '../../components/loading/Loading';
-import styles from './MovieDetailStyle'
+import Loading from '../../../components/loading/Loading.tsx';
+import styles from './MovieDetailStyle.ts'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
-import {Constants} from "../../constant/AppConstants";
+import {Constants} from "../../../constant/AppConstants.ts";
 import {
     useGetArtistAndCrewQuery,
     useGetMovieDetailQuery,
     useGetSimilarMovieQuery,
-} from "../../redux/query/RTKQuery.ts";
+} from "../../../redux/query/RTKQuery.ts";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 type RouteParams = {
     movieId: string;

@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../components/loading/Loading';
-import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
-import styles from './PopularStyle'
-import {View} from "react-native";
-import {useGetPopularMovieQuery} from "../../redux/query/RTKQuery.ts";
+import Loading from '../../../components/loading/Loading.tsx';
+import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
+import {View} from 'react-native';
+import styles from './TopRatedTvSeries.Style.ts'
+import {useTopRatedTvSeriesApiQuery} from "../../../redux/query/RTKQuery.ts";
 import {useNavigation} from "@react-navigation/native";
-import {MovieItem} from "../../types/MovieItem.ts";
+import {MovieItem} from "../../../types/MovieItem.ts";
 
-const Popular = () => {
+
+const TopRatedTvSeries = () => {
     const navigation = useNavigation();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = useGetPopularMovieQuery(page)
+    const {data = [], error, isLoading, isFetching, isSuccess} = useTopRatedTvSeriesApiQuery(page)
 
     useEffect(() => {
         if (data && page > 1) {
@@ -28,6 +29,7 @@ const Popular = () => {
     };
 
     if (isLoading) return <Loading/>;
+
     return (<View style={styles.mainView}>
         <MovieItemComponent
             movies={movies}
@@ -35,4 +37,4 @@ const Popular = () => {
             loadMoreData={loadMoreMovies}/>
     </View>);
 }
-export default Popular
+export default TopRatedTvSeries

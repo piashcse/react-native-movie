@@ -5,6 +5,8 @@ import {MovieItem} from "../../types/MovieItem.ts";
 import {MovieDetail} from "../../types/MovieDetail.ts";
 import {CastAndCrew} from "../../types/ArtistAndCrew.ts";
 import {ArtistDetail} from "../../types/ArtistDetail.ts";
+import {TvSeriesResult} from "../../types/TvSeriesResult.ts";
+import {TvSeriesItem} from "../../types/TvSeriesItem.ts";
 
 export const nowPlayingMovieApi = createApi({
     reducerPath: 'nowPlayingMovieApi',
@@ -113,3 +115,58 @@ export const artistDetailApi = createApi({
 })
 
 export const {useGetAristDetailQuery} = artistDetailApi;
+
+export const airingTodayTvSeriesApi = createApi({
+    reducerPath: 'airingTodayTvSeriesApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        airingTodayTvSeriesApi: builder.query<TvSeriesItem[], number>({
+            query: (page) => `tv/airing_today?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+            transformResponse: (response: TvSeriesResult) => response.results,
+        }),
+    }),
+})
+
+export  const {useAiringTodayTvSeriesApiQuery}  = airingTodayTvSeriesApi
+
+export const onTheAirTvSeriesApi = createApi({
+    reducerPath: 'onTheAirTvSeriesApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        onTheAirTvSeriesApi: builder.query<TvSeriesItem[], number>({
+            query: (page) => `tv/on_the_air?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+            transformResponse: (response: TvSeriesResult) => response.results,
+        }),
+    }),
+})
+
+export const {useOnTheAirTvSeriesApiQuery}= onTheAirTvSeriesApi
+
+export const popularTvSeriesApi = createApi({
+    reducerPath: 'popularTvSeriesApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        popularTvSeriesApi: builder.query<TvSeriesItem[], number>({
+            query: (page) => `tv/popular?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+            transformResponse: (response: TvSeriesResult) => response.results,
+        }),
+    }),
+})
+
+export const {usePopularTvSeriesApiQuery}= popularTvSeriesApi
+
+export const topRatedTvSeriesApi = createApi({
+    reducerPath: 'topRatedTvSeriesApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        topRatedTvSeriesApi: builder.query<TvSeriesItem[], number>({
+            query: (page) => `tv/top_rated?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+            transformResponse: (response: TvSeriesResult) => response.results,
+        }),
+    }),
+})
+
+export const {useTopRatedTvSeriesApiQuery} = topRatedTvSeriesApi
+
+
+

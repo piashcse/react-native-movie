@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../components/loading/Loading';
-import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
-import styles from './UpComingStyle'
+import Loading from '../../../components/loading/Loading.tsx';
+import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
+import styles from './PopularMovie.Style.ts'
 import {View} from "react-native";
-import {useGetUpcomingMovieQuery} from "../../redux/query/RTKQuery.ts";
+import {useGetPopularMovieQuery} from "../../../redux/query/RTKQuery.ts";
 import {useNavigation} from "@react-navigation/native";
-import {MovieItem} from "../../types/MovieItem.ts";
+import {MovieItem} from "../../../types/MovieItem.ts";
 
-const UpComing = () => {
+const PopularMovie = () => {
     const navigation = useNavigation();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = useGetUpcomingMovieQuery(page)
+    const {data = [], error, isLoading, isFetching, isSuccess} = useGetPopularMovieQuery(page)
 
     useEffect(() => {
         if (data && page > 1) {
@@ -31,8 +31,8 @@ const UpComing = () => {
     return (<View style={styles.mainView}>
         <MovieItemComponent
             movies={movies}
-            loadMoreData={loadMoreMovies}
-            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item?.id})}/>
+            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
+            loadMoreData={loadMoreMovies}/>
     </View>);
 }
-export default UpComing
+export default PopularMovie

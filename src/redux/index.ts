@@ -3,13 +3,14 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import logger from 'redux-logger';
 import {
+    airingTodayTvSeriesApi,
     artistAndCrewApi,
     artistDetailApi,
     movieDetailApi,
-    nowPlayingMovieApi,
-    popularMovieApi,
+    nowPlayingMovieApi, onTheAirTvSeriesApi,
+    popularMovieApi, popularTvSeriesApi,
     similarMovieApi,
-    topRatedMovieApi,
+    topRatedMovieApi, topRatedTvSeriesApi,
     upcomingMovieApi
 } from './query/RTKQuery.ts'
 import {setupListeners} from "@reduxjs/toolkit/query";
@@ -28,6 +29,10 @@ const configurationAppStore = () => {
             [similarMovieApi.reducerPath]: similarMovieApi.reducer,
             [artistAndCrewApi.reducerPath]: artistAndCrewApi.reducer,
             [artistDetailApi.reducerPath]: artistDetailApi.reducer,
+            [airingTodayTvSeriesApi.reducerPath]: airingTodayTvSeriesApi.reducer,
+            [onTheAirTvSeriesApi.reducerPath]: onTheAirTvSeriesApi.reducer,
+            [popularTvSeriesApi.reducerPath]: popularTvSeriesApi.reducer,
+            [topRatedTvSeriesApi.reducerPath]: topRatedTvSeriesApi.reducer,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([...middleware, logger,
             nowPlayingMovieApi.middleware,
@@ -37,7 +42,11 @@ const configurationAppStore = () => {
             movieDetailApi.middleware,
             similarMovieApi.middleware,
             artistAndCrewApi.middleware,
-            artistDetailApi.middleware
+            artistDetailApi.middleware,
+            airingTodayTvSeriesApi.middleware,
+            onTheAirTvSeriesApi.middleware,
+            popularTvSeriesApi.middleware,
+            topRatedTvSeriesApi.middleware,
         ]),
         devTools: process.env.NODE_ENV === 'development'
     })

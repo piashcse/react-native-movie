@@ -7,6 +7,7 @@ const COLOR = {
     suggestionContainerColor: 'rgba(0,0,0,0.3)',
     inputTextBorderColor: '#CCC',
     inputTextBackgroundColor: 'rgba(0,0,0,0.05)',
+    tabIndicatorColor: '#6200EE',
 };
 
 export {COLOR};
