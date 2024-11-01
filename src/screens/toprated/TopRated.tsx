@@ -11,7 +11,7 @@ const TopRated = () => {
     const navigation = useNavigation();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching} = useGetTopRatedMovieQuery(page);
+    const {data = [], error, isLoading, isFetching, isSuccess} = useGetTopRatedMovieQuery(page);
 
     useEffect(() => {
         if (data && page > 1) {
@@ -19,7 +19,7 @@ const TopRated = () => {
         }else {
             setMovies(data ?? []);
         }
-    }, [page, data.length]);
+    }, [isSuccess]);
 
     const loadMoreMovies = () => {
         if (!isFetching && !isLoading && !error) {

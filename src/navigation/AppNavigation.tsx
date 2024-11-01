@@ -16,8 +16,8 @@ const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
     return (<Tab.Navigator>
-        <Tab.Screen name="Home" component={NowPlaying} options={{
-            tabBarLabel: 'Home',
+        <Tab.Screen name="NowPlaying" component={NowPlaying} options={{
+            tabBarLabel: 'NowPlaying',
             tabBarIcon: ({color, size}) => (<MaterialIcons name="home" color={color} size={size}/>),
         }}/>
         <Tab.Screen name="Popular" component={Popular} options={{
