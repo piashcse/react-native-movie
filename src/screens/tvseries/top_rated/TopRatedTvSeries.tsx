@@ -1,24 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import Loading from '../../../components/loading/Loading.tsx';
-import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import {View} from 'react-native';
 import styles from './TopRatedTvSeries.Style.ts'
 import {useTopRatedTvSeriesApiQuery} from "../../../redux/query/RTKQuery.ts";
-import {useNavigation} from "@react-navigation/native";
-import {MovieItem} from "../../../types/MovieItem.ts";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
+import {TvSeriesItem} from "../../../types/TvSeriesItem.ts";
+import TvSeriesItemComponent from "../../../components/tvseries-item/TvSeriesItemComponent.tsx";
 
+type RootStackParamList = {
+    TvSeriesDetail: { tvSeriesId: number };
+};
+type  TopRatedTvSeriesNavigationProp = NavigationProp<RootStackParamList, 'TvSeriesDetail'>;
 
 const TopRatedTvSeries = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<TopRatedTvSeriesNavigationProp>();
     const [page, setPage] = useState(1);
-    const [movies, setMovies] = useState<Array<MovieItem>>([]);
+    const [tvSeries, setTvSeries] = useState<Array<TvSeriesItem>>([]);
     const {data = [], error, isLoading, isFetching, isSuccess} = useTopRatedTvSeriesApiQuery(page)
 
     useEffect(() => {
         if (data && page > 1) {
-            setMovies((prevMovies) => [...prevMovies, ...data]);
+            setTvSeries((prevTvSeries) => [...prevTvSeries, ...data]);
         }else {
-            setMovies(data ?? []);
+            setTvSeries(data ?? []);
         }
     }, [isSuccess]);
 
@@ -31,9 +35,9 @@ const TopRatedTvSeries = () => {
     if (isLoading) return <Loading/>;
 
     return (<View style={styles.mainView}>
-        <MovieItemComponent
-            movies={movies}
-            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
+        <TvSeriesItemComponent
+            tvSeries={tvSeries}
+            onPress={(item) =>{ navigation.navigate('TvSeriesDetail', {tvSeriesId: item.id})}}
             loadMoreData={loadMoreMovies}/>
     </View>);
 }

@@ -16,6 +16,7 @@ import AiringTodayTvSeries from "../screens/tvseries/airing_today/AiringTodayTvS
 import OnTheAirTvSeries from "../screens/tvseries/on_the_air/OnTheAirTvSeries.tsx";
 import PopularTvSeries from "../screens/tvseries/popular/PopularTvSeries.tsx";
 import UpComingTvSeries from "../screens/tvseries/top_rated/TopRatedTvSeries.tsx";
+import TvSeriesDetail from "../screens/tvseries/tvseries-detail/TvSeriesDetail.tsx";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -100,6 +101,9 @@ const AppNavigation = () => {
             }}/>
             <Stack.Screen name="ArtistDetail" component={ArtistDetail} options={{
                 title: 'Artist detail'
+            }}/>
+            <Stack.Screen name="TvSeriesDetail" component={TvSeriesDetail} options={{
+                title: 'TvSeries detail'
             }}/>
         </Stack.Navigator>
     </NavigationContainer>);

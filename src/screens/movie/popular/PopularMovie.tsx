@@ -4,11 +4,16 @@ import MovieItemComponent from '../../../components/movie-item/MovieItemComponen
 import styles from './PopularMovie.Style.ts'
 import {View} from "react-native";
 import {useGetPopularMovieQuery} from "../../../redux/query/RTKQuery.ts";
-import {useNavigation} from "@react-navigation/native";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MovieItem} from "../../../types/MovieItem.ts";
 
+type RootStackParamList = {
+    MovieDetail: { movieId: number };
+};
+type PopularMovieNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
+
 const PopularMovie = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<PopularMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
     const {data = [], error, isLoading, isFetching, isSuccess} = useGetPopularMovieQuery(page)

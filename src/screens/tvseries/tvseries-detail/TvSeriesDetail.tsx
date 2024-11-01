@@ -1,38 +1,40 @@
 import React from 'react';
 import Loading from '../../../components/loading/Loading.tsx';
-import styles from './MovieDetail.Style.ts'
+import styles from './TvSeriesDetail.Style.ts'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../../constant/AppConstants.ts";
 import {
-    useGetArtistAndCrewQuery,
-    useGetMovieDetailQuery,
-    useGetSimilarMovieQuery,
+    useRecommendedTvSeriesApiQuery,
+    useTvSeriesArtistAndCrewApiQuery,
+    useTvSeriesDetailApiQuery,
 } from "../../../redux/query/RTKQuery.ts";
 import {NavigationProp, RouteProp, useNavigation, useRoute} from "@react-navigation/native";
-import {MovieItem} from "../../../types/MovieItem.ts";
+import {TvSeriesItem} from "../../../types/TvSeriesItem.ts";
 import {Cast} from "../../../types/ArtistAndCrew.ts";
+
 type RouteParams = {
-    movieId: string;
+    tvSeriesId: string;
 };
 type RootStackParamList = {
-    MovieDetail: { movieId: number };
+    TvSeriesDetail: { tvSeriesId: number };
     ArtistDetail: { personId: number };
 };
-type MovieDetailNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
-const MovieDetail = () => {
-    const navigation = useNavigation<MovieDetailNavigationProp>();
+type TvSeriesDetailNavigationProp = NavigationProp<RootStackParamList, 'TvSeriesDetail'>;
+
+const TvSeriesDetail = () => {
+    const navigation = useNavigation<TvSeriesDetailNavigationProp>();
     const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
-    const { movieId } = route.params;
-    const { data: movieDetail, isLoading: isLoadingMovieDetail } = useGetMovieDetailQuery(Number(movieId))
-    const { data: similarMovies, isLoading: isLoadingSimilarMovies } = useGetSimilarMovieQuery(Number(movieId))
-    const { data: castAndCrew, isLoading: isLoadingCastAndCrew } = useGetArtistAndCrewQuery(Number(movieId))
+    const { tvSeriesId } = route.params;
+    const { data: tvSeriesDetail, isLoading: isLoadingMovieDetail } = useTvSeriesDetailApiQuery(Number(tvSeriesId))
+    const { data: similarMovies, isLoading: isLoadingSimilarMovies } = useRecommendedTvSeriesApiQuery(Number(tvSeriesId))
+    const { data: castAndCrew, isLoading: isLoadingCastAndCrew } = useTvSeriesArtistAndCrewApiQuery(Number(tvSeriesId))
 
     const isLoading = isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew
 
-    const recommendedMovieItem = ({item}:{item:MovieItem}) => {
+    const recommendedTvSeriesItem = ({item}:{item:TvSeriesItem}) => {
         return (<TouchableOpacity
             style={styles.movieItemContainer}
-            onPress={() => navigation.navigate('MovieDetail', {movieId: item.id})}>
+            onPress={() => navigation.navigate('TvSeriesDetail', {tvSeriesId: item.id})}>
             <Image
                 style={styles.similarImageView}
                 source={{
@@ -40,7 +42,7 @@ const MovieDetail = () => {
                 }}/>
         </TouchableOpacity>)
     }
-    const artistItem = ({item}:{ item:Cast}) => {
+    const artistItem = ({item}:{item:Cast}) => {
         return (<TouchableOpacity
             style={styles.movieItemContainer}
             onPress={() => {
@@ -58,35 +60,35 @@ const MovieDetail = () => {
         <Image
             style={styles.imageView}
             source={{
-                uri: `${Constants.IMAGE_URL}${movieDetail?.poster_path}`,
+                uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.poster_path}`,
             }}/>
         <View style={styles.secondContainer}>
-            <Text style={styles.title}>{movieDetail?.title}</Text>
+            <Text style={styles.title}>{tvSeriesDetail?.name}</Text>
             <View style={styles.thirdContainer}>
                 <View style={styles.fourthContainer}>
-                    <Text style={styles.infoTitleData}>{movieDetail?.original_language}</Text>
+                    <Text style={styles.infoTitleData}>{tvSeriesDetail?.original_language}</Text>
                     <Text style={styles.infoTitle}>Language</Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                    <Text style={styles.infoTitleData}>{movieDetail?.vote_average}</Text>
+                    <Text style={styles.infoTitleData}>{tvSeriesDetail?.vote_average}</Text>
                     <Text style={styles.infoTitle}>Rating</Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                    <Text style={styles.infoTitleData}>{movieDetail?.runtime} min</Text>
-                    <Text style={styles.infoTitle}>Duration</Text>
+                    <Text style={styles.infoTitleData}>{tvSeriesDetail?.number_of_episodes}</Text>
+                    <Text style={styles.infoTitle}>Number Of Episode</Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                    <Text style={styles.infoTitleData}>{movieDetail?.release_date}</Text>
+                    <Text style={styles.infoTitleData}>{tvSeriesDetail?.first_air_date}</Text>
                     <Text style={styles.infoTitle}>Release Date</Text>
                 </View>
             </View>
             <Text style={styles.description}>Description</Text>
-            <Text>{movieDetail?.overview}</Text>
+            <Text>{tvSeriesDetail?.overview}</Text>
             <Text style={styles.description}>Similar</Text>
             <FlatList
                 style={styles.flatListContainer}
                 data={similarMovies}
-                renderItem={recommendedMovieItem}
+                renderItem={recommendedTvSeriesItem}
                 keyExtractor={(item, index) => index.toString()}
                 horizontal={true}
             />
@@ -101,4 +103,4 @@ const MovieDetail = () => {
         </View>
     </ScrollView>)
 }
-export default MovieDetail
+export default TvSeriesDetail

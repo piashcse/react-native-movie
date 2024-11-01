@@ -2,13 +2,17 @@ import React, {useEffect, useState} from 'react';
 import Loading from '../../../components/loading/Loading.tsx';import {View} from 'react-native';
 import styles from './OnTheAirTvSeries.Style.ts'
 import { useOnTheAirTvSeriesApiQuery} from "../../../redux/query/RTKQuery.ts";
-import {useNavigation} from "@react-navigation/native";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {TvSeriesItem} from "../../../types/TvSeriesItem.ts";
 import TvSeriesItemComponent from "../../../components/tvseries-item/TvSeriesItemComponent.tsx";
 
+type RootStackParamList = {
+    TvSeriesDetail: { tvSeriesId: number };
+};
+type  OnTheAirTvNavigationProp = NavigationProp<RootStackParamList, 'TvSeriesDetail'>;
 
 const OnTheAirTvSeries = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<OnTheAirTvNavigationProp>();
     const [page, setPage] = useState(1);
     const [tvSeries, setTvSeries] = useState<Array<TvSeriesItem>>([]);
     const {data = [], error, isLoading, isFetching, isSuccess} = useOnTheAirTvSeriesApiQuery(page)
@@ -32,7 +36,7 @@ const OnTheAirTvSeries = () => {
     return (<View style={styles.mainView}>
         <TvSeriesItemComponent
             tvSeries={tvSeries}
-            onPress={(item) =>{ }}
+            onPress={(item) =>{ navigation.navigate('TvSeriesDetail', {tvSeriesId: item.id})}}
             loadMoreData={loadMoreMovies}/>
     </View>);
 }

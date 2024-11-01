@@ -7,6 +7,7 @@ import {CastAndCrew} from "../../types/ArtistAndCrew.ts";
 import {ArtistDetail} from "../../types/ArtistDetail.ts";
 import {TvSeriesResult} from "../../types/TvSeriesResult.ts";
 import {TvSeriesItem} from "../../types/TvSeriesItem.ts";
+import {TvSeriesDetail} from "../../types/TvSeriesDetail.ts";
 
 export const nowPlayingMovieApi = createApi({
     reducerPath: 'nowPlayingMovieApi',
@@ -168,5 +169,39 @@ export const topRatedTvSeriesApi = createApi({
 
 export const {useTopRatedTvSeriesApiQuery} = topRatedTvSeriesApi
 
+export const tvSeriesDetailApi = createApi({
+    reducerPath: 'tvSeriesDetailApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        tvSeriesDetailApi: builder.query<TvSeriesDetail, number>({
+            query: (tvSeriesId) => `tv/${tvSeriesId}?api_key=${Constants.API_KEY}&language=en-US`,
+            transformResponse: (response: TvSeriesDetail) => response
+        }),
+    }),
+})
+export const {useTvSeriesDetailApiQuery} = tvSeriesDetailApi
 
+export const recommendedTvSeriesApi = createApi({
+    reducerPath: 'recommendedTvSeriesApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        recommendedTvSeriesApi: builder.query<TvSeriesItem[], number>({
+            query: (tvSeriesId) => `tv/${tvSeriesId}/recommendations?api_key=${Constants.API_KEY}&language=en-US`,
+            transformResponse: (response: TvSeriesResult) => response.results
+        }),
+    }),
+})
+export const {useRecommendedTvSeriesApiQuery} = recommendedTvSeriesApi
 
+export const tvSeriesArtistAndCrewApi = createApi({
+    reducerPath: 'tvSeriesArtistAndCrewApi',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        tvSeriesArtistAndCrewApi: builder.query<CastAndCrew, number>({
+            query: (movieId) => `tv/${movieId}/credits?api_key=${Constants.API_KEY}&language=en-US`,
+            transformResponse: (response: CastAndCrew) => response
+        }),
+    }),
+})
+
+export const {useTvSeriesArtistAndCrewApiQuery} = tvSeriesArtistAndCrewApi

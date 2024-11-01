@@ -4,11 +4,16 @@ import MovieItemComponent from '../../../components/movie-item/MovieItemComponen
 import styles from './TopRatedMovie.Style.ts'
 import {View} from "react-native";
 import { useGetTopRatedMovieQuery} from "../../../redux/query/RTKQuery.ts";
-import {useNavigation} from "@react-navigation/native";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MovieItem} from "../../../types/MovieItem.ts";
 
+type RootStackParamList = {
+    MovieDetail: { movieId: number };
+};
+type TopRatedMovieNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
+
 const TopRatedMovie = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<TopRatedMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
     const {data = [], error, isLoading, isFetching, isSuccess} = useGetTopRatedMovieQuery(page);
