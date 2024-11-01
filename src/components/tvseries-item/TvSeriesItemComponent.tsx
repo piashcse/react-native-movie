@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import {FlatList, Image, View, TouchableOpacity, ImageBackground} from "react-native";
-import styles from "./MovieItem.Style.ts";
+import styles from "./TvSeriesItem.Style.ts";
 import {Constants} from "../../constant/AppConstants";
-import {MovieItem} from "../../types/MovieItem";
+import {TvSeriesItem} from "../../types/TvSeriesItem.ts";
 
-interface MovieItemProps {
-    movies: Array<MovieItem>;
-    onPress: (item: MovieItem) => void;
+interface TvSeriesItemProps {
+    tvSeries: Array<TvSeriesItem>;
+    onPress: (item: TvSeriesItem) => void;
     loadMoreData: () => void
 }
 
-const MovieItemComponent = (props: MovieItemProps) => {
-    const {movies, onPress, loadMoreData} = props;
+const MovieItemComponent = (props: TvSeriesItemProps) => {
+    const {tvSeries, onPress, loadMoreData} = props;
     const [isLoading, setIsLoading] = useState(true)
-    const movieItem = ({item}: { item: MovieItem }) => {
+    const TvSeriesItem = ({item}: { item: TvSeriesItem }) => {
         return (<TouchableOpacity style={styles.movieItemContainer} onPress={() => onPress(item)}>
             <ImageBackground
                 imageStyle={{borderRadius: 18}}
@@ -35,8 +35,8 @@ const MovieItemComponent = (props: MovieItemProps) => {
     return (<View style={styles.mainView}>
         <FlatList
             style={styles.flatListContainer}
-            data={movies}
-            renderItem={movieItem}
+            data={tvSeries}
+            renderItem={TvSeriesItem}
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
             onEndReachedThreshold={0.5}

@@ -1,28 +1,35 @@
 import React from 'react';
-import Loading from '../../components/loading/Loading';
-import styles from './MovieDetailStyle'
+import Loading from '../../../components/loading/Loading.tsx';
+import styles from './MovieDetail.Style.ts'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
-import {Constants} from "../../constant/AppConstants";
+import {Constants} from "../../../constant/AppConstants.ts";
 import {
     useGetArtistAndCrewQuery,
     useGetMovieDetailQuery,
     useGetSimilarMovieQuery,
-} from "../../redux/query/RTKQuery.ts";
-import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
+} from "../../../redux/query/RTKQuery.ts";
+import {NavigationProp, RouteProp, useNavigation, useRoute} from "@react-navigation/native";
+import {MovieItem} from "../../../types/MovieItem.ts";
+import {Cast} from "../../../types/ArtistAndCrew.ts";
 type RouteParams = {
     movieId: string;
 };
+type RootStackParamList = {
+    MovieDetail: { movieId: number };
+    ArtistDetail: { personId: number };
+};
+type MovieDetailNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
 const MovieDetail = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<MovieDetailNavigationProp>();
     const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
     const { movieId } = route.params;
-    const { data: movieDetail, isLoading: isLoadingMovieDetail } = useGetMovieDetailQuery(movieId)
-    const { data: similarMovies, isLoading: isLoadingSimilarMovies } = useGetSimilarMovieQuery(movieId)
-    const { data: castAndCrew, isLoading: isLoadingCastAndCrew } = useGetArtistAndCrewQuery(movieId)
+    const { data: movieDetail, isLoading: isLoadingMovieDetail } = useGetMovieDetailQuery(Number(movieId))
+    const { data: similarMovies, isLoading: isLoadingSimilarMovies } = useGetSimilarMovieQuery(Number(movieId))
+    const { data: castAndCrew, isLoading: isLoadingCastAndCrew } = useGetArtistAndCrewQuery(Number(movieId))
 
     const isLoading = isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew
 
-    const similarItem = ({item}) => {
+    const recommendedMovieItem = ({item}:{item:MovieItem}) => {
         return (<TouchableOpacity
             style={styles.movieItemContainer}
             onPress={() => navigation.navigate('MovieDetail', {movieId: item.id})}>
@@ -33,7 +40,7 @@ const MovieDetail = () => {
                 }}/>
         </TouchableOpacity>)
     }
-    const artistItem = ({item}) => {
+    const artistItem = ({item}:{ item:Cast}) => {
         return (<TouchableOpacity
             style={styles.movieItemContainer}
             onPress={() => {
@@ -47,7 +54,6 @@ const MovieDetail = () => {
         </TouchableOpacity>)
     }
 
-    // main view with loading while api call is going on
     return isLoading ? <Loading/> : (<ScrollView style={styles.mainView}>
         <Image
             style={styles.imageView}
@@ -80,8 +86,8 @@ const MovieDetail = () => {
             <FlatList
                 style={styles.flatListContainer}
                 data={similarMovies}
-                renderItem={similarItem}
-                keyExtractor={(item, index) => index}
+                renderItem={recommendedMovieItem}
+                keyExtractor={(item, index) => index.toString()}
                 horizontal={true}
             />
             <Text style={styles.description}>Artist</Text>
@@ -89,7 +95,7 @@ const MovieDetail = () => {
                 style={styles.flatListContainer}
                 data={castAndCrew?.cast}
                 renderItem={artistItem}
-                keyExtractor={(item, index) => index}
+                keyExtractor={(item, index) => index.toString()}
                 horizontal={true}
             />
         </View>

@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../components/loading/Loading';
-import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
-import styles from './PopularStyle'
+import Loading from '../../../components/loading/Loading.tsx';
+import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
+import styles from './PopularMovie.Style.ts'
 import {View} from "react-native";
-import {useGetPopularMovieQuery} from "../../redux/query/RTKQuery.ts";
-import {useNavigation} from "@react-navigation/native";
-import {MovieItem} from "../../types/MovieItem.ts";
+import {useGetPopularMovieQuery} from "../../../redux/query/RTKQuery.ts";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
+import {MovieItem} from "../../../types/MovieItem.ts";
 
-const Popular = () => {
-    const navigation = useNavigation();
+type RootStackParamList = {
+    MovieDetail: { movieId: number };
+};
+type PopularMovieNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
+
+const PopularMovie = () => {
+    const navigation = useNavigation<PopularMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
     const {data = [], error, isLoading, isFetching, isSuccess} = useGetPopularMovieQuery(page)
@@ -35,4 +40,4 @@ const Popular = () => {
             loadMoreData={loadMoreMovies}/>
     </View>);
 }
-export default Popular
+export default PopularMovie

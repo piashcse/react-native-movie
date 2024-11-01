@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../components/loading/Loading';
-import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
-import styles from './UpComingStyle'
+import Loading from '../../../components/loading/Loading.tsx';
+import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
+import styles from './UpComingMovie.Style.ts'
 import {View} from "react-native";
-import {useGetUpcomingMovieQuery} from "../../redux/query/RTKQuery.ts";
-import {useNavigation} from "@react-navigation/native";
-import {MovieItem} from "../../types/MovieItem.ts";
+import {useGetUpcomingMovieQuery} from "../../../redux/query/RTKQuery.ts";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
+import {MovieItem} from "../../../types/MovieItem.ts";
 
-const UpComing = () => {
-    const navigation = useNavigation();
+type RootStackParamList = {
+    MovieDetail: { movieId: number };
+};
+type UpComingMovieNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
+
+const UpComingMovie = () => {
+    const navigation = useNavigation<UpComingMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
     const {data = [], error, isLoading, isFetching, isSuccess} = useGetUpcomingMovieQuery(page)
@@ -35,4 +40,4 @@ const UpComing = () => {
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item?.id})}/>
     </View>);
 }
-export default UpComing
+export default UpComingMovie

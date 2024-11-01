@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../components/loading/Loading';
-import MovieItemComponent from '../../components/movie-item/MovieItemComponent.tsx';
+import Loading from '../../../components/loading/Loading.tsx';
+import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import {View} from 'react-native';
-import styles from './NowPlayingStyle.ts'
-import {useGetNowPlayingMovieQuery} from "../../redux/query/RTKQuery.ts";
-import {useNavigation} from "@react-navigation/native";
-import {MovieItem} from "../../types/MovieItem.ts";
+import styles from './NowPlayingMovie.Style.ts'
+import {useGetNowPlayingMovieQuery} from "../../../redux/query/RTKQuery.ts";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
+import {MovieItem} from "../../../types/MovieItem.ts";
 
+type RootStackParamList = {
+    MovieDetail: { movieId: number };
+};
+type NowPlayingMovieNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
 
-const NowPlaying = () => {
-    const navigation = useNavigation();
+const NowPlayingMovie = () => {
+    const navigation = useNavigation<NowPlayingMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
     const {data = [], error, isLoading, isFetching, isSuccess} = useGetNowPlayingMovieQuery(page)
@@ -37,4 +41,4 @@ const NowPlaying = () => {
             loadMoreData={loadMoreMovies}/>
     </View>);
 }
-export default NowPlaying
+export default NowPlayingMovie
