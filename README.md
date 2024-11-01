@@ -25,7 +25,6 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 
 ## Architecture
   - RKT Query-Based Architecture (RTK Query - Hooks - reducer)
-  - Hooks
   - Redux
 <p float="left"> 
   <a href='https://redux-toolkit.js.org/rtk-query/overview'>
