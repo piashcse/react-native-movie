@@ -16,7 +16,7 @@ const PopularMovie = () => {
     const navigation = useNavigation<PopularMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = usePopularMovieQuery(page)
+    const {data = [], error, isFetching, isSuccess} = usePopularMovieQuery(page)
 
     useEffect(() => {
         if (data.length) {
@@ -25,7 +25,7 @@ const PopularMovie = () => {
     }, [isSuccess]);
 
     const loadMoreMovies = () => {
-        if (!isFetching && !isLoading && !error) {
+        if (!isFetching && !error) {
             setPage((prevPage) => prevPage + 1);
         }
     };

@@ -15,7 +15,7 @@ const OnTheAirTvSeries = () => {
     const navigation = useNavigation<OnTheAirTvNavigationProp>();
     const [page, setPage] = useState(1);
     const [tvSeries, setTvSeries] = useState<Array<TvSeriesItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = useOnTheAirTvSeriesApiQuery(page)
+    const {data = [], error, isFetching, isSuccess} = useOnTheAirTvSeriesApiQuery(page)
 
     useEffect(() => {
         if (data.length) {
@@ -24,7 +24,7 @@ const OnTheAirTvSeries = () => {
     }, [isSuccess]);
 
     const loadMoreMovies = () => {
-        if (!isFetching && !isLoading && !error) {
+        if (!isFetching && !error) {
             setPage((prevPage) => prevPage + 1);
         }
     };

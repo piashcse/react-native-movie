@@ -16,7 +16,7 @@ const UpComingMovie = () => {
     const navigation = useNavigation<UpComingMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = useUpcomingMovieQuery(page)
+    const {data = [], error, isFetching, isSuccess} = useUpcomingMovieQuery(page)
 
     useEffect(() => {
         if (data.length) {
@@ -25,12 +25,12 @@ const UpComingMovie = () => {
     }, [isSuccess]);
 
     const loadMoreMovies = () => {
-        if (!isFetching && !isLoading && !error) {
+        if (!isFetching && !error) {
             setPage((prevPage) => prevPage + 1);
         }
     };
 
-    if (isLoading) return <Loading/>;
+    if (isFetching) return <Loading/>;
     return (<View style={styles.mainView}>
         <MovieItemComponent
             movies={movies}

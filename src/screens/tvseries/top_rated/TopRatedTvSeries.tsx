@@ -16,7 +16,7 @@ const TopRatedTvSeries = () => {
     const navigation = useNavigation<TopRatedTvSeriesNavigationProp>();
     const [page, setPage] = useState(1);
     const [tvSeries, setTvSeries] = useState<Array<TvSeriesItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = useTopRatedTvSeriesApiQuery(page)
+    const {data = [], error, isFetching, isSuccess} = useTopRatedTvSeriesApiQuery(page)
 
     useEffect(() => {
         if (data.length) {
@@ -25,7 +25,7 @@ const TopRatedTvSeries = () => {
     }, [isSuccess]);
 
     const loadMoreMovies = () => {
-        if (!isFetching && !isLoading && !error) {
+        if (!isFetching && !error) {
             setPage((prevPage) => prevPage + 1);
         }
     };
