@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from '../../../components/loading/Loading.tsx';
+import {Loading} from '../../../components/loading/Loading.tsx';
 import styles from './TvSeriesDetail.Style.ts'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../../constant/AppConstants.ts";
@@ -25,9 +25,9 @@ const TvSeriesDetail = () => {
     const navigation = useNavigation<TvSeriesDetailNavigationProp>();
     const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
     const { tvSeriesId } = route.params;
-    const { data: tvSeriesDetail, isLoading: isLoadingMovieDetail } = useTvSeriesDetailApiQuery(Number(tvSeriesId))
-    const { data: similarMovies, isLoading: isLoadingSimilarMovies } = useRecommendedTvSeriesApiQuery(Number(tvSeriesId))
-    const { data: castAndCrew, isLoading: isLoadingCastAndCrew } = useTvSeriesArtistAndCrewApiQuery(Number(tvSeriesId))
+    const { data: tvSeriesDetail, isFetching: isLoadingMovieDetail } = useTvSeriesDetailApiQuery(Number(tvSeriesId))
+    const { data: similarMovies, isFetching: isLoadingSimilarMovies } = useRecommendedTvSeriesApiQuery(Number(tvSeriesId))
+    const { data: castAndCrew, isFetching: isLoadingCastAndCrew } = useTvSeriesArtistAndCrewApiQuery(Number(tvSeriesId))
 
     const isLoading = isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew
 

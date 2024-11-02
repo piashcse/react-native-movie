@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from '../../../components/loading/Loading.tsx';
+import {Loading} from '../../../components/loading/Loading.tsx';
 import styles from './MovieDetail.Style.ts'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../../constant/AppConstants.ts";
@@ -23,9 +23,9 @@ const MovieDetail = () => {
     const navigation = useNavigation<MovieDetailNavigationProp>();
     const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
     const { movieId } = route.params;
-    const { data: movieDetail, isLoading: isLoadingMovieDetail } = useGetMovieDetailQuery(Number(movieId))
-    const { data: similarMovies, isLoading: isLoadingSimilarMovies } = useGetSimilarMovieQuery(Number(movieId))
-    const { data: castAndCrew, isLoading: isLoadingCastAndCrew } = useGetArtistAndCrewQuery(Number(movieId))
+    const { data: movieDetail, isFetching: isLoadingMovieDetail } = useGetMovieDetailQuery(Number(movieId))
+    const { data: similarMovies, isFetching: isLoadingSimilarMovies } = useGetSimilarMovieQuery(Number(movieId))
+    const { data: castAndCrew, isFetching: isLoadingCastAndCrew } = useGetArtistAndCrewQuery(Number(movieId))
 
     const isLoading = isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew
 

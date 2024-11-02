@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
-import {FlatList, Image, View, TouchableOpacity, ImageBackground} from "react-native";
+import {FlatList, Image, View, TouchableOpacity, ImageBackground, FlatListProps} from "react-native";
 import styles from "./TvSeriesItem.Style.ts";
 import {Constants} from "../../constant/AppConstants";
 import {TvSeriesItem} from "../../types/TvSeriesItem.ts";
 
-interface TvSeriesItemProps {
+interface TvSeriesItemProps extends Omit<FlatListProps<TvSeriesItem>, 'data' | 'renderItem'> {
     tvSeries: Array<TvSeriesItem>;
     onPress: (item: TvSeriesItem) => void;
-    loadMoreData: () => void
+    loadMoreData: () => void;
 }
 
-const MovieItemComponent = (props: TvSeriesItemProps) => {
-    const {tvSeries, onPress, loadMoreData} = props;
+const MovieItemComponent = ({ tvSeries, onPress, loadMoreData, ...rest }: TvSeriesItemProps) => {
     const [isLoading, setIsLoading] = useState(true)
     const TvSeriesItem = ({item}: { item: TvSeriesItem }) => {
         return (<TouchableOpacity style={styles.movieItemContainer} onPress={() => onPress(item)}>
@@ -41,6 +40,7 @@ const MovieItemComponent = (props: TvSeriesItemProps) => {
             keyExtractor={(item, index) => index.toString()}
             onEndReachedThreshold={0.5}
             onEndReached={loadMoreData}
+            {...rest}
         />
     </View>);
 }

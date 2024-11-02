@@ -13,20 +13,20 @@ export const nowPlayingMovieApi = createApi({
     reducerPath: 'nowPlayingMovieApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
-        getNowPlayingMovie: builder.query<MovieItem[], number>({
+        nowPlayingMovie: builder.query<MovieItem[], number>({
             query: (page) => `movie/now_playing?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
             transformResponse: (response: MovieResult) => response.results,
         }),
     }),
 })
 
-export const { useGetNowPlayingMovieQuery } = nowPlayingMovieApi;
+export const { useNowPlayingMovieQuery } = nowPlayingMovieApi;
 
 export const popularMovieApi = createApi({
     reducerPath: 'popularMovieApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
-        getPopularMovie: builder.query<MovieItem[], number>({
+        popularMovie: builder.query<MovieItem[], number>({
             query: (page ) => `movie/popular?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
             transformResponse: (response: MovieResult) => {
                 console.log('transform ', response.results)
@@ -37,33 +37,33 @@ export const popularMovieApi = createApi({
 })
 
 
-export const {useGetPopularMovieQuery} = popularMovieApi;
+export const {usePopularMovieQuery} = popularMovieApi;
 
 export const topRatedMovieApi = createApi({
     reducerPath: 'topRatedMovieApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
-        getTopRatedMovie: builder.query<MovieItem[], number>({
+        topRatedMovie: builder.query<MovieItem[], number>({
             query: (page) => `movie/top_rated?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
             transformResponse: (response: MovieResult) => response.results
         }),
     }),
 })
-export const {useGetTopRatedMovieQuery} = topRatedMovieApi;
+export const {useTopRatedMovieQuery} = topRatedMovieApi;
 
 
 export const upcomingMovieApi = createApi({
     reducerPath: 'upcomingMovieApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
     endpoints: (builder) => ({
-        getUpcomingMovie: builder.query<MovieItem[], number>({
+        upcomingMovie: builder.query<MovieItem[], number>({
             query: (page) => `movie/upcoming?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
             transformResponse: (response: MovieResult) => response.results
         }),
     }),
 })
 
-export const {useGetUpcomingMovieQuery} = upcomingMovieApi;
+export const {useUpcomingMovieQuery} = upcomingMovieApi;
 
 export const movieDetailApi = createApi({
     reducerPath: 'movieDetailApi',
