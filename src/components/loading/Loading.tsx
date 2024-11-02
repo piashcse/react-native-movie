@@ -4,12 +4,21 @@ import styles from './LoadingStyle';
 import {COLOR} from '../../constant/Colors';
 
 const Loading = () => {
-    return (<View style={styles.containerLoading}>
-        <View style={styles.containerIndicator}>
-            <ActivityIndicator size={'large'} color={COLOR.primaryColor}/>
-            <Text style={styles.loadingTextStyle}>Loading...</Text>
-        </View>
-    </View>);
+  return (
+    <View style={styles.containerLoading}>
+      <View style={styles.containerIndicator}>
+        <ActivityIndicator size={'large'} color={COLOR.primaryColor} />
+        <Text style={styles.loadingTextStyle}>Loading...</Text>
+      </View>
+    </View>
+  );
 };
 
-export default Loading
+const FooterLoading = () => {
+  return <ActivityIndicator size={'large'} color={COLOR.primaryColor} />;
+};
+
+export {
+  Loading,
+  FooterLoading,
+};

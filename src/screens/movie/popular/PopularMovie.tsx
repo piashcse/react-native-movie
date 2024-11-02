@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../../components/loading/Loading.tsx';
 import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import styles from './PopularMovie.Style.ts'
 import {View} from "react-native";
-import {useGetPopularMovieQuery} from "../../../redux/query/RTKQuery.ts";
+import {usePopularMovieQuery} from "../../../redux/query/RTKQuery.ts";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MovieItem} from "../../../types/MovieItem.ts";
+import {FooterLoading, Loading} from "../../../components/loading/Loading.tsx";
 
 type RootStackParamList = {
     MovieDetail: { movieId: number };
@@ -16,13 +16,11 @@ const PopularMovie = () => {
     const navigation = useNavigation<PopularMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = useGetPopularMovieQuery(page)
+    const {data = [], error, isLoading, isFetching, isSuccess} = usePopularMovieQuery(page)
 
     useEffect(() => {
-        if (data && page > 1) {
-            setMovies((prevMovies) => [...prevMovies, ...data]);
-        }else {
-            setMovies(data ?? []);
+        if (data.length) {
+            setMovies((prevMovies) => page === 1 ? data : [...prevMovies, ...data]);
         }
     }, [isSuccess]);
 
@@ -32,12 +30,15 @@ const PopularMovie = () => {
         }
     };
 
-    if (isLoading) return <Loading/>;
+    if (isFetching && page == 1) return <Loading/>;
+
     return (<View style={styles.mainView}>
         <MovieItemComponent
             movies={movies}
             onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
-            loadMoreData={loadMoreMovies}/>
+            loadMoreData={loadMoreMovies}
+            ListFooterComponent={isFetching && page > 1 ? <FooterLoading/> : null}
+        />
     </View>);
 }
 export default PopularMovie

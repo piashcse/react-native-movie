@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../../components/loading/Loading.tsx';
+import {FooterLoading, Loading} from '../../../components/loading/Loading.tsx';
 import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import styles from './TopRatedMovie.Style.ts'
 import {View} from "react-native";
-import { useGetTopRatedMovieQuery} from "../../../redux/query/RTKQuery.ts";
+import { useTopRatedMovieQuery} from "../../../redux/query/RTKQuery.ts";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MovieItem} from "../../../types/MovieItem.ts";
 
@@ -16,13 +16,11 @@ const TopRatedMovie = () => {
     const navigation = useNavigation<TopRatedMovieNavigationProp>();
     const [page, setPage] = useState(1);
     const [movies, setMovies] = useState<Array<MovieItem>>([]);
-    const {data = [], error, isLoading, isFetching, isSuccess} = useGetTopRatedMovieQuery(page);
+    const {data = [], error, isLoading, isFetching, isSuccess} = useTopRatedMovieQuery(page);
 
     useEffect(() => {
-        if (data && page > 1) {
-            setMovies((prevMovies) => [...prevMovies, ...data]);
-        }else {
-            setMovies(data ?? []);
+        if (data.length) {
+            setMovies((prevMovies) => page === 1 ? data : [...prevMovies, ...data]);
         }
     }, [isSuccess]);
 
@@ -32,13 +30,15 @@ const TopRatedMovie = () => {
         }
     };
 
-    if (isLoading) return <Loading/>;
+    if (isFetching && page == 1) return <Loading/>;
+
     return (<View style={styles.mainView}>
         <MovieItemComponent
             movies={movies}
+            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}
             loadMoreData={loadMoreMovies}
-            onPress={(item) => navigation.navigate('MovieDetail', {movieId: item.id})}/>
-        {isLoading && <Loading/>}
+            ListFooterComponent={isFetching && page > 1 ? <FooterLoading/> : null}
+        />
     </View>);
 }
 export default TopRatedMovie

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../../components/loading/Loading.tsx';
+import {FooterLoading, Loading} from '../../../components/loading/Loading.tsx';
 import {View} from 'react-native';
 import styles from './PopularTvSeries.Style.ts'
 import {usePopularTvSeriesApiQuery} from "../../../redux/query/RTKQuery.ts";
@@ -19,10 +19,8 @@ const PopularTvSeries = () => {
     const {data = [], error, isLoading, isFetching, isSuccess} = usePopularTvSeriesApiQuery(page)
 
     useEffect(() => {
-        if (data && page > 1) {
-            setTvSeries((prevTvSeries) => [...prevTvSeries, ...data]);
-        }else {
-            setTvSeries(data ?? []);
+        if (data.length) {
+            setTvSeries((prevTvSeries) => page === 1 ? data : [...prevTvSeries, ...data]);
         }
     }, [isSuccess]);
 
@@ -32,13 +30,14 @@ const PopularTvSeries = () => {
         }
     };
 
-    if (isLoading) return <Loading/>;
+    if (isFetching && page == 1) return <Loading/>;
 
     return (<View style={styles.mainView}>
         <TvSeriesItemComponent
             tvSeries={tvSeries}
             onPress={(item) =>{ navigation.navigate('TvSeriesDetail', {tvSeriesId: item.id})}}
-            loadMoreData={loadMoreMovies}/>
+            loadMoreData={loadMoreMovies}
+            ListFooterComponent={isFetching && page > 1 ? <FooterLoading/> : null}/>
     </View>);
 }
 export default PopularTvSeries

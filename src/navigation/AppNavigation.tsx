@@ -49,12 +49,12 @@ const MovieBottomNavigation = () => {
         <MovieBottomTab.Screen name="NowPlaying" component={NowPlayingMovie} options={{
             tabBarLabel: 'NowPlaying',
             headerShown: false,
-            tabBarIcon: ({color, size}) => (<MaterialIcons name="home" color={color} size={size}/>),
+            tabBarIcon: ({color, size}) => (<MaterialIcons name="movie" color={color} size={size}/>),
         }}/>
         <MovieBottomTab.Screen name="Popular" component={PopularMovie} options={{
             tabBarLabel: 'Popular',
             headerShown: false,
-            tabBarIcon: ({color, size}) => (<MaterialIcons name="timeline" color={color} size={size}/>),
+            tabBarIcon: ({color, size}) => (<MaterialIcons name="favorite" color={color} size={size}/>),
         }}/>
         <MovieBottomTab.Screen name="TopRated" component={TopRatedMovie} options={{
             tabBarLabel: 'Top Rated',
@@ -73,7 +73,7 @@ const TvSeriesBottomNavigation = () => {
         <TvSeriesBottomTab.Screen name="AiringTodayTvSeries" component={AiringTodayTvSeries} options={{
             tabBarLabel: 'AiringToday',
             headerShown: false,
-            tabBarIcon: ({color, size}) => (<MaterialIcons name="home" color={color} size={size}/>),
+            tabBarIcon: ({color, size}) => (<MaterialIcons name="movie" color={color} size={size}/>),
         }} />
         <TvSeriesBottomTab.Screen name="OnTheAirTvSeries" component={OnTheAirTvSeries} options={{
             tabBarLabel: 'OnTheAir',
@@ -83,7 +83,7 @@ const TvSeriesBottomNavigation = () => {
         <TvSeriesBottomTab.Screen name="PopularTvSeries" component={PopularTvSeries} options={{
             tabBarLabel: 'Popular',
             headerShown: false,
-            tabBarIcon: ({color, size}) => (<MaterialIcons name="star" color={color} size={size}/>),
+            tabBarIcon: ({color, size}) => (<MaterialIcons name="favorite" color={color} size={size}/>),
         }}/>
         <TvSeriesBottomTab.Screen name="TopRatedTvSeries" component={UpComingTvSeries} options={{
             tabBarLabel: 'TopRated ',

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../../../components/loading/Loading.tsx';import {View} from 'react-native';
+import {FooterLoading, Loading} from '../../../components/loading/Loading.tsx';import {View} from 'react-native';
 import styles from './OnTheAirTvSeries.Style.ts'
 import { useOnTheAirTvSeriesApiQuery} from "../../../redux/query/RTKQuery.ts";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
@@ -18,10 +18,8 @@ const OnTheAirTvSeries = () => {
     const {data = [], error, isLoading, isFetching, isSuccess} = useOnTheAirTvSeriesApiQuery(page)
 
     useEffect(() => {
-        if (data && page > 1) {
-            setTvSeries((prevTvSeries) => [...prevTvSeries, ...data]);
-        }else {
-            setTvSeries(data ?? []);
+        if (data.length) {
+            setTvSeries((prevTvSeries) => page === 1 ? data : [...prevTvSeries, ...data]);
         }
     }, [isSuccess]);
 
@@ -31,13 +29,14 @@ const OnTheAirTvSeries = () => {
         }
     };
 
-    if (isLoading) return <Loading/>;
+    if (isFetching && page == 1) return <Loading/>;
 
     return (<View style={styles.mainView}>
         <TvSeriesItemComponent
             tvSeries={tvSeries}
             onPress={(item) =>{ navigation.navigate('TvSeriesDetail', {tvSeriesId: item.id})}}
-            loadMoreData={loadMoreMovies}/>
+            loadMoreData={loadMoreMovies}
+            ListFooterComponent={isFetching && page > 1 ? <FooterLoading/> : null}/>
     </View>);
 }
 export default OnTheAirTvSeries
