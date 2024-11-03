@@ -1,6 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas';
 import logger from 'redux-logger';
 import {
     airingTodayTvSeriesApi,
@@ -66,7 +65,6 @@ const configurationAppStore = () => {
         devTools: process.env.NODE_ENV === 'development'
     })
     setupListeners(store.dispatch)
-    sagaMiddleware.run(rootSaga);
     return store
 }
 export default configurationAppStore
