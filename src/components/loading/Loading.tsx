@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, ActivityIndicator, Text} from 'react-native';
-import styles from './LoadingStyle';
+import styles from './Loading.style.ts';
 import {COLOR} from '../../constant/Colors';
 
 const Loading = () => {

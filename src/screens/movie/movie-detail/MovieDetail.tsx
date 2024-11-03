@@ -1,6 +1,6 @@
 import React from 'react';
 import {Loading} from '../../../components/loading/Loading.tsx';
-import styles from './MovieDetail.Style.ts'
+import styles from './MovieDetail.style.ts'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../../constant/AppConstants.ts";
 import {
@@ -11,14 +11,11 @@ import {
 import {NavigationProp, RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {MovieItem} from "../../../types/MovieItem.ts";
 import {Cast} from "../../../types/ArtistAndCrew.ts";
+import {RootStackParam} from "../../../types/navigation/NavigationTypes.ts";
 type RouteParams = {
     movieId: string;
 };
-type RootStackParamList = {
-    MovieDetail: { movieId: number };
-    ArtistDetail: { personId: number };
-};
-type MovieDetailNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
+type MovieDetailNavigationProp = NavigationProp<RootStackParam, 'MovieDetail'>;
 const MovieDetail = () => {
     const navigation = useNavigation<MovieDetailNavigationProp>();
     const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();

@@ -7,10 +7,17 @@ import {
     artistAndCrewApi,
     artistDetailApi,
     movieDetailApi,
-    nowPlayingMovieApi, onTheAirTvSeriesApi,
-    popularMovieApi, popularTvSeriesApi, recommendedTvSeriesApi,
+    nowPlayingMovieApi,
+    onTheAirTvSeriesApi,
+    popularMovieApi,
+    popularTvSeriesApi,
+    recommendedTvSeriesApi,
+    searchMovieTvSeries,
     similarMovieApi,
-    topRatedMovieApi, topRatedTvSeriesApi, tvSeriesArtistAndCrewApi, tvSeriesDetailApi,
+    topRatedMovieApi,
+    topRatedTvSeriesApi,
+    tvSeriesArtistAndCrewApi,
+    tvSeriesDetailApi,
     upcomingMovieApi
 } from './query/RTKQuery.ts'
 import {setupListeners} from "@reduxjs/toolkit/query";
@@ -36,6 +43,7 @@ const configurationAppStore = () => {
             [tvSeriesDetailApi.reducerPath]: tvSeriesDetailApi.reducer,
             [recommendedTvSeriesApi.reducerPath]: recommendedTvSeriesApi.reducer,
             [tvSeriesArtistAndCrewApi.reducerPath]: tvSeriesArtistAndCrewApi.reducer,
+            [searchMovieTvSeries.reducerPath]: searchMovieTvSeries.reducer,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([...middleware, logger,
             nowPlayingMovieApi.middleware,
@@ -53,6 +61,7 @@ const configurationAppStore = () => {
             recommendedTvSeriesApi.middleware,
             tvSeriesDetailApi.middleware,
             tvSeriesArtistAndCrewApi.middleware,
+            searchMovieTvSeries.middleware,
         ]),
         devTools: process.env.NODE_ENV === 'development'
     })

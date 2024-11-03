@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FlatList, Image, View, TouchableOpacity, ImageBackground, FlatListProps} from "react-native";
-import styles from "./TvSeriesItem.Style.ts";
+import styles from "./TvSeriesItem.style.ts";
 import {Constants} from "../../constant/AppConstants";
 import {TvSeriesItem} from "../../types/TvSeriesItem.ts";
 

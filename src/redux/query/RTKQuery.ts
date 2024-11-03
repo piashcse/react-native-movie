@@ -8,6 +8,7 @@ import {ArtistDetail} from "../../types/ArtistDetail.ts";
 import {TvSeriesResult} from "../../types/TvSeriesResult.ts";
 import {TvSeriesItem} from "../../types/TvSeriesItem.ts";
 import {TvSeriesDetail} from "../../types/TvSeriesDetail.ts";
+import {SearchData, SearchParams} from "../../components/search/DynamicSearch.tsx";
 
 export const nowPlayingMovieApi = createApi({
     reducerPath: 'nowPlayingMovieApi',
@@ -205,3 +206,16 @@ export const tvSeriesArtistAndCrewApi = createApi({
 })
 
 export const {useTvSeriesArtistAndCrewApiQuery} = tvSeriesArtistAndCrewApi
+
+export const searchMovieTvSeries = createApi({
+    reducerPath: 'searchMovieTvSeries',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
+    endpoints: (builder) => ({
+        searchMovieTvSeries: builder.query<SearchData[], SearchParams>({
+            query: (search : SearchParams) => `search/${search.isMovie? 'movie' : 'tv'}?query=${search.query}&api_key=${Constants.API_KEY}&language=en-US`,
+            transformResponse: (response: MovieResult) => response.results as SearchData[]
+        }),
+    }),
+})
+
+export const {useSearchMovieTvSeriesQuery} = searchMovieTvSeries;

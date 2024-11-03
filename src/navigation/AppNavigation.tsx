@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -11,39 +11,70 @@ import UpComingMovie from "../screens/movie/upcoming/UpComingMovie.tsx";
 import MovieDetail from "../screens/movie/movie-detail/MovieDetail";
 import ArtistDetail from "../screens/artist-detail/ArtistDetail";
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
-import {COLOR} from "../constant/Colors.ts";
 import AiringTodayTvSeries from "../screens/tvseries/airing_today/AiringTodayTvSeries.tsx";
 import OnTheAirTvSeries from "../screens/tvseries/on_the_air/OnTheAirTvSeries.tsx";
 import PopularTvSeries from "../screens/tvseries/popular/PopularTvSeries.tsx";
 import UpComingTvSeries from "../screens/tvseries/top_rated/TopRatedTvSeries.tsx";
 import TvSeriesDetail from "../screens/tvseries/tvseries-detail/TvSeriesDetail.tsx";
+import {BackHandler, View} from "react-native";
+import {AnimatedFAB} from "react-native-paper";
+import DynamicSearch from "../components/search/DynamicSearch.tsx";
+import styles from "./AppNavigation.Style.ts";
+import {useState} from "react";
+
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 const MovieBottomTab = createBottomTabNavigator();
 const TvSeriesBottomTab = createBottomTabNavigator();
+import { useFocusEffect } from '@react-navigation/native';
+
 
 const TabView = () => {
-   return (
-        <Tab.Navigator screenOptions={{
-            tabBarIndicatorStyle: {
-                backgroundColor: COLOR.tabIndicatorColor,
-                height: 3,
-                borderRadius: 2,
-                width: '20%',
-                left: '15%'
-            },
-            tabBarLabelStyle: {
-                fontSize: 14,
-                fontWeight: 'bold',
-            },
-        }}>
-            <Tab.Screen name="Movie" options={{title: 'Movie' }} component={MovieBottomNavigation} />
-            <Tab.Screen name="Tv Series" options={{title: 'Tv Series' }} component={TvSeriesBottomNavigation} />
-        </Tab.Navigator>
+    const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+    const navigation = useNavigation();
+
+    useFocusEffect(()=>{
+        const backAction = () => {
+            if (isSearchBarVisible) {
+                setIsSearchBarVisible(false)
+            }else if (navigation.canGoBack()){
+                navigation.goBack();
+            } else {
+                BackHandler.exitApp()
+            }
+            return true;
+        };
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+        return () => backHandler.remove();
+    })
+
+    return (
+       <View style={styles.rootView}>
+           <Tab.Navigator screenOptions={{
+                   tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
+                   tabBarLabelStyle: styles.tabBarLabelStyle,
+               }}>
+                   <Tab.Screen name="Movie" options={{title: 'Movie' }} component={MovieBottomNavigation} />
+                   <Tab.Screen name="Tv Series" options={{title: 'Tv Series' }} component={TvSeriesBottomNavigation} />
+           </Tab.Navigator>
+           <DynamicSearch isVisible={isSearchBarVisible}/>
+           <AnimatedFAB
+               icon={'movie-search'}
+               label={'Label'}
+               extended={false}
+               onPress={() => setIsSearchBarVisible(!isSearchBarVisible)}
+               visible={true}
+               animateFrom={'right'}
+               iconMode={'static'}
+               style={styles.favStyle}
+           />
+       </View>
     );
 }
-
 const MovieBottomNavigation = () => {
     return (<MovieBottomTab.Navigator>
         <MovieBottomTab.Screen name="NowPlaying" component={NowPlayingMovie} options={{

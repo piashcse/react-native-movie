@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Loading from '../../components/loading/Loading';
-import styles from './ArtistDetailStyle'
+import styles from './ArtistDetail.style.ts'
 import {Image, Text, View, ScrollView} from "react-native";
 import {Constants} from "../../constant/AppConstants";
 import {useGetAristDetailQuery} from "../../redux/query/RTKQuery.ts";
