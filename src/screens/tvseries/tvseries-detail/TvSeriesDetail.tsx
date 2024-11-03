@@ -1,6 +1,6 @@
 import React from 'react';
 import {Loading} from '../../../components/loading/Loading.tsx';
-import styles from './TvSeriesDetail.Style.ts'
+import styles from './TvSeriesDetail.style.ts'
 import {FlatList, Image, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Constants} from "../../../constant/AppConstants.ts";
 import {
@@ -11,15 +11,12 @@ import {
 import {NavigationProp, RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {TvSeriesItem} from "../../../types/TvSeriesItem.ts";
 import {Cast} from "../../../types/ArtistAndCrew.ts";
+import {RootStackParam} from "../../../types/navigation/NavigationTypes.ts";
 
 type RouteParams = {
     tvSeriesId: string;
 };
-type RootStackParamList = {
-    TvSeriesDetail: { tvSeriesId: number };
-    ArtistDetail: { personId: number };
-};
-type TvSeriesDetailNavigationProp = NavigationProp<RootStackParamList, 'TvSeriesDetail'>;
+type TvSeriesDetailNavigationProp = NavigationProp<RootStackParam, 'TvSeriesDetail'>;
 
 const TvSeriesDetail = () => {
     const navigation = useNavigation<TvSeriesDetailNavigationProp>();

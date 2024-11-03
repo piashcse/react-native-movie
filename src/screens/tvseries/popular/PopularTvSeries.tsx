@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {FooterLoading, Loading} from '../../../components/loading/Loading.tsx';
 import {View} from 'react-native';
-import styles from './PopularTvSeries.Style.ts'
+import styles from './PopularTvSeries.style.ts'
 import {usePopularTvSeriesApiQuery} from "../../../redux/query/RTKQuery.ts";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {TvSeriesItem} from "../../../types/TvSeriesItem.ts";
 import TvSeriesItemComponent from "../../../components/tvseries-item/TvSeriesItemComponent.tsx";
+import {RootStackParam} from "../../../types/navigation/NavigationTypes.ts";
 
-type RootStackParamList = {
-    TvSeriesDetail: { tvSeriesId: number };
-};
-type  PopularTvSeriesNavigationProp = NavigationProp<RootStackParamList, 'TvSeriesDetail'>;
+type  PopularTvSeriesNavigationProp = NavigationProp<RootStackParam, 'TvSeriesDetail'>;
 
 const PopularTvSeries = () => {
     const navigation = useNavigation<PopularTvSeriesNavigationProp>();

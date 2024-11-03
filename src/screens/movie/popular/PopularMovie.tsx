@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
-import styles from './PopularMovie.Style.ts'
+import styles from './PopularMovie.style.ts'
 import {View} from "react-native";
 import {usePopularMovieQuery} from "../../../redux/query/RTKQuery.ts";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MovieItem} from "../../../types/MovieItem.ts";
 import {FooterLoading, Loading} from "../../../components/loading/Loading.tsx";
+import {RootStackParam} from "../../../types/navigation/NavigationTypes.ts";
 
-type RootStackParamList = {
-    MovieDetail: { movieId: number };
-};
-type PopularMovieNavigationProp = NavigationProp<RootStackParamList, 'MovieDetail'>;
+type PopularMovieNavigationProp = NavigationProp<RootStackParam, 'MovieDetail'>;
 
 const PopularMovie = () => {
     const navigation = useNavigation<PopularMovieNavigationProp>();
