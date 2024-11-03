@@ -17,12 +17,14 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 
 # Main Features
 - Movie
-  - Movie List  
+  - Movie List
+  - Movie Series Search
   - Movie Detail
   - Recommended Movie
   - Artist info and artist detail
 - TV Series
   - TV Series List
+  - TV Series Search
   - TV Series Detail
   - Recommended TV Series
   - Artist info and artist detail
