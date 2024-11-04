@@ -29,7 +29,7 @@ const DynamicSearch = ({isVisible}: {isVisible: boolean}) => {
   const navigation = useNavigation<SearchNavigationProp>();
   const route = useRoute();
   const tabName = getFocusedRouteNameFromRoute(route) || 'movie';
-  const isMovie = tabName === 'movie';
+  const isMovie = tabName === 'Movie';
   const {data = [], isFetching} = useSearchMovieTvSeriesQuery({
     query: searchQuery,
     isMovie: isMovie,
