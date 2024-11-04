@@ -12,6 +12,8 @@ import {NavigationProp, RouteProp, useNavigation, useRoute} from "@react-navigat
 import {MovieItem} from "../../../types/MovieItem.ts";
 import {Cast} from "../../../types/ArtistAndCrew.ts";
 import {RootStackParam} from "../../../types/navigation/NavigationTypes.ts";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {useFavoriteStore} from "../../../store/FavoriteStore.ts";
 type RouteParams = {
     movieId: string;
 };
@@ -23,8 +25,17 @@ const MovieDetail = () => {
     const { data: movieDetail, isFetching: isLoadingMovieDetail } = useGetMovieDetailQuery(Number(movieId))
     const { data: similarMovies, isFetching: isLoadingSimilarMovies } = useGetSimilarMovieQuery(Number(movieId))
     const { data: castAndCrew, isFetching: isLoadingCastAndCrew } = useGetArtistAndCrewQuery(Number(movieId))
+    const {toggleFavoriteMovie, isFavoriteMovie} = useFavoriteStore()
+
 
     const isLoading = isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew
+
+    const onPressFavorite = () => {
+        if (movieDetail){
+            toggleFavoriteMovie(movieDetail)
+        }
+    };
+
 
     const recommendedMovieItem = ({item}:{item:MovieItem}) => {
         return (<TouchableOpacity
@@ -52,11 +63,20 @@ const MovieDetail = () => {
     }
 
     return isLoading ? <Loading/> : (<ScrollView style={styles.mainView}>
-        <Image
-            style={styles.imageView}
-            source={{
-                uri: `${Constants.IMAGE_URL}${movieDetail?.poster_path}`,
-            }}/>
+        <View style={styles.imageView}>
+            <Image
+                style={styles.imageView}
+                source={{
+                    uri: `${Constants.IMAGE_URL}${movieDetail?.poster_path}`,
+                }}/>
+            <TouchableOpacity style={styles.favoriteContainer} onPress={onPressFavorite}>
+                <MaterialIcons
+                    name={'favorite'}
+                    size={24}
+                    color={isFavoriteMovie(Number(movieId)) ? 'red' : 'grey'}
+                />
+            </TouchableOpacity>
+        </View>
         <View style={styles.secondContainer}>
             <Text style={styles.title}>{movieDetail?.title}</Text>
             <View style={styles.thirdContainer}>
