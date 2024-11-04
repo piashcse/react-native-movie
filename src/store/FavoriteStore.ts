@@ -59,7 +59,7 @@ export const useFavoriteStore = create<FavoriteMoviesTvSeriesStore>()(
       clearFavoriteTvSeries: () => set({favoriteTvSeries: []}),
     }),
     {
-      name: '@favorite_movies_tv_series',
+      name: '@favorite',
       storage: createJSONStorage(() => AsyncStorage),
     },
   ),
