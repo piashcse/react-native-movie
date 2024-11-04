@@ -9,10 +9,12 @@
 React Native Movie App 🎬 - A cross-platform react native app for exploring [The Movie DB](https://www.themoviedb.org) using RTK Query and Redux Toolkit for optimized state and API management.<br>
 
 <p align="center">
-  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730480204304_100.PNG" />
-  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730480218847_100.PNG" />
-  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730480241388_100.PNG" />
-  <img width="40%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730480234480_100.PNG" />
+  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741954753_100.PNG" />
+  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741946121_100.PNG" />
+  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741936047_100.PNG" />
+  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741920629_100.PNG" />
+  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741927781_100.PNG" />
+  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741964832_100.PNG" />
 </p>
 
 # Main Features
@@ -22,12 +24,14 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
   - Movie Detail
   - Recommended Movie
   - Artist info and artist detail
+  - Favorite Movie in local Storage
 - TV Series
   - TV Series List
   - TV Series Search
   - TV Series Detail
   - Recommended TV Series
   - Artist info and artist detail
+  - Favorite Tv Serires in local Storage
 - Pagination with RTK Query 
 - Bottom navigation
 - Network connection state with SnackBar
@@ -47,6 +51,7 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 - [Redux-toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development
 - [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
 - [React-Navigation 6](https://reactnavigation.org/) - Routing and navigation for your React Native apps.
+- [Zustand](https://zustand-demo.pmnd.rs/) - A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy API based on hooks, isn't boilerplatey or opinionated.
 
 ## Requirements
 
