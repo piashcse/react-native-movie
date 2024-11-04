@@ -13,13 +13,14 @@ type FavoriteMovieNavigationProp = NavigationProp<
 >;
 const FavoriteMovie = () => {
   const navigation = useNavigation<FavoriteMovieNavigationProp>();
-  const {favoriteMovies} = useFavoriteStore();
+  const {favoriteMovies, toggleFavoriteMovie} = useFavoriteStore();
   const favorite = ({item}: {item: MovieDetail}) => {
     return (
       <FavoriteComponent
         title={item.title}
         poster_path={item.poster_path}
         onPress={() => navigation.navigate('MovieDetail', {movieId: item.id})}
+        onRemove={()=>{toggleFavoriteMovie(item)}}
       />
     );
   };

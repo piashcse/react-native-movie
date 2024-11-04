@@ -14,7 +14,7 @@ type FavoriteTvSeriesNavigationProp = NavigationProp<
 
 const FavoriteTvSeries = () => {
   const navigation = useNavigation<FavoriteTvSeriesNavigationProp>();
-  const {favoriteTvSeries} = useFavoriteStore();
+  const {favoriteTvSeries, toggleFavoriteTvSeries} = useFavoriteStore();
   const favorite = ({item}: {item: TvSeriesDetail}) => {
     return (
       <FavoriteComponent
@@ -23,6 +23,7 @@ const FavoriteTvSeries = () => {
         onPress={() => {
           navigation.navigate('TvSeriesDetail', {tvSeriesId: item.id});
         }}
+        onRemove={()=>{toggleFavoriteTvSeries(item)}}
       />
     );
   };

@@ -25,5 +25,13 @@ const styles = StyleSheet.create({
   titleText: {
     color: 'white',
   },
+  removeIcon: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    borderRadius: 24,
+    padding: 8,
+  },
 });
 export default styles;
