@@ -1,5 +1,4 @@
 import {configureStore} from '@reduxjs/toolkit'
-import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import {
     airingTodayTvSeriesApi,
@@ -21,9 +20,6 @@ import {
 } from './query/RTKQuery.ts'
 import {setupListeners} from "@reduxjs/toolkit/query";
 
-const sagaMiddleware = createSagaMiddleware();
-const middleware = [sagaMiddleware];
-
 const configurationAppStore = () => {
     const store = configureStore({
         reducer: {
@@ -44,7 +40,7 @@ const configurationAppStore = () => {
             [tvSeriesArtistAndCrewApi.reducerPath]: tvSeriesArtistAndCrewApi.reducer,
             [searchMovieTvSeries.reducerPath]: searchMovieTvSeries.reducer,
         },
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([...middleware, logger,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([ logger,
             nowPlayingMovieApi.middleware,
             popularMovieApi.middleware,
             topRatedMovieApi.middleware,
