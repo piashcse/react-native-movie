@@ -15,7 +15,7 @@ const MovieItemComponent = ({ tvSeries, onPress, loadMoreData, ...rest }: TvSeri
     const TvSeriesItem = ({item}: { item: TvSeriesItem }) => {
         return (<TouchableOpacity style={styles.movieItemContainer} onPress={() => onPress(item)}>
             <ImageBackground
-                imageStyle={{borderRadius: 18}}
+                imageStyle={styles.backgroundImage}
                 source={isLoading ? require('../../assets/placeholder.jpeg') : {uri: `${Constants.IMAGE_URL}${item.poster_path}`}}
             >
                 <Image

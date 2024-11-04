@@ -20,5 +20,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.suggestionContainerColor,
         height: 0.5,
     },
+    backgroundImage: {
+        borderRadius: 18,
+    },
 });
 export default styles;
