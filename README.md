@@ -9,12 +9,12 @@
 React Native Movie App 🎬 - A cross-platform react native app for exploring [The Movie DB](https://www.themoviedb.org) using RTK Query and Redux Toolkit for optimized state and API management.<br>
 
 <p align="center">
-  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741954753_100.PNG" />
-  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741946121_100.PNG" />
-  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741936047_100.PNG" />
-  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741920629_100.PNG" />
-  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741927781_100.PNG" />
-  <img width="33%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741964832_100.PNG" />
+  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741954753_100.PNG" />
+  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741946121_100.PNG" />
+  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741936047_100.PNG" />
+  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741920629_100.PNG" />
+  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741927781_100.PNG" />
+  <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741964832_100.PNG" />
 </p>
 
 # Main Features
