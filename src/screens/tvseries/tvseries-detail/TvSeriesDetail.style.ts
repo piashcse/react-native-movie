@@ -40,6 +40,17 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderColor: COLOR.inputTextBorderColor,
         resizeMode: 'cover'
-    }
+    },
+    favoriteContainer: {
+        position: 'absolute',
+        height:40,
+        width:40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: 16,
+        right: 16,
+        backgroundColor:'white',
+        borderRadius:20
+    },
 });
 export default styles;

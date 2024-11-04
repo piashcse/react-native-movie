@@ -12,6 +12,8 @@ import {NavigationProp, RouteProp, useNavigation, useRoute} from "@react-navigat
 import {TvSeriesItem} from "../../../types/TvSeriesItem.ts";
 import {Cast} from "../../../types/ArtistAndCrew.ts";
 import {RootStackParam} from "../../../types/navigation/NavigationTypes.ts";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {useFavoriteStore} from "../../../store/FavoriteStore.ts";
 
 type RouteParams = {
     tvSeriesId: string;
@@ -25,8 +27,15 @@ const TvSeriesDetail = () => {
     const { data: tvSeriesDetail, isFetching: isLoadingMovieDetail } = useTvSeriesDetailApiQuery(Number(tvSeriesId))
     const { data: similarMovies, isFetching: isLoadingSimilarMovies } = useRecommendedTvSeriesApiQuery(Number(tvSeriesId))
     const { data: castAndCrew, isFetching: isLoadingCastAndCrew } = useTvSeriesArtistAndCrewApiQuery(Number(tvSeriesId))
+    const {toggleFavoriteTvSeries, isFavoriteTvSeries} = useFavoriteStore()
 
     const isLoading = isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew
+
+    const onPressFavorite = () => {
+        if (tvSeriesDetail){
+            toggleFavoriteTvSeries(tvSeriesDetail)
+        }
+    };
 
     const recommendedTvSeriesItem = ({item}:{item:TvSeriesItem}) => {
         return (<TouchableOpacity
@@ -54,11 +63,20 @@ const TvSeriesDetail = () => {
     }
 
     return isLoading ? <Loading/> : (<ScrollView style={styles.mainView}>
-        <Image
-            style={styles.imageView}
-            source={{
-                uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.poster_path}`,
-            }}/>
+        <View style={styles.imageView}>
+            <Image
+                style={styles.imageView}
+                source={{
+                    uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.poster_path}`,
+                }}/>
+            <TouchableOpacity style={styles.favoriteContainer} onPress={onPressFavorite}>
+                <MaterialIcons
+                    name={'favorite'}
+                    size={24}
+                    color={isFavoriteTvSeries(Number(tvSeriesId)) ? 'red' : 'grey'}
+                />
+            </TouchableOpacity>
+        </View>
         <View style={styles.secondContainer}>
             <Text style={styles.title}>{tvSeriesDetail?.name}</Text>
             <View style={styles.thirdContainer}>

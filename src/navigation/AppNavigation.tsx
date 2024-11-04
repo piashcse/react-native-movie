@@ -126,7 +126,9 @@ const TvSeriesBottomNavigation = () => {
 const AppNavigation = () => {
     return (<NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen name="tab" component={TabView} options={{headerShown: false}}/>
+            <Stack.Screen name="tab" component={TabView} options={{
+                title: 'RN Movie',
+            }}/>
             <Stack.Screen name="MovieDetail" component={MovieDetail} options={{
                 title: 'Movie detail'
             }}/>
