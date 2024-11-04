@@ -16,7 +16,7 @@ import OnTheAirTvSeries from "../screens/tvseries/on_the_air/OnTheAirTvSeries.ts
 import PopularTvSeries from "../screens/tvseries/popular/PopularTvSeries.tsx";
 import UpComingTvSeries from "../screens/tvseries/top_rated/TopRatedTvSeries.tsx";
 import TvSeriesDetail from "../screens/tvseries/tvseries-detail/TvSeriesDetail.tsx";
-import {BackHandler, View} from "react-native";
+import {BackHandler, TouchableOpacity, View} from "react-native";
 import {AnimatedFAB} from "react-native-paper";
 import DynamicSearch from "../components/search/DynamicSearch.tsx";
 import styles from "./AppNavigation.Style.ts";
@@ -25,12 +25,15 @@ import {useState} from "react";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
+const FavoriteTab = createMaterialTopTabNavigator();
 const MovieBottomTab = createBottomTabNavigator();
 const TvSeriesBottomTab = createBottomTabNavigator();
 import { useFocusEffect } from '@react-navigation/native';
+import FavoriteMovie from "../screens/favorite/movie/FavoriteMovie.tsx";
+import FavoriteTvSeries from "../screens/favorite/tvseries/FavoriteTvSeries.tsx";
 
 
-const TabView = () => {
+const PrimaryTabView = () => {
     const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
     const navigation = useNavigation();
 
@@ -74,6 +77,23 @@ const TabView = () => {
            />
        </View>
     );
+}
+
+const FavoriteTavView = () => {
+    return(
+        <FavoriteTab.Navigator screenOptions={{
+            tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
+            tabBarLabelStyle: styles.tabBarLabelStyle,
+        }}>
+            <FavoriteTab.Screen name={"FavMovie"} component={FavoriteMovie} options={{
+                title:'Movie'
+            }}/>
+            <FavoriteTab.Screen name={"FavTvSeries"} component={FavoriteTvSeries} options={{
+                title:'Tv Series'
+            }}/>
+
+        </FavoriteTab.Navigator>
+    )
 }
 const MovieBottomNavigation = () => {
     return (<MovieBottomTab.Navigator>
@@ -126,8 +146,19 @@ const TvSeriesBottomNavigation = () => {
 const AppNavigation = () => {
     return (<NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen name="tab" component={TabView} options={{
-                title: 'RN Movie',
+            <Stack.Screen
+                name="PrimaryTab"
+                component={PrimaryTabView}
+                options={({ navigation }) => ({
+                    title: 'RN Movie',
+                    headerRight: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('FavoriteTab')}>
+                            <MaterialIcons name="favorite" size={24} color="gray" style={{ marginRight: 16 }} />
+                        </TouchableOpacity>
+                    ),
+                })}/>
+            <Stack.Screen name="FavoriteTab" component={FavoriteTavView} options={{
+                title: 'Favorite',
             }}/>
             <Stack.Screen name="MovieDetail" component={MovieDetail} options={{
                 title: 'Movie detail'
