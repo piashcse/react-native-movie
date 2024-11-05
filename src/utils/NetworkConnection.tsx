@@ -1,41 +1,29 @@
-import React from "react";
-import {useNetInfo, NetInfoState} from "@react-native-community/netinfo";
-import {View, StyleSheet} from "react-native";
-import Snackbar from 'react-native-snackbar';
+import React, {useEffect, useState} from 'react';
+import {useNetInfo, NetInfoState} from '@react-native-community/netinfo';
+import {Snackbar} from 'react-native-paper';
 
 const checkInternetConnection = () => {
-    const internetState: NetInfoState = useNetInfo();
+  const internetState: NetInfoState = useNetInfo();
+  const [visible, setVisible] = useState(false);
 
-    if (internetState.isConnected === false) {
-        return (
-            <View style={styles.centered}>
-                {Snackbar.show({
-                    text: 'Network connection is unavailable',
-                    duration: Snackbar.LENGTH_INDEFINITE,
-                    action: {
-                        text: 'RETRY',
-                        textColor: 'green',
-                        onPress: () => {
-                            /* Do something. */
-                        },
-                    },
-                })}
-            </View>
-        );
-    }
+  const onDismissSnackBar = () => setVisible(false);
+
+  useEffect(() => {
+    if (!internetState.isConnected) setVisible(!internetState.isConnected);
+  }, [internetState.isConnected]);
+
+  return (
+    <Snackbar
+      visible={visible}
+      onDismiss={onDismissSnackBar}
+      action={{
+        label: 'Dismiss',
+        onPress: () => {
+          onDismissSnackBar();
+        },
+      }}>
+      Network connection is unavailable.
+    </Snackbar>
+  );
 };
-const styles = StyleSheet.create({
-    centered: {
-        alignItems: "center",
-        flex: 1,
-        justifyContent: "center",
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
-        textAlign: "center",
-    },
-});
-
-
 export default checkInternetConnection;

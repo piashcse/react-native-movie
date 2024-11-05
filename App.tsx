@@ -11,13 +11,16 @@ import configureStore from './src/redux';
 import {Provider} from 'react-redux';
 import Navigation from './src/navigation/AppNavigation';
 import NetworkConnection from "./src/utils/NetworkConnection";
+import {SafeAreaProvider} from "react-native-safe-area-context";
 
 const store = configureStore();
 const App = () => {
     return (
         <Provider store={store}>
-            <NetworkConnection/>
-            <Navigation/>
+          <SafeAreaProvider>
+              <Navigation/>
+              <NetworkConnection/>
+          </SafeAreaProvider>
         </Provider>
     );
 };
