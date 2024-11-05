@@ -14,7 +14,6 @@ const ArtistDetail = () => {
     const { personId } = route.params;
     const { data: artistDetail, isLoading, error } = useGetAristDetailQuery(Number(personId))
 
-    // main view with loading while api call is going on
     return isLoading ? <Loading/> : (<ScrollView style={styles.mainView}>
         <View style={styles.secondContainer}>
             <Image
