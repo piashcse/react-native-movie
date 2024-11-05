@@ -20,24 +20,23 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 # Main Features
 - Movie
   - Movie List
-  - Movie Series Search
+  - Movie Search
   - Movie Detail
   - Recommended Movie
-  - Artist info and artist detail
-  - Favorite Movie in local Storage
+  - Favorite Movie in local storage
 - TV Series
   - TV Series List
   - TV Series Search
   - TV Series Detail
   - Recommended TV Series
-  - Artist info and artist detail
-  - Favorite Tv Serires in local Storage
+  - Favorite TV Series in local storage
+- Artist Detail
 - Pagination with RTK Query 
-- Bottom navigation
+- Bottom Navigation
 - Network connection state with SnackBar
 
 ## Architecture
-  - RKT Query-Based Architecture (RTK Query - Hooks - reducer)
+  - RTK Query-Based Architecture (RTK Query - Hooks - reducer)
   - Redux
 <p float="left"> 
   <a href='https://redux-toolkit.js.org/rtk-query/overview'>
