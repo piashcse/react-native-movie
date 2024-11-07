@@ -26,6 +26,7 @@ import { Cast } from '../../../types/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../store/FavoriteStore.ts';
+import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 
 type RouteParams = {
   tvSeriesId: string;
@@ -142,7 +143,10 @@ const TvSeriesDetail = () => {
           </View>
         </View>
         <Text style={styles.description}>Description</Text>
-        <Text>{tvSeriesDetail?.overview}</Text>
+        <SeeMoreText
+          text={tvSeriesDetail?.overview ?? ''}
+          readMoreStyle={styles.seeMoreTextStyle}
+        />
         <Text style={styles.description}>Similar</Text>
         <FlatList
           style={styles.flatListContainer}
