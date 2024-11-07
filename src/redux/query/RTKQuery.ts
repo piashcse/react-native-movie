@@ -222,7 +222,7 @@ export const tvSeriesArtistAndCrewApi = createApi({
 
 export const { useTvSeriesArtistAndCrewApiQuery } = tvSeriesArtistAndCrewApi;
 
-export const searchMovieTvSeries = createApi({
+export const searchMovieTvSeriesApi = createApi({
   reducerPath: 'searchMovieTvSeries',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
   endpoints: (builder) => ({
@@ -237,4 +237,4 @@ export const searchMovieTvSeries = createApi({
   }),
 });
 
-export const { useSearchMovieTvSeriesQuery } = searchMovieTvSeries;
+export const { useSearchMovieTvSeriesQuery } = searchMovieTvSeriesApi;

@@ -10,7 +10,7 @@ import {
   popularMovieApi,
   popularTvSeriesApi,
   recommendedTvSeriesApi,
-  searchMovieTvSeries,
+  searchMovieTvSeriesApi,
   similarMovieApi,
   topRatedMovieApi,
   topRatedTvSeriesApi,
@@ -38,7 +38,7 @@ const configurationAppStore = () => {
       [tvSeriesDetailApi.reducerPath]: tvSeriesDetailApi.reducer,
       [recommendedTvSeriesApi.reducerPath]: recommendedTvSeriesApi.reducer,
       [tvSeriesArtistAndCrewApi.reducerPath]: tvSeriesArtistAndCrewApi.reducer,
-      [searchMovieTvSeries.reducerPath]: searchMovieTvSeries.reducer,
+      [searchMovieTvSeriesApi.reducerPath]: searchMovieTvSeriesApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat([
@@ -58,7 +58,7 @@ const configurationAppStore = () => {
         recommendedTvSeriesApi.middleware,
         tvSeriesDetailApi.middleware,
         tvSeriesArtistAndCrewApi.middleware,
-        searchMovieTvSeries.middleware,
+        searchMovieTvSeriesApi.middleware,
       ]),
     devTools: process.env.NODE_ENV === 'development',
   });

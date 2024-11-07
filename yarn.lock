@@ -1666,7 +1666,7 @@
   dependencies:
     "@react-native/codegen" "0.76.1"
 
-"@react-native/babel-preset@0.76.1":
+"@react-native/babel-preset@^0.76.1", "@react-native/babel-preset@0.76.1":
   version "0.76.1"
   resolved "https://registry.npmjs.org/@react-native/babel-preset/-/babel-preset-0.76.1.tgz"
   integrity sha512-b6YRmA13CmVuTQKHRen/Q0glHwmZFZoEDs+MJ1NL0UNHq9V5ytvdwTW1ntkmjtXuTnPMzkwYvumJBN9UTZjkBA==
