@@ -1,4 +1,5 @@
-# React Native Movie 🚀 
+# React Native Movie 🚀
+
 [![React Native](https://img.shields.io/badge/React%20Native-v0.76.1-green.svg)](https://facebook.github.io/react-native/)
 ![badge-Android](https://img.shields.io/badge/Platform-Android-brightgreen)
 ![badge-iOS](https://img.shields.io/badge/Platform-iOS-lightgray)
@@ -18,6 +19,7 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 </p>
 
 # Main Features
+
 - Movie
   - Movie List
   - Movie Search
@@ -31,13 +33,14 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
   - Recommended TV Series
   - Favorite TV Series in local storage
 - Artist Detail
-- Pagination with RTK Query 
+- Pagination with RTK Query
 - Bottom Navigation
 - Network connection state with SnackBar
 
 ## Architecture
-  - RTK Query-Based Architecture (RTK Query - Hooks - reducer)
-  - Redux
+
+- RTK Query-Based Architecture (RTK Query - Hooks - reducer)
+- Redux
 <p float="left"> 
   <a href='https://redux-toolkit.js.org/rtk-query/overview'>
   <img src='https://redux-toolkit.js.org/img/redux-logo-landscape.png' height='50' alt='RTK Query Logo' aria-label='redux-toolkit.js.org/rtk-query' />
@@ -45,6 +48,7 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 </p>
 
 ## Built With 🛠
+
 - [React-Native](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform.
 - [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) RTK Query is a powerful data fetching and caching tool. It is designed to simplify common cases for loading data in a web application, eliminating the need to hand-write data fetching & caching logic yourself.
 - [Redux-toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development
@@ -59,7 +63,7 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 
 ## How to run
 
-- `git clone git@github.com:piashcse/react-native-movie.git` 
+- `git clone git@github.com:piashcse/react-native-movie.git`
 - `yarn install`
 
 Now, you can choose a command to run the project:
@@ -81,6 +85,7 @@ Now, you can choose a command to run the project:
 [![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/piashcse/)
 
 # License
+
 ```
 Copyright 2023 piashcse (Mehedi Hassan Piash)
 
@@ -96,4 +101,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-

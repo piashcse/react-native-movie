@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, ActivityIndicator, Text} from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
 import styles from './Loading.style.ts';
-import {COLOR} from '../../constant/Colors';
+import { COLOR } from '../../constant/Colors';
 
 const Loading = () => {
   return (
@@ -18,7 +18,4 @@ const FooterLoading = () => {
   return <ActivityIndicator size={'large'} color={COLOR.primaryColor} />;
 };
 
-export {
-  Loading,
-  FooterLoading,
-};
+export { Loading, FooterLoading };
