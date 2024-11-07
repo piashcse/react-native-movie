@@ -32,7 +32,7 @@ const FavoriteComponent = (props: FavoriteProps) => {
           onLoadEnd={() => setIsLoading(false)}
         />
         <TouchableOpacity style={styles.removeIcon} onPress={props.onRemove}>
-          <MaterialIcons name="delete" size={24} color="gray" />
+          <MaterialIcons name="delete" size={24} color="black" />
         </TouchableOpacity>
 
         <View style={styles.overlay}>

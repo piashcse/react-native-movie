@@ -12,15 +12,18 @@ import { Provider } from 'react-redux';
 import Navigation from './src/navigation/AppNavigation';
 import NetworkConnection from './src/utils/NetworkConnection';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PaperProvider } from 'react-native-paper';
 
 const store = configureStore();
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <Navigation />
-        <NetworkConnection />
-      </SafeAreaProvider>
+      <PaperProvider>
+        <SafeAreaProvider>
+          <Navigation />
+          <NetworkConnection />
+        </SafeAreaProvider>
+      </PaperProvider>
     </Provider>
   );
 };
