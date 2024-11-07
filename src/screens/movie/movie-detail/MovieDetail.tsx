@@ -26,6 +26,8 @@ import { Cast } from '../../../types/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../store/FavoriteStore.ts';
+import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
+import { COLOR } from '../../../constant/Colors.ts';
 type RouteParams = {
   movieId: string;
 };
@@ -133,7 +135,10 @@ const MovieDetail = () => {
           </View>
         </View>
         <Text style={styles.description}>Description</Text>
-        <Text>{movieDetail?.overview}</Text>
+        <SeeMoreText
+          text={movieDetail?.overview ?? ''}
+          readMoreStyle={styles.seeMoreTextStyle}
+        />
         <Text style={styles.description}>Similar</Text>
         <FlatList
           style={styles.flatListContainer}

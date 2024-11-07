@@ -65,5 +65,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
   },
+  seeMoreTextStyle: {
+    color: COLOR.primaryColor,
+  },
 });
 export default styles;
