@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   rootView: {
@@ -8,30 +8,30 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   searchBarContainer: {
-    borderRadius: 0
+    borderRadius: 0,
   },
   imageView: {
-    width:100,
+    width: 100,
     height: 120,
     borderRadius: 8,
     resizeMode: 'cover',
   },
-  backgroundImage:{
-    borderRadius:8
+  backgroundImage: {
+    borderRadius: 8,
   },
-  itemListContainer:{
+  itemListContainer: {
     flexDirection: 'row',
-    marginVertical: 8
+    marginVertical: 8,
   },
   flatListContainer: {
     marginHorizontal: 8,
-    maxHeight:410
+    maxHeight: 410,
   },
   titleContainer: {
-    marginLeft:8
+    marginLeft: 8,
   },
-  titleStyle:{
+  titleStyle: {
     fontSize: 16,
-  }
+  },
 });
 export default styles;

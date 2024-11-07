@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {useNetInfo, NetInfoState} from '@react-native-community/netinfo';
-import {Snackbar} from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
+import { useNetInfo, NetInfoState } from '@react-native-community/netinfo';
+import { Snackbar } from 'react-native-paper';
 
 const checkInternetConnection = () => {
   const internetState: NetInfoState = useNetInfo();
@@ -21,7 +21,8 @@ const checkInternetConnection = () => {
         onPress: () => {
           onDismissSnackBar();
         },
-      }}>
+      }}
+    >
       Network connection is unavailable.
     </Snackbar>
   );
