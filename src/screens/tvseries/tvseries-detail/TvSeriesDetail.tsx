@@ -25,7 +25,7 @@ import { TvSeriesItem } from '../../../types/TvSeriesItem.ts';
 import { Cast } from '../../../types/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useFavoriteStore } from '../../../redux/store/FavoriteStore.ts';
+import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 
 type RouteParams = {
