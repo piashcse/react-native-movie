@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styles from './FovoriteTvSeries.style.ts';
 import { FlatList, View } from 'react-native';
-import { useFavoriteStore } from '../../../store/FavoriteStore.ts';
+import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import FavoriteComponent from '../../../components/favorite/FavoriteComponent.tsx';
 import { TvSeriesDetail } from '../../../types/TvSeriesDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import ConfirmationAlert from '../../../components/alert-dialog/ConfirmationAlert.tsx';
-import { MovieDetail } from '../../../types/MovieDetail.ts';
+import { confirmationAlert } from '../../../constant/Dictionary.ts';
 
 type FavoriteTvSeriesNavigationProp = NavigationProp<
   RootStackParam,
@@ -59,8 +59,8 @@ const FavoriteTvSeries = () => {
       />
       <ConfirmationAlert
         visible={visible}
-        title={'Remove Favorite'}
-        message={'Are you sure you want to remove from your favorites?'}
+        title={confirmationAlert.title}
+        message={confirmationAlert.message}
         onConfirm={confirmRemoveFavorite}
         onCancel={hideDialog}
       />

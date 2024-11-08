@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { MovieDetail } from '../types/MovieDetail.ts';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TvSeriesDetail } from '../types/TvSeriesDetail.ts';
+import { zustandMMKVStorage } from './mmkv.ts';
 
 interface FavoriteMoviesTvSeriesStore {
   favoriteMovies: MovieDetail[];
@@ -61,7 +61,7 @@ export const useFavoriteStore = create<FavoriteMoviesTvSeriesStore>()(
     }),
     {
       name: '@favorite',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => zustandMMKVStorage),
     }
   )
 );

@@ -1499,13 +1499,6 @@
   resolved "https://registry.npmjs.org/@pkgr/core/-/core-0.1.1.tgz"
   integrity sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==
 
-"@react-native-async-storage/async-storage@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-2.0.0.tgz"
-  integrity sha512-af6H9JjfL6G/PktBfUivvexoiFKQTJGQCtSWxMdivLzNIY94mu9DdiY0JqCSg/LyPCLGKhHPUlRQhNvpu3/KVA==
-  dependencies:
-    merge-options "^3.0.4"
-
 "@react-native-community/cli-clean@15.0.0":
   version "15.0.0"
   resolved "https://registry.npmjs.org/@react-native-community/cli-clean/-/cli-clean-15.0.0.tgz"
@@ -1869,14 +1862,14 @@
   dependencies:
     color "^4.2.3"
 
-"@react-navigation/material-top-tabs@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.npmjs.org/@react-navigation/material-top-tabs/-/material-top-tabs-7.0.0.tgz"
-  integrity sha512-SpxHMQrJDzwgOzn2B8uqfuhuzB8pVWp++3aLH5jXwIi0aDGNFydHD2Kb9/RXNWM9zla42RzkqSUdmYfba0KBwg==
+"@react-navigation/material-top-tabs@7.0.1":
+  version "7.0.1"
+  resolved "https://registry.npmjs.org/@react-navigation/material-top-tabs/-/material-top-tabs-7.0.1.tgz"
+  integrity sha512-Fozf/GT1/B1YY22QYKMMqeisj+yaHGS1/SBGGTre5ClM3uM7U2NTP6YeibIClB+12b/OFiB8w2GiKBz5Y+bb0w==
   dependencies:
     "@react-navigation/elements" "^2.0.0"
     color "^4.2.3"
-    react-native-tab-view "^4.0.0"
+    react-native-tab-view "^4.0.1"
 
 "@react-navigation/native@^7.0.0", "@react-navigation/native@7.0.0":
   version "7.0.0"
@@ -4374,11 +4367,6 @@ is-path-inside@^3.0.3:
   resolved "https://registry.npmjs.org/is-path-inside/-/is-path-inside-3.0.3.tgz"
   integrity sha512-Fd4gABb+ycGAmKou8eMftCupSir5lRxqf4aD/vd0cD2qc4HL07OjCeuHMr8Ro4CoMaeCKDB0/ECBOVWjTwUvPQ==
 
-is-plain-obj@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-2.1.0.tgz"
-  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
-
 is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.npmjs.org/is-plain-object/-/is-plain-object-2.0.4.tgz"
@@ -5191,13 +5179,6 @@ memoize-one@^5.0.0:
   version "5.2.1"
   resolved "https://registry.npmjs.org/memoize-one/-/memoize-one-5.2.1.tgz"
   integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
-
-merge-options@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.npmjs.org/merge-options/-/merge-options-3.0.4.tgz"
-  integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
-  dependencies:
-    is-plain-obj "^2.1.0"
 
 merge-stream@^2.0.0:
   version "2.0.0"
@@ -6056,6 +6037,11 @@ react-is@^18.3.1:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-mmkv@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/react-native-mmkv/-/react-native-mmkv-3.1.0.tgz"
+  integrity sha512-HDh89nYVSufHMweZ3TVNUHQp2lsEh1ApaoV08bUOU1nrlmGgC3I7tGUn1Uy40Hs7yRMPKx5NWKE5Dh86jTVrwg==
+
 react-native-pager-view@*, "react-native-pager-view@>= 6.0.0", react-native-pager-view@6.5.0:
   version "6.5.0"
   resolved "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-6.5.0.tgz"
@@ -6083,10 +6069,10 @@ react-native-safe-area-context@*, "react-native-safe-area-context@>= 4.0.0", rea
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-tab-view@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/react-native-tab-view/-/react-native-tab-view-4.0.0.tgz"
-  integrity sha512-RDlQhdDdaVithyrIebSG0G8P/1njMqVdTd4SbtAC1ndqNjsVxRiMU+8cnBmt/tGsyz8ebtUdpNyvD3kiWyXzNg==
+react-native-tab-view@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/react-native-tab-view/-/react-native-tab-view-4.0.1.tgz"
+  integrity sha512-9J/mcYfZ3o8yHYR0VxOpdgnU2gPkiCBxNVMtN0GpHtDshGhaczoIeu3Mn4jQKS73GQ2T8/4NH1LHU/Ue0ZF0jQ==
   dependencies:
     use-latest-callback "^0.2.1"
 
@@ -6105,7 +6091,7 @@ react-native-vector-icons@*, react-native-vector-icons@10.2.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native@*, "react-native@^0.0.0-0 || >=0.65 <1.0", react-native@>=0.59, react-native@0.76.1:
+react-native@*, react-native@>=0.59, react-native@0.76.1:
   version "0.76.1"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.76.1.tgz"
   integrity sha512-z4KnbrnnAvloRs9NGnah3u6/LK3IbtNMrvByxa3ifigbMlsMY4WPRYV9lvt/hH4Mzt8bfuI+utnOxFyJTTq3lg==
