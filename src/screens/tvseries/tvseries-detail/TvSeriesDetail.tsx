@@ -28,6 +28,7 @@ import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
+import { detailInfo } from '../../../constant/Dictionary.ts';
 
 type RouteParams = {
   tvSeriesId: string;
@@ -132,13 +133,13 @@ const TvSeriesDetail = () => {
             <View>
               <View style={styles.titleAndInfoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>Language</Text>
+                  <Text style={styles.infoTitle}>{detailInfo.language}</Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.original_language}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>Rating</Text>
+                  <Text style={styles.infoTitle}>{detailInfo.rating}</Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.vote_average}
                   </Text>
@@ -146,13 +147,15 @@ const TvSeriesDetail = () => {
               </View>
               <View style={styles.infoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>Number Of Episode</Text>
+                  <Text style={styles.infoTitle}>
+                    {detailInfo.numberOfEpisode}
+                  </Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.number_of_episodes}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>Release Date</Text>
+                  <Text style={styles.infoTitle}>{detailInfo.releaseDate}</Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.first_air_date}
                   </Text>
@@ -163,13 +166,13 @@ const TvSeriesDetail = () => {
         </View>
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.description}>Description</Text>
+        <Text style={styles.description}>{detailInfo.description}</Text>
         <SeeMoreText
           text={tvSeriesDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
         />
         {similarMovies?.length && (
-          <Text style={styles.description}>Similar</Text>
+          <Text style={styles.description}>{detailInfo.similar}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}
@@ -180,7 +183,7 @@ const TvSeriesDetail = () => {
           showsHorizontalScrollIndicator={false}
         />
         {castAndCrew?.cast?.length && (
-          <Text style={styles.description}>Artist</Text>
+          <Text style={styles.description}>{detailInfo.artist}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}
