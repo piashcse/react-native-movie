@@ -144,7 +144,7 @@ const TvSeriesDetail = () => {
                 <View style={styles.fourthContainer}>
                   <Text style={styles.infoTitle}>{detailInfo.rating}</Text>
                   <Text style={styles.infoTitleData}>
-                    {tvSeriesDetail?.vote_average}
+                    {tvSeriesDetail?.vote_average?.toFixed(1)}
                   </Text>
                 </View>
               </View>
