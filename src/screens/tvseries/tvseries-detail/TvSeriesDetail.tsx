@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  ImageBackground,
 } from 'react-native';
 import { Constants } from '../../../constant/AppConstants.ts';
 import {
@@ -96,72 +97,98 @@ const TvSeriesDetail = () => {
     <Loading />
   ) : (
     <ScrollView style={styles.mainView}>
-      <View style={styles.imageView}>
-        <Image
-          style={styles.imageView}
-          source={{
-            uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.poster_path}`,
-          }}
-        />
-        <TouchableOpacity
-          style={styles.favoriteContainer}
-          onPress={onPressFavorite}
-        >
-          <MaterialIcons
-            name={'favorite'}
-            size={24}
-            color={isFavoriteTvSeries(Number(tvSeriesId)) ? 'red' : 'grey'}
+      <View>
+        <View style={styles.backdropImageView}>
+          <ImageBackground
+            style={styles.backdropImageView}
+            source={{
+              uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.backdrop_path}`,
+            }}
+            blurRadius={1.56}
           />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.secondContainer}>
-        <Text style={styles.title}>{tvSeriesDetail?.name}</Text>
-        <View style={styles.thirdContainer}>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>
-              {tvSeriesDetail?.original_language}
+          <TouchableOpacity
+            style={styles.favoriteContainer}
+            onPress={onPressFavorite}
+          >
+            <MaterialIcons
+              name={'favorite'}
+              size={24}
+              color={isFavoriteTvSeries(Number(tvSeriesId)) ? 'red' : 'grey'}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.posterImageContainer}>
+          <Image
+            style={styles.posterImageView}
+            source={{
+              uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.poster_path}`,
+            }}
+            resizeMode={'stretch'}
+          />
+          <View style={styles.secondContainer}>
+            <Text style={styles.title} numberOfLines={1}>
+              {tvSeriesDetail?.name}
             </Text>
-            <Text style={styles.infoTitle}>Language</Text>
-          </View>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>
-              {tvSeriesDetail?.vote_average}
-            </Text>
-            <Text style={styles.infoTitle}>Rating</Text>
-          </View>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>
-              {tvSeriesDetail?.number_of_episodes}
-            </Text>
-            <Text style={styles.infoTitle}>Number Of Episode</Text>
-          </View>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>
-              {tvSeriesDetail?.first_air_date}
-            </Text>
-            <Text style={styles.infoTitle}>Release Date</Text>
+            <View>
+              <View style={styles.titleAndInfoContainer}>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Language</Text>
+                  <Text style={styles.infoTitleData}>
+                    {tvSeriesDetail?.original_language}
+                  </Text>
+                </View>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Rating</Text>
+                  <Text style={styles.infoTitleData}>
+                    {tvSeriesDetail?.vote_average}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.infoContainer}>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Number Of Episode</Text>
+                  <Text style={styles.infoTitleData}>
+                    {tvSeriesDetail?.number_of_episodes}
+                  </Text>
+                </View>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Release Date</Text>
+                  <Text style={styles.infoTitleData}>
+                    {tvSeriesDetail?.first_air_date}
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
+      </View>
+      <View style={styles.footerContainer}>
         <Text style={styles.description}>Description</Text>
         <SeeMoreText
           text={tvSeriesDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
         />
-        <Text style={styles.description}>Similar</Text>
+        {similarMovies?.length && (
+          <Text style={styles.description}>Similar</Text>
+        )}
         <FlatList
           style={styles.flatListContainer}
           data={similarMovies}
           renderItem={recommendedTvSeriesItem}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
         />
-        <Text style={styles.description}>Artist</Text>
+        {castAndCrew?.cast?.length && (
+          <Text style={styles.description}>Artist</Text>
+        )}
         <FlatList
           style={styles.flatListContainer}
           data={castAndCrew?.cast}
           renderItem={artistItem}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
     </ScrollView>

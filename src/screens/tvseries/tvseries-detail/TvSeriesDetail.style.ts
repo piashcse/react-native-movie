@@ -5,9 +5,24 @@ const styles = StyleSheet.create({
   mainView: {
     flex: 1,
   },
-  imageView: {
-    height: 270,
-    resizeMode: 'stretch',
+  backdropImageView: {
+    height: 260,
+    resizeMode: 'cover',
+    opacity: 0.96,
+  },
+  posterImageContainer: {
+    marginTop: -70,
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'flex-end',
+    bottom: 0,
+  },
+  posterImageView: {
+    height: 170,
+    width: 130,
+    bottom: 0,
+    marginLeft: 12,
+    borderRadius: 14,
   },
   secondContainer: {
     flex: 1,
@@ -15,7 +30,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     color: COLOR.black,
     fontWeight: 'bold',
   },
@@ -23,10 +38,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 8,
   },
-  infoTitle: { fontSize: 12 },
-  infoTitleData: { fontSize: 14, color: COLOR.black, fontWeight: 'bold' },
+  titleAndInfoContainer: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  infoTitle: { fontSize: 13, color: COLOR.black, fontWeight: '500' },
+  infoTitleData: { fontSize: 12 },
+  infoContainer: {
+    flexDirection: 'row',
+  },
   fourthContainer: {
     flex: 1,
+  },
+  footerContainer: {
+    marginHorizontal: 8,
   },
   description: {
     marginTop: 8,
@@ -65,8 +92,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
   },
-  seeMoreTextStyle: {
-    color: COLOR.primaryColor,
-  },
+  seeMoreTextStyle: { color: COLOR.primaryColor },
 });
 export default styles;

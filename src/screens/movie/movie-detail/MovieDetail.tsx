@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  ImageBackground,
 } from 'react-native';
 import { Constants } from '../../../constant/AppConstants.ts';
 import {
@@ -27,7 +28,6 @@ import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
-import { COLOR } from '../../../constant/Colors.ts';
 type RouteParams = {
   movieId: string;
 };
@@ -90,70 +90,98 @@ const MovieDetail = () => {
     <Loading />
   ) : (
     <ScrollView style={styles.mainView}>
-      <View style={styles.imageView}>
-        <Image
-          style={styles.imageView}
-          source={{
-            uri: `${Constants.IMAGE_URL}${movieDetail?.poster_path}`,
-          }}
-        />
-        <TouchableOpacity
-          style={styles.favoriteContainer}
-          onPress={onPressFavorite}
-        >
-          <MaterialIcons
-            name={'favorite'}
-            size={24}
-            color={isFavoriteMovie(Number(movieId)) ? 'red' : 'grey'}
+      <View>
+        <View style={styles.backdropImageView}>
+          <ImageBackground
+            style={styles.backdropImageView}
+            source={{
+              uri: `${Constants.IMAGE_URL}${movieDetail?.backdrop_path}`,
+            }}
+            blurRadius={1.56}
           />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.secondContainer}>
-        <Text style={styles.title}>{movieDetail?.title}</Text>
-        <View style={styles.thirdContainer}>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>
-              {movieDetail?.original_language}
+          <TouchableOpacity
+            style={styles.favoriteContainer}
+            onPress={onPressFavorite}
+          >
+            <MaterialIcons
+              name={'favorite'}
+              size={24}
+              color={isFavoriteMovie(Number(movieId)) ? 'red' : 'grey'}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.posterImageContainer}>
+          <Image
+            style={styles.posterImageView}
+            source={{
+              uri: `${Constants.IMAGE_URL}${movieDetail?.poster_path}`,
+            }}
+            resizeMode={'stretch'}
+          />
+          <View style={styles.secondContainer}>
+            <Text style={styles.title} numberOfLines={1}>
+              {movieDetail?.title}
             </Text>
-            <Text style={styles.infoTitle}>Language</Text>
-          </View>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>
-              {movieDetail?.vote_average}
-            </Text>
-            <Text style={styles.infoTitle}>Rating</Text>
-          </View>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>{movieDetail?.runtime} min</Text>
-            <Text style={styles.infoTitle}>Duration</Text>
-          </View>
-          <View style={styles.fourthContainer}>
-            <Text style={styles.infoTitleData}>
-              {movieDetail?.release_date}
-            </Text>
-            <Text style={styles.infoTitle}>Release Date</Text>
+            <View>
+              <View style={styles.titleAndInfoContainer}>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Language</Text>
+                  <Text style={styles.infoTitleData}>
+                    {movieDetail?.original_language}
+                  </Text>
+                </View>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Rating</Text>
+                  <Text style={styles.infoTitleData}>
+                    {movieDetail?.vote_average}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.infoContainer}>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Duration</Text>
+                  <Text style={styles.infoTitleData}>
+                    {movieDetail?.runtime} min
+                  </Text>
+                </View>
+                <View style={styles.fourthContainer}>
+                  <Text style={styles.infoTitle}>Release Date</Text>
+                  <Text style={styles.infoTitleData}>
+                    {movieDetail?.release_date}
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
+      </View>
+      <View style={styles.footerContainer}>
         <Text style={styles.description}>Description</Text>
         <SeeMoreText
           text={movieDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
         />
-        <Text style={styles.description}>Similar</Text>
+        {similarMovies?.length && (
+          <Text style={styles.description}>Similar</Text>
+        )}
         <FlatList
           style={styles.flatListContainer}
           data={similarMovies}
           renderItem={recommendedMovieItem}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
         />
-        <Text style={styles.description}>Artist</Text>
+        {castAndCrew?.cast?.length && (
+          <Text style={styles.description}>Artist</Text>
+        )}
         <FlatList
           style={styles.flatListContainer}
           data={castAndCrew?.cast}
           renderItem={artistItem}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
     </ScrollView>
