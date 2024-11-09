@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLOR } from '../../constant/Colors';
+import { colors } from '../../constant/Colors';
 
 const styles = StyleSheet.create({
   mainView: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: COLOR.black,
+    color: colors.black,
     fontWeight: 'bold',
   },
   thirdContainer: {
@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   infoTitle: { fontSize: 12 },
-  infoTitleData: { fontSize: 14, color: COLOR.black, fontWeight: 'bold' },
+  infoTitleData: { fontSize: 14, color: colors.black, fontWeight: 'bold' },
   fourthContainer: {
     flex: 1,
   },
   description: {
     marginTop: 8,
     fontSize: 19,
-    color: COLOR.black,
+    color: colors.black,
     fontWeight: 'bold',
   },
   flatListContainer: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     marginHorizontal: 4,
     borderWidth: 1.5,
-    borderColor: COLOR.inputTextBorderColor,
+    borderColor: colors.inputTextBorderColor,
     resizeMode: 'cover',
   },
   artistInfoContainer: {
@@ -70,13 +70,13 @@ const styles = StyleSheet.create({
   },
   titleData: {
     fontSize: 16,
-    color: COLOR.black,
+    color: colors.black,
   },
   biography: {
     fontSize: 24,
     marginTop: 16,
     marginBottom: 8,
-    color: COLOR.black,
+    color: colors.black,
   },
 });
 export default styles;
