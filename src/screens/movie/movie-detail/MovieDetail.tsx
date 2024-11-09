@@ -83,6 +83,9 @@ const MovieDetail = () => {
             uri: `${Constants.IMAGE_URL}${item.profile_path}`,
           }}
         />
+        <Text style={styles.artistTitleStyle} numberOfLines={1}>
+          {item.name}
+        </Text>
       </TouchableOpacity>
     );
   };

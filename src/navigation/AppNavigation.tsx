@@ -260,7 +260,7 @@ const AppNavigation = () => {
           name="TvSeriesDetail"
           component={TvSeriesDetail}
           options={{
-            title: 'TvSeries detail',
+            title: 'Tv Series detail',
           }}
         />
       </Stack.Navigator>

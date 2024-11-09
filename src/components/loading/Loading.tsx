@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, ActivityIndicator, Text } from 'react-native';
 import styles from './Loading.style.ts';
-import { COLOR } from '../../constant/Colors';
+import { colors } from '../../constant/Colors';
 
 const Loading = () => {
   return (
     <View style={styles.containerLoading}>
       <View style={styles.containerIndicator}>
-        <ActivityIndicator size={'large'} color={COLOR.primaryColor} />
+        <ActivityIndicator size={'large'} color={colors.primaryColor} />
         <Text style={styles.loadingTextStyle}>Loading...</Text>
       </View>
     </View>
@@ -15,7 +15,7 @@ const Loading = () => {
 };
 
 const FooterLoading = () => {
-  return <ActivityIndicator size={'large'} color={COLOR.primaryColor} />;
+  return <ActivityIndicator size={'large'} color={colors.primaryColor} />;
 };
 
 export { Loading, FooterLoading };

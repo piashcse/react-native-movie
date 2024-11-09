@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { COLOR } from '../../constant/Colors';
+import { colors } from '../../constant/Colors';
 
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     width,
     height,
     position: 'absolute',
-    backgroundColor: COLOR.loadingBackgroundColor,
+    backgroundColor: colors.loadingBackgroundColor,
     top: 0,
     left: 0,
     flex: 1,
@@ -18,14 +18,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLOR.transparentColor,
+    backgroundColor: colors.transparentColor,
     height: 100,
     width: width / 1.2,
     borderRadius: 2,
   },
   loadingTextStyle: {
     fontSize: 25,
-    color: COLOR.primaryColor,
+    color: colors.primaryColor,
     marginLeft: 20,
   },
 });
