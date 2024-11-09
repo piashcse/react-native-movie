@@ -4,7 +4,8 @@ import { COLOR } from '../../constant/Colors';
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    margin: 8,
+    backgroundColor: 'white',
+    padding: 8,
   },
   imageView: {
     height: 250,
