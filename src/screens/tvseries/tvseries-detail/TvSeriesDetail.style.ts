@@ -4,6 +4,7 @@ import { COLOR } from '../../../constant/Colors.ts';
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
+    backgroundColor: 'white',
   },
   backdropImageView: {
     height: 260,
