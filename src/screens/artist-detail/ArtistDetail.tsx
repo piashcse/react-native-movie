@@ -5,6 +5,7 @@ import { Image, Text, View, ScrollView } from 'react-native';
 import { Constants } from '../../constant/AppConstants';
 import { useGetAristDetailQuery } from '../../redux/query/RTKQuery.ts';
 import { RouteProp, useRoute } from '@react-navigation/native';
+import { SharedElement } from 'react-navigation-shared-element';
 type RouteParams = {
   personId: string;
 };
@@ -12,23 +13,23 @@ type RouteParams = {
 const ArtistDetail = () => {
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { personId } = route.params;
-  const {
-    data: artistDetail,
-    isLoading,
-    error,
-  } = useGetAristDetailQuery(Number(personId));
+  const { data: artistDetail, isLoading } = useGetAristDetailQuery(
+    Number(personId)
+  );
 
   return isLoading ? (
     <Loading />
   ) : (
     <ScrollView style={styles.mainView}>
       <View style={styles.secondContainer}>
-        <Image
-          style={styles.imageView}
-          source={{
-            uri: `${Constants.IMAGE_URL}${artistDetail?.profile_path}`,
-          }}
-        />
+        <SharedElement id={personId.toString()}>
+          <Image
+            style={styles.imageView}
+            source={{
+              uri: `${Constants.IMAGE_URL}${artistDetail?.profile_path}`,
+            }}
+          />
+        </SharedElement>
         <View>
           <View style={styles.artistInfoContainer}>
             <Text style={styles.artistName}>{artistDetail?.name}</Text>

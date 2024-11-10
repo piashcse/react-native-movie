@@ -49,7 +49,6 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
       >
         {text}
       </Text>
-
       {showMoreButton ? (
         <Text onPress={toggleTextShown} style={readMoreStyle}>
           {textShown ? 'See Less' : 'See More'}

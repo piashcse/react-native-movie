@@ -10,6 +10,7 @@ import {
 import styles from './MovieItem.style.ts';
 import { Constants } from '../../constant/AppConstants';
 import { MovieItem } from '../../types/MovieItem';
+import { SharedElement } from 'react-navigation-shared-element';
 
 interface MovieItemProps
   extends Omit<FlatListProps<MovieItem>, 'data' | 'renderItem'> {
@@ -39,15 +40,17 @@ const MovieItemComponent = ({
               : { uri: `${Constants.IMAGE_URL}${item.poster_path}` }
           }
         >
-          <Image
-            style={styles.imageView}
-            source={{
-              uri: `${Constants.IMAGE_URL}${item.poster_path}`,
-            }}
-            onLoadEnd={() => {
-              setIsLoading(false);
-            }}
-          />
+          <SharedElement id={`movie.${item.id}.poster`}>
+            <Image
+              style={styles.imageView}
+              source={{
+                uri: `${Constants.IMAGE_URL}${item.poster_path}`,
+              }}
+              onLoadEnd={() => {
+                setIsLoading(false);
+              }}
+            />
+          </SharedElement>
         </ImageBackground>
       </TouchableOpacity>
     );
