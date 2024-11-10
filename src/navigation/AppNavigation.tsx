@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -21,15 +20,17 @@ import { AnimatedFAB } from 'react-native-paper';
 import DynamicSearch from '../components/search/DynamicSearch.tsx';
 import styles from './AppNavigation.Style.ts';
 import { useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import FavoriteMovie from '../screens/favorite/movie/FavoriteMovie.tsx';
+import FavoriteTvSeries from '../screens/favorite/tvseries/FavoriteTvSeries.tsx';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
-const Stack = createStackNavigator();
+//const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 const FavoriteTab = createMaterialTopTabNavigator();
 const MovieBottomTab = createBottomTabNavigator();
 const TvSeriesBottomTab = createBottomTabNavigator();
-import { useFocusEffect } from '@react-navigation/native';
-import FavoriteMovie from '../screens/favorite/movie/FavoriteMovie.tsx';
-import FavoriteTvSeries from '../screens/favorite/tvseries/FavoriteTvSeries.tsx';
 
 const PrimaryTabView = () => {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
@@ -245,23 +246,53 @@ const AppNavigation = () => {
         <Stack.Screen
           name="MovieDetail"
           component={MovieDetail}
-          options={{
+          options={() => ({
             title: 'Movie detail',
-          }}
+            gestureEnabled: false,
+            transitionSpec: {
+              open: { animation: 'timing', config: { duration: 500 } },
+              close: { animation: 'timing', config: { duration: 500 } },
+            },
+            cardStyleInterpolator: ({ current: { progress } }) => ({
+              cardStyle: {
+                opacity: progress,
+              },
+            }),
+          })}
         />
         <Stack.Screen
           name="ArtistDetail"
           component={ArtistDetail}
-          options={{
+          options={() => ({
             title: 'Artist detail',
-          }}
+            gestureEnabled: false,
+            transitionSpec: {
+              open: { animation: 'timing', config: { duration: 500 } },
+              close: { animation: 'timing', config: { duration: 500 } },
+            },
+            cardStyleInterpolator: ({ current: { progress } }) => ({
+              cardStyle: {
+                opacity: progress,
+              },
+            }),
+          })}
         />
         <Stack.Screen
           name="TvSeriesDetail"
           component={TvSeriesDetail}
-          options={{
+          options={() => ({
             title: 'Tv Series detail',
-          }}
+            gestureEnabled: false,
+            transitionSpec: {
+              open: { animation: 'timing', config: { duration: 500 } },
+              close: { animation: 'timing', config: { duration: 500 } },
+            },
+            cardStyleInterpolator: ({ current: { progress } }) => ({
+              cardStyle: {
+                opacity: progress,
+              },
+            }),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

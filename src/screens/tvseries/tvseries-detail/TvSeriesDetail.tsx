@@ -29,6 +29,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 import { detailInfo } from '../../../constant/Dictionary.ts';
+import { SharedElement } from 'react-navigation-shared-element';
 
 type RouteParams = {
   tvSeriesId: string;
@@ -84,15 +85,17 @@ const TvSeriesDetail = () => {
           navigation.navigate('ArtistDetail', { personId: item.id });
         }}
       >
-        <Image
-          style={styles.artistImageView}
-          source={{
-            uri: `${Constants.IMAGE_URL}${item.profile_path}`,
-          }}
-        />
-        <Text style={styles.artistTitleStyle} numberOfLines={1}>
-          {item.name}
-        </Text>
+        <SharedElement id={item.id.toString()}>
+          <Image
+            style={styles.artistImageView}
+            source={{
+              uri: `${Constants.IMAGE_URL}${item.profile_path}`,
+            }}
+          />
+          <Text style={styles.artistTitleStyle} numberOfLines={1}>
+            {item.name}
+          </Text>
+        </SharedElement>
       </TouchableOpacity>
     );
   };
@@ -103,13 +106,15 @@ const TvSeriesDetail = () => {
     <ScrollView style={styles.mainView}>
       <View>
         <View style={styles.backdropImageView}>
-          <ImageBackground
-            style={styles.backdropImageView}
-            source={{
-              uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.backdrop_path}`,
-            }}
-            blurRadius={1.56}
-          />
+          <SharedElement id={`tvSeries.${tvSeriesId}.poster`}>
+            <ImageBackground
+              style={styles.backdropImageView}
+              source={{
+                uri: `${Constants.IMAGE_URL}${tvSeriesDetail?.backdrop_path}`,
+              }}
+              blurRadius={1.56}
+            />
+          </SharedElement>
           <TouchableOpacity
             style={styles.favoriteContainer}
             onPress={onPressFavorite}
