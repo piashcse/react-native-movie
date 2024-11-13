@@ -108,13 +108,23 @@ jobs:
                      -configuration Debug \
                      -archivePath $PWD/build/react_native_movie.xcarchive \
                     -destination "generic/platform=iOS" \
-                    archive | xcpretty
+                     clean archive
 
-      - name: Export iOS IPA
+      - name: Export .ipa
+        env:
+          XCODE_SCHEME: react_native_movie
         run: |
-          EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
-          xcodebuild -exportArchive -archivePath $RUNNER_TEMP/react_native_movie.xcarchive
-                     -exportOptionsPlist $EXPORT_OPTS_PATH -exportPath $RUNNER_TEMP/build
+          xcodebuild -exportArchive \
+                     -archivePath $PWD/build/$react_native_movie.xcarchive \
+                     -exportPath $PWD/build/react_native_movie.ipa \
+                     -exportOptionsPlist ios/ExportOptions.plist      
+
+#      - name: Export iOS IPA
+#        run: |
+#          EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
+#          xcodebuild -exportArchive -archivePath $RUNNER_TEMP/react_native_movie.xcarchive \
+#                     -exportOptionsPlist $EXPORT_OPTS_PATH \
+#                     -exportPath $RUNNER_TEMP/build
 #          xcodebuild -exportArchive \
 #                     -archivePath $PWD/build/react_native_movie.xcarchive \
 #                     -exportOptionsPlist $GITHUB_WORKSPACE/ios/exportOptions.plist \
