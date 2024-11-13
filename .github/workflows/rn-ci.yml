@@ -107,9 +107,8 @@ jobs:
                      -sdk iphoneos \
                      -configuration Debug \
                      -archivePath $PWD/build/react_native_movie.xcarchive \
-                     -destination "generic/platform=iOS" \
-                     archive \
-                     SWIFT_OPTIMIZATION_LEVEL=-Owholemodule | xcpretty | xcpretty --verbose
+                    -destination "generic/platform=iOS" \
+                    archive | xcpretty
 
       - name: Export iOS IPA
         run: |
