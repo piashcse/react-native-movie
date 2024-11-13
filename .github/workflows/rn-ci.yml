@@ -108,7 +108,7 @@ jobs:
                      -configuration Debug \
                      -archivePath $PWD/build/react_native_movie.xcarchive \
                     -destination "generic/platform=iOS" \
-                     clean archive
+                     archive | xcpretty
 
       - name: Export .ipa
         env:
