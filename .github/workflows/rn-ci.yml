@@ -21,7 +21,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18' # Specify the version your project requires
+          node-version: '18'
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm install
@@ -30,7 +38,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
-          java-version: '17' # Set to the required JDK version for Android
+          java-version: '17'
 
       - name: Cache Gradle
         uses: actions/cache@v2
@@ -68,18 +76,49 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm install
 
-      - name: Install Cocoapods dependencies
+      - name: Cache CocoaPods
+        uses: actions/cache@v2
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install CocoaPods dependencies
         run: |
           cd ios
           pod install
 
-      - name: Build iOS App
+      - name: Build iOS App Archive
         run: |
           xcodebuild -workspace ios/react_native_movie.xcworkspace \
                      -scheme react_native_movie \
-                     -sdk iphonesimulator \
+                     -sdk iphoneos \
                      -configuration Debug \
-                     build
+                     -archivePath $PWD/build/react_native_movie.xcarchive \
+                     archive
+
+      - name: Export iOS IPA
+        run: |
+          xcodebuild -exportArchive \
+                     -archivePath $PWD/build/react_native_movie.xcarchive \
+                     -exportOptionsPlist ios/exportOptions.plist \
+                     -exportPath $PWD/build
+        # Ensure exportOptions.plist is set up correctly in the ios directory
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: react_native_movie-debug.ipa
+          path: build/react_native_movie.ipa
