@@ -114,7 +114,7 @@ jobs:
         run: |
           xcodebuild -exportArchive \
                      -archivePath $PWD/build/react_native_movie.xcarchive \
-                     -exportOptionsPlist ios/exportOptions.plist \
+                     -exportOptionsPlist ~/react-native-movie/ios/exportOptions.plist \
                      -exportPath $PWD/build
         # Ensure exportOptions.plist is set up correctly in the ios directory
 
