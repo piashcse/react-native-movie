@@ -109,12 +109,15 @@ jobs:
                      -archivePath $PWD/build/react_native_movie.xcarchive \
                     -destination "generic/platform=iOS" \
                     archive | xcpretty
+      - name: Check exportOptions.plist
+        run: |  
+          if [ -f "$PWD/ios/exportOptions.plist" ]; then echo "exportOptions.plist found."; else echo "exportOptions.plist NOT found."; fi
 
       - name: Export iOS IPA
         run: |
           xcodebuild -exportArchive \
                      -archivePath $PWD/build/react_native_movie.xcarchive \
-                     -exportOptionsPlist ~/react-native-movie/ios/exportOptions.plist \
+                     -exportOptionsPlist $GITHUB_WORKSPACE/ios/exportOptions.plist \
                      -exportPath $PWD/build
         # Ensure exportOptions.plist is set up correctly in the ios directory
 
