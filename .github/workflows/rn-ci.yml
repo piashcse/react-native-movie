@@ -1,0 +1,138 @@
+name: React Native CI/CD
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  android-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Cache Gradle
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}
+
+      - name: Build Android APK
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+      - name: Run tests
+        run: npm test
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+  ios-build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v2
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          pod install
+
+      - name: Build iOS App Archive
+        run: |
+          xcodebuild -workspace ios/react_native_movie.xcworkspace \
+                     -scheme react_native_movie \
+                     -sdk iphoneos \
+                     -configuration Debug \
+                     -archivePath $PWD/build/react_native_movie.xcarchive \
+                    -destination "generic/platform=iOS" \
+                     archive | xcpretty
+
+      - name: Export .ipa
+        env:
+          XCODE_SCHEME: react_native_movie
+        run: |
+          xcodebuild -exportArchive \
+                     -archivePath $PWD/build/$react_native_movie.xcarchive \
+                     -exportPath $PWD/build/react_native_movie.ipa \
+                     -exportOptionsPlist ios/ExportOptions.plist      
+
+#      - name: Export iOS IPA
+#        run: |
+#          EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
+#          xcodebuild -exportArchive -archivePath $RUNNER_TEMP/react_native_movie.xcarchive \
+#                     -exportOptionsPlist $EXPORT_OPTS_PATH \
+#                     -exportPath $RUNNER_TEMP/build
+#          xcodebuild -exportArchive \
+#                     -archivePath $PWD/build/react_native_movie.xcarchive \
+#                     -exportOptionsPlist $GITHUB_WORKSPACE/ios/exportOptions.plist \
+#                     -exportPath $PWD/build
+        # Ensure exportOptions.plist is set up correctly in the ios directory
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: react_native_movie-debug.ipa
+          path: build/react_native_movie.ipa
