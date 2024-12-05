@@ -3,7 +3,7 @@ import { Loading } from '../../components/loading/Loading';
 import styles from './ArtistDetail.style.ts';
 import { Image, Text, View, ScrollView } from 'react-native';
 import { Constants } from '../../constant/AppConstants';
-import { useGetAristDetailQuery } from '../../redux/query/RTKQuery.ts';
+import { useAristDetailQuery } from '../../redux/query/RTKQuery.ts';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
 type RouteParams = {
@@ -13,7 +13,7 @@ type RouteParams = {
 const ArtistDetail = () => {
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { personId } = route.params;
-  const { data: artistDetail, isLoading } = useGetAristDetailQuery(
+  const { data: artistDetail, isLoading } = useAristDetailQuery(
     Number(personId)
   );
 

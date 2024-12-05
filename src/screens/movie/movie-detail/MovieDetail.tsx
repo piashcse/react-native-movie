@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 import { Constants } from '../../../constant/AppConstants.ts';
 import {
-  useGetArtistAndCrewQuery,
-  useGetMovieDetailQuery,
-  useGetSimilarMovieQuery,
+  useArtistAndCrewQuery,
+  useMovieDetailQuery,
+  useSimilarMovieQuery,
 } from '../../../redux/query/RTKQuery.ts';
 import {
   NavigationProp,
@@ -40,11 +40,11 @@ const MovieDetail = () => {
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { movieId } = route.params;
   const { data: movieDetail, isFetching: isLoadingMovieDetail } =
-    useGetMovieDetailQuery(Number(movieId));
+    useMovieDetailQuery(Number(movieId));
   const { data: similarMovies, isFetching: isLoadingSimilarMovies } =
-    useGetSimilarMovieQuery(Number(movieId));
+    useSimilarMovieQuery(Number(movieId));
   const { data: castAndCrew, isFetching: isLoadingCastAndCrew } =
-    useGetArtistAndCrewQuery(Number(movieId));
+    useArtistAndCrewQuery(Number(movieId));
   const { toggleFavoriteMovie, isFavoriteMovie } = useFavoriteStore();
 
   const isLoading =
