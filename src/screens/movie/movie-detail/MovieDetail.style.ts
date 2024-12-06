@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   posterImageView: {
-    height: 170,
+    height: 180,
     width: 130,
     bottom: 0,
     marginLeft: 12,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   movieItemContainer: { margin: 4 },
   similarImageView: {
-    height: 150,
+    height: 160,
     width: 120,
     borderRadius: 12,
     resizeMode: 'cover',

@@ -10,30 +10,32 @@ interface ReadMoreTextProps {
   readMoreStyle?: TextStyle;
   text: string;
   textStyle?: TextStyle;
+  numberOfLines?: number;
 }
 
 const SeeMoreText: React.FC<ReadMoreTextProps> = ({
   readMoreStyle,
   text,
   textStyle,
+  numberOfLines = 3,
 }: ReadMoreTextProps) => {
   const [showMoreButton, setShowMoreButton] = useState(false);
   const [textShown, setTextShown] = useState(false);
-  const [numLines, setNumLines] = useState<number | undefined>(undefined);
+  const [numLines, setNumLines] = useState<number | undefined>(numberOfLines);
 
   const toggleTextShown = () => {
     setTextShown(!textShown);
   };
 
   useEffect(() => {
-    setNumLines(textShown ? undefined : 3);
+    setNumLines(textShown ? undefined : numLines);
   }, [textShown]);
 
   const onTextLayout = useCallback(
     (e: NativeSyntheticEvent<TextLayoutEventData>) => {
       if (e.nativeEvent.lines.length > 3 && !textShown) {
         setShowMoreButton(true);
-        setNumLines(3);
+        setNumLines(numberOfLines);
       }
     },
     [textShown]

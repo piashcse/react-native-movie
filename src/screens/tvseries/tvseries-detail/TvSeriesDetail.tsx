@@ -178,6 +178,7 @@ const TvSeriesDetail = () => {
         <SeeMoreText
           text={tvSeriesDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
+          numberOfLines={2}
         />
         {similarMovies?.length && (
           <Text style={styles.description}>{detailInfo.similar}</Text>
