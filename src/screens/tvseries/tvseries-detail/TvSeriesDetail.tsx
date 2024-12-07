@@ -28,7 +28,7 @@ import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
-import { detailInfo } from '../../../constant/Dictionary.ts';
+import { detailInfo } from '../../../locale/dictionary.ts';
 import { SharedElement } from 'react-navigation-shared-element';
 
 type RouteParams = {

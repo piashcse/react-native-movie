@@ -7,7 +7,8 @@ import { TvSeriesDetail } from '../../../types/TvSeriesDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import ConfirmationAlert from '../../../components/alert-dialog/ConfirmationAlert.tsx';
-import { confirmationAlert } from '../../../constant/Dictionary.ts';
+import { confirmationAlert } from '../../../locale/dictionary.ts';
+import { useLocalization } from '../../../hooks/useLocalization.ts';
 
 type FavoriteTvSeriesNavigationProp = NavigationProp<
   RootStackParam,
@@ -17,6 +18,8 @@ type FavoriteTvSeriesNavigationProp = NavigationProp<
 const FavoriteTvSeries = () => {
   const navigation = useNavigation<FavoriteTvSeriesNavigationProp>();
   const { favoriteTvSeries, toggleFavoriteTvSeries } = useFavoriteStore();
+  const localizedConfirmationAlert = useLocalization(confirmationAlert);
+
   const [visible, setVisible] = useState(false);
   const [tvSeriesToRemove, setTvSeriesToRemove] =
     useState<TvSeriesDetail | null>(null);
@@ -59,8 +62,8 @@ const FavoriteTvSeries = () => {
       />
       <ConfirmationAlert
         visible={visible}
-        title={confirmationAlert.title}
-        message={confirmationAlert.message}
+        title={localizedConfirmationAlert.title}
+        message={localizedConfirmationAlert.message}
         onConfirm={confirmRemoveFavorite}
         onCancel={hideDialog}
       />
