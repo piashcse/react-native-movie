@@ -1,12 +1,20 @@
 import { useMemo } from 'react';
 import { i18nLocale } from '../locale/i18nLocale.ts';
+import { AppString } from '../locale/AppString.ts';
 
-export const useLocalization = (obj: Record<string, string>) => {
+type AppStringKey = keyof typeof AppString; // Keys of APP_STRING
+
+export const useLocalization = () => {
   return useMemo(() => {
-    const localizedObj: Record<string, string> = {};
-    Object.keys(obj).forEach((key) => {
-      localizedObj[key] = i18nLocale.t(obj[key]);
+    const localizedStrings: Record<AppStringKey, string> = {} as Record<
+      AppStringKey,
+      string
+    >;
+
+    (Object.keys(AppString) as AppStringKey[]).forEach((key) => {
+      localizedStrings[key] = i18nLocale.t(AppString[key]);
     });
-    return localizedObj;
-  }, [obj]);
+
+    return localizedStrings;
+  }, []);
 };

@@ -7,7 +7,6 @@ import { TvSeriesDetail } from '../../../types/TvSeriesDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import ConfirmationAlert from '../../../components/alert-dialog/ConfirmationAlert.tsx';
-import { confirmationAlert } from '../../../locale/dictionary.ts';
 import { useLocalization } from '../../../hooks/useLocalization.ts';
 
 type FavoriteTvSeriesNavigationProp = NavigationProp<
@@ -18,7 +17,7 @@ type FavoriteTvSeriesNavigationProp = NavigationProp<
 const FavoriteTvSeries = () => {
   const navigation = useNavigation<FavoriteTvSeriesNavigationProp>();
   const { favoriteTvSeries, toggleFavoriteTvSeries } = useFavoriteStore();
-  const localizedConfirmationAlert = useLocalization(confirmationAlert);
+  const localizedConfirmationAlert = useLocalization();
 
   const [visible, setVisible] = useState(false);
   const [tvSeriesToRemove, setTvSeriesToRemove] =
