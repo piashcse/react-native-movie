@@ -7,7 +7,6 @@ import { MovieDetail } from '../../../types/MovieDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import ConfirmationAlert from '../../../components/alert-dialog/ConfirmationAlert.tsx';
-import { confirmationAlert } from '../../../locale/dictionary.ts';
 import { useLocalization } from '../../../hooks/useLocalization.ts';
 
 type FavoriteMovieNavigationProp = NavigationProp<
@@ -18,7 +17,7 @@ type FavoriteMovieNavigationProp = NavigationProp<
 const FavoriteMovie = () => {
   const navigation = useNavigation<FavoriteMovieNavigationProp>();
   const { favoriteMovies, toggleFavoriteMovie } = useFavoriteStore();
-  const localizedConfirmationAlert = useLocalization(confirmationAlert);
+  const localization = useLocalization();
 
   const [visible, setVisible] = useState(false);
   const [movieToRemove, setMovieToRemove] = useState<MovieDetail | null>(null);
@@ -59,8 +58,8 @@ const FavoriteMovie = () => {
       />
       <ConfirmationAlert
         visible={visible}
-        title={localizedConfirmationAlert.title}
-        message={localizedConfirmationAlert.message}
+        title={localization.title}
+        message={localization.message}
         onConfirm={confirmRemoveFavorite}
         onCancel={hideDialog}
       />

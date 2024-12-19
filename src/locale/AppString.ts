@@ -1,9 +1,4 @@
-export const confirmationAlert = {
-  title: 'Remove Favorite',
-  message: 'Are you want to remove this item?',
-};
-
-export const detailInfo = {
+export const AppString = {
   releaseDate: 'Release Date',
   description: 'Description',
   duration: 'Duration',
@@ -13,4 +8,6 @@ export const detailInfo = {
   similar: 'Similar',
   artist: 'Artist',
   min: 'min',
+  title: 'Remove Favorite',
+  message: 'Are you want to remove this item?',
 };

@@ -28,7 +28,7 @@ import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
-import { detailInfo } from '../../../locale/dictionary.ts';
+import { AppString } from '../../../locale/AppString.ts';
 import { SharedElement } from 'react-navigation-shared-element';
 
 type RouteParams = {
@@ -135,13 +135,13 @@ const MovieDetail = () => {
             <View>
               <View style={styles.titleAndInfoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{detailInfo.language}</Text>
+                  <Text style={styles.infoTitle}>{AppString.language}</Text>
                   <Text style={styles.infoTitleData}>
                     {movieDetail?.original_language}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{detailInfo.rating}</Text>
+                  <Text style={styles.infoTitle}>{AppString.rating}</Text>
                   <Text style={styles.infoTitleData}>
                     {movieDetail?.vote_average?.toFixed(1)}
                   </Text>
@@ -149,13 +149,13 @@ const MovieDetail = () => {
               </View>
               <View style={styles.infoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{detailInfo.duration}</Text>
+                  <Text style={styles.infoTitle}>{AppString.duration}</Text>
                   <Text style={styles.infoTitleData}>
-                    {movieDetail?.runtime} {detailInfo.min}
+                    {movieDetail?.runtime} {AppString.min}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{detailInfo.releaseDate}</Text>
+                  <Text style={styles.infoTitle}>{AppString.releaseDate}</Text>
                   <Text style={styles.infoTitleData}>
                     {movieDetail?.release_date}
                   </Text>
@@ -166,14 +166,14 @@ const MovieDetail = () => {
         </View>
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.description}>{detailInfo.description}</Text>
+        <Text style={styles.description}>{AppString.description}</Text>
         <SeeMoreText
           text={movieDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
           numberOfLines={2}
         />
         {similarMovies?.length && (
-          <Text style={styles.description}>{detailInfo.similar}</Text>
+          <Text style={styles.description}>{AppString.similar}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}
@@ -184,7 +184,7 @@ const MovieDetail = () => {
           showsHorizontalScrollIndicator={false}
         />
         {castAndCrew?.cast?.length && (
-          <Text style={styles.description}>{detailInfo.artist}</Text>
+          <Text style={styles.description}>{AppString.artist}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}
