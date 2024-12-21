@@ -1,6 +1,4 @@
 {
-  "Remove Favorite": "Remove Favorite",
-  "Are you want to remove this item?": "Are you want to remove this item?",
   "releaseDate": "Release Date",
   "description": "Description",
   "duration": "Duration",
@@ -9,5 +7,7 @@
   "language": "Language",
   "similar": "Similar",
   "artist": "Artist",
-  "min": "min"
+  "min": "min",
+  "Remove Favorite": "ফেবারিট রিমুভ",
+  "Are you want to remove this item?": "আপনি কি এ আইটেমটি রিমুভ করতে চাচ্ছেন?"
 }

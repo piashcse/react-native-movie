@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { i18nLocale } from '../locale/i18nLocale.ts';
-import { AppString } from '../locale/AppString.ts';
+import { i18nLocale } from '../localization/i18nLocale.ts';
+import { AppString } from '../localization/AppString.ts';
 
 type AppStringKey = keyof typeof AppString; // Keys of APP_STRING
 
