@@ -28,8 +28,8 @@ import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
-import { AppString } from '../../../locale/AppString.ts';
 import { SharedElement } from 'react-navigation-shared-element';
+import { useLocalization } from '../../../hooks/useLocalization.ts';
 
 type RouteParams = {
   tvSeriesId: string;
@@ -40,6 +40,7 @@ type TvSeriesDetailNavigationProp = NavigationProp<
 >;
 
 const TvSeriesDetail = () => {
+  const localization = useLocalization();
   const navigation = useNavigation<TvSeriesDetailNavigationProp>();
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { tvSeriesId } = route.params;
@@ -141,13 +142,13 @@ const TvSeriesDetail = () => {
             <View>
               <View style={styles.titleAndInfoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{AppString.language}</Text>
+                  <Text style={styles.infoTitle}>{localization.language}</Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.original_language}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{AppString.rating}</Text>
+                  <Text style={styles.infoTitle}>{localization.rating}</Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.vote_average?.toFixed(1)}
                   </Text>
@@ -156,14 +157,16 @@ const TvSeriesDetail = () => {
               <View style={styles.infoContainer}>
                 <View style={styles.fourthContainer}>
                   <Text style={styles.infoTitle}>
-                    {AppString.numberOfEpisode}
+                    {localization.numberOfEpisode}
                   </Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.number_of_episodes}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{AppString.releaseDate}</Text>
+                  <Text style={styles.infoTitle}>
+                    {localization.releaseDate}
+                  </Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.first_air_date}
                   </Text>
@@ -174,14 +177,14 @@ const TvSeriesDetail = () => {
         </View>
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.description}>{AppString.description}</Text>
+        <Text style={styles.description}>{localization.description}</Text>
         <SeeMoreText
           text={tvSeriesDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
           numberOfLines={2}
         />
         {similarMovies?.length && (
-          <Text style={styles.description}>{AppString.similar}</Text>
+          <Text style={styles.description}>{localization.similar}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}
@@ -192,7 +195,7 @@ const TvSeriesDetail = () => {
           showsHorizontalScrollIndicator={false}
         />
         {castAndCrew?.cast?.length && (
-          <Text style={styles.description}>{AppString.artist}</Text>
+          <Text style={styles.description}>{localization.artist}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}

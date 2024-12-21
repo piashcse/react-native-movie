@@ -28,14 +28,15 @@ import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
-import { AppString } from '../../../locale/AppString.ts';
 import { SharedElement } from 'react-navigation-shared-element';
+import { useLocalization } from '../../../hooks/useLocalization.ts';
 
 type RouteParams = {
   movieId: string;
 };
 type MovieDetailNavigationProp = NavigationProp<RootStackParam, 'MovieDetail'>;
 const MovieDetail = () => {
+  const localization = useLocalization();
   const navigation = useNavigation<MovieDetailNavigationProp>();
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { movieId } = route.params;
@@ -135,13 +136,13 @@ const MovieDetail = () => {
             <View>
               <View style={styles.titleAndInfoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{AppString.language}</Text>
+                  <Text style={styles.infoTitle}>{localization.language}</Text>
                   <Text style={styles.infoTitleData}>
                     {movieDetail?.original_language}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{AppString.rating}</Text>
+                  <Text style={styles.infoTitle}>{localization.rating}</Text>
                   <Text style={styles.infoTitleData}>
                     {movieDetail?.vote_average?.toFixed(1)}
                   </Text>
@@ -149,13 +150,15 @@ const MovieDetail = () => {
               </View>
               <View style={styles.infoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{AppString.duration}</Text>
+                  <Text style={styles.infoTitle}>{localization.duration}</Text>
                   <Text style={styles.infoTitleData}>
-                    {movieDetail?.runtime} {AppString.min}
+                    {movieDetail?.runtime} {localization.min}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{AppString.releaseDate}</Text>
+                  <Text style={styles.infoTitle}>
+                    {localization.releaseDate}
+                  </Text>
                   <Text style={styles.infoTitleData}>
                     {movieDetail?.release_date}
                   </Text>
@@ -166,14 +169,14 @@ const MovieDetail = () => {
         </View>
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.description}>{AppString.description}</Text>
+        <Text style={styles.description}>{localization.description}</Text>
         <SeeMoreText
           text={movieDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
           numberOfLines={2}
         />
         {similarMovies?.length && (
-          <Text style={styles.description}>{AppString.similar}</Text>
+          <Text style={styles.description}>{localization.similar}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}
@@ -184,7 +187,7 @@ const MovieDetail = () => {
           showsHorizontalScrollIndicator={false}
         />
         {castAndCrew?.cast?.length && (
-          <Text style={styles.description}>{AppString.artist}</Text>
+          <Text style={styles.description}>{localization.artist}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}

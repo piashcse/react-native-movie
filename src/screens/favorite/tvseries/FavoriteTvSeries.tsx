@@ -17,7 +17,7 @@ type FavoriteTvSeriesNavigationProp = NavigationProp<
 const FavoriteTvSeries = () => {
   const navigation = useNavigation<FavoriteTvSeriesNavigationProp>();
   const { favoriteTvSeries, toggleFavoriteTvSeries } = useFavoriteStore();
-  const localizedConfirmationAlert = useLocalization();
+  const localization = useLocalization();
 
   const [visible, setVisible] = useState(false);
   const [tvSeriesToRemove, setTvSeriesToRemove] =
@@ -61,8 +61,8 @@ const FavoriteTvSeries = () => {
       />
       <ConfirmationAlert
         visible={visible}
-        title={localizedConfirmationAlert.title}
-        message={localizedConfirmationAlert.message}
+        title={localization.title}
+        message={localization.message}
         onConfirm={confirmRemoveFavorite}
         onCancel={hideDialog}
       />
