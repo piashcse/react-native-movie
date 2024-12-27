@@ -5,7 +5,7 @@ import {
 } from '../../../components/loading/Loading.tsx';
 import { View } from 'react-native';
 import styles from './TopRatedTvSeries.style.ts';
-import { useTopRatedTvSeriesApiQuery } from '../../../redux/query/RTKQuery.ts';
+import { useTopRatedTvSeriesQuery } from '../../../redux/query/RTKQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { TvSeriesItem } from '../../../types/TvSeriesItem.ts';
 import TvSeriesItemComponent from '../../../components/tvseries-item/TvSeriesItemComponent.tsx';
@@ -25,7 +25,7 @@ const TopRatedTvSeries = () => {
     error,
     isFetching,
     isSuccess,
-  } = useTopRatedTvSeriesApiQuery(page);
+  } = useTopRatedTvSeriesQuery(page);
 
   useEffect(() => {
     if (data.length) {

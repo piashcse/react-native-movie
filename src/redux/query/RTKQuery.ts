@@ -12,94 +12,85 @@ import {
   SearchData,
   SearchParams,
 } from '../../components/search/DynamicSearch.tsx';
+const buildQuery = (
+  path: string,
+  params: Record<string, string | number> = {}
+) => {
+  const searchParams = new URLSearchParams({
+    api_key: Constants.API_KEY,
+    language: 'en-US',
+    ...params,
+  });
+  return `${path}?${searchParams.toString()}`;
+};
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
   endpoints: (builder) => ({
+    // Movies
     nowPlayingMovie: builder.query<MovieItem[], number>({
-      query: (page) =>
-        `movie/now_playing?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+      query: (page) => buildQuery('movie/now_playing', { page }),
       transformResponse: (response: MovieResult) => response.results,
     }),
     popularMovie: builder.query<MovieItem[], number>({
-      query: (page) =>
-        `movie/popular?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
-      transformResponse: (response: MovieResult) => {
-        console.log('transform ', response.results);
-        return response.results;
-      },
+      query: (page) => buildQuery('movie/popular', { page }),
+      transformResponse: (response: MovieResult) => response.results,
     }),
     topRatedMovie: builder.query<MovieItem[], number>({
-      query: (page) =>
-        `movie/top_rated?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+      query: (page) => buildQuery('movie/top_rated', { page }),
       transformResponse: (response: MovieResult) => response.results,
     }),
     upcomingMovie: builder.query<MovieItem[], number>({
-      query: (page) =>
-        `movie/upcoming?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+      query: (page) => buildQuery('movie/upcoming', { page }),
       transformResponse: (response: MovieResult) => response.results,
     }),
     movieDetail: builder.query<MovieDetail, number>({
-      query: (movieId) =>
-        `movie/${movieId}?api_key=${Constants.API_KEY}&language=en-US`,
-      transformResponse: (response: MovieDetail) => response,
+      query: (movieId) => buildQuery(`movie/${movieId}`),
     }),
     similarMovie: builder.query<MovieItem[], number>({
-      query: (movieId) =>
-        `movie/${movieId}/recommendations?api_key=${Constants.API_KEY}&language=en-US`,
+      query: (movieId) => buildQuery(`movie/${movieId}/recommendations`),
       transformResponse: (response: MovieResult) => response.results,
     }),
     artistAndCrew: builder.query<CastAndCrew, number>({
-      query: (movieId) =>
-        `movie/${movieId}/credits?api_key=${Constants.API_KEY}&language=en-US`,
-      transformResponse: (response: CastAndCrew) => response,
+      query: (movieId) => buildQuery(`movie/${movieId}/credits`),
     }),
-    aristDetail: builder.query<ArtistDetail, number>({
-      query: (personId) =>
-        `person/${personId}?api_key=${Constants.API_KEY}&language=en-US`,
-      transformResponse: (response: ArtistDetail) => response,
+    artistDetail: builder.query<ArtistDetail, number>({
+      query: (personId) => buildQuery(`person/${personId}`),
     }),
-    airingTodayTvSeriesApi: builder.query<TvSeriesItem[], number>({
-      query: (page) =>
-        `tv/airing_today?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+
+    // TV Series
+    airingTodayTvSeries: builder.query<TvSeriesItem[], number>({
+      query: (page) => buildQuery('tv/airing_today', { page }),
       transformResponse: (response: TvSeriesResult) => response.results,
     }),
-    onTheAirTvSeriesApi: builder.query<TvSeriesItem[], number>({
-      query: (page) =>
-        `tv/on_the_air?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+    onTheAirTvSeries: builder.query<TvSeriesItem[], number>({
+      query: (page) => buildQuery('tv/on_the_air', { page }),
       transformResponse: (response: TvSeriesResult) => response.results,
     }),
-    popularTvSeriesApi: builder.query<TvSeriesItem[], number>({
-      query: (page) =>
-        `tv/popular?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+    popularTvSeries: builder.query<TvSeriesItem[], number>({
+      query: (page) => buildQuery('tv/popular', { page }),
       transformResponse: (response: TvSeriesResult) => response.results,
     }),
-    topRatedTvSeriesApi: builder.query<TvSeriesItem[], number>({
-      query: (page) =>
-        `tv/top_rated?page=${page}&language=en-US&api_key=${Constants.API_KEY}`,
+    topRatedTvSeries: builder.query<TvSeriesItem[], number>({
+      query: (page) => buildQuery('tv/top_rated', { page }),
       transformResponse: (response: TvSeriesResult) => response.results,
     }),
-    tvSeriesDetailApi: builder.query<TvSeriesDetail, number>({
-      query: (tvSeriesId) =>
-        `tv/${tvSeriesId}?api_key=${Constants.API_KEY}&language=en-US`,
-      transformResponse: (response: TvSeriesDetail) => response,
+    tvSeriesDetail: builder.query<TvSeriesDetail, number>({
+      query: (tvSeriesId) => buildQuery(`tv/${tvSeriesId}`),
     }),
-    recommendedTvSeriesApi: builder.query<TvSeriesItem[], number>({
-      query: (tvSeriesId) =>
-        `tv/${tvSeriesId}/recommendations?api_key=${Constants.API_KEY}&language=en-US`,
+    recommendedTvSeries: builder.query<TvSeriesItem[], number>({
+      query: (tvSeriesId) => buildQuery(`tv/${tvSeriesId}/recommendations`),
       transformResponse: (response: TvSeriesResult) => response.results,
     }),
-    tvSeriesArtistAndCrewApi: builder.query<CastAndCrew, number>({
-      query: (movieId) =>
-        `tv/${movieId}/credits?api_key=${Constants.API_KEY}&language=en-US`,
-      transformResponse: (response: CastAndCrew) => response,
+    tvSeriesArtistAndCrew: builder.query<CastAndCrew, number>({
+      query: (tvSeriesId) => buildQuery(`tv/${tvSeriesId}/credits`),
     }),
+
+    // Search
     searchMovieTvSeries: builder.query<SearchData[], SearchParams>({
-      query: (search: SearchParams) =>
-        `search/${search.isMovie ? 'movie' : 'tv'}?query=${
-          search.query
-        }&api_key=${Constants.API_KEY}&language=en-US`,
+      query: ({ isMovie, query }) =>
+        buildQuery(`search/${isMovie ? 'movie' : 'tv'}`, { query }),
       transformResponse: (response: MovieResult) =>
         response.results as SearchData[],
     }),
@@ -114,13 +105,13 @@ export const {
   useMovieDetailQuery,
   useSimilarMovieQuery,
   useArtistAndCrewQuery,
-  useAristDetailQuery,
-  useAiringTodayTvSeriesApiQuery,
-  useOnTheAirTvSeriesApiQuery,
-  usePopularTvSeriesApiQuery,
-  useTopRatedTvSeriesApiQuery,
-  useTvSeriesDetailApiQuery,
-  useRecommendedTvSeriesApiQuery,
-  useTvSeriesArtistAndCrewApiQuery,
+  useArtistDetailQuery,
+  useAiringTodayTvSeriesQuery,
+  useOnTheAirTvSeriesQuery,
+  usePopularTvSeriesQuery,
+  useTopRatedTvSeriesQuery,
+  useTvSeriesDetailQuery,
+  useRecommendedTvSeriesQuery,
+  useTvSeriesArtistAndCrewQuery,
   useSearchMovieTvSeriesQuery,
 } = movieApi;

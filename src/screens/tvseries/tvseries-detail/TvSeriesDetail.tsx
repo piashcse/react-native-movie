@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 import { Constants } from '../../../constant/AppConstants.ts';
 import {
-  useRecommendedTvSeriesApiQuery,
-  useTvSeriesArtistAndCrewApiQuery,
-  useTvSeriesDetailApiQuery,
+  useRecommendedTvSeriesQuery,
+  useTvSeriesArtistAndCrewQuery,
+  useTvSeriesDetailQuery,
 } from '../../../redux/query/RTKQuery.ts';
 import {
   NavigationProp,
@@ -45,11 +45,11 @@ const TvSeriesDetail = () => {
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { tvSeriesId } = route.params;
   const { data: tvSeriesDetail, isFetching: isLoadingMovieDetail } =
-    useTvSeriesDetailApiQuery(Number(tvSeriesId));
+    useTvSeriesDetailQuery(Number(tvSeriesId));
   const { data: similarMovies, isFetching: isLoadingSimilarMovies } =
-    useRecommendedTvSeriesApiQuery(Number(tvSeriesId));
+    useRecommendedTvSeriesQuery(Number(tvSeriesId));
   const { data: castAndCrew, isFetching: isLoadingCastAndCrew } =
-    useTvSeriesArtistAndCrewApiQuery(Number(tvSeriesId));
+    useTvSeriesArtistAndCrewQuery(Number(tvSeriesId));
   const { toggleFavoriteTvSeries, isFavoriteTvSeries } = useFavoriteStore();
 
   const isLoading =
