@@ -5,7 +5,7 @@ import {
 } from '../../../components/loading/Loading.tsx';
 import { View } from 'react-native';
 import styles from './PopularTvSeries.style.ts';
-import { usePopularTvSeriesApiQuery } from '../../../redux/query/RTKQuery.ts';
+import { usePopularTvSeriesQuery } from '../../../redux/query/RTKQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { TvSeriesItem } from '../../../types/TvSeriesItem.ts';
 import TvSeriesItemComponent from '../../../components/tvseries-item/TvSeriesItemComponent.tsx';
@@ -25,7 +25,7 @@ const PopularTvSeries = () => {
     error,
     isFetching,
     isSuccess,
-  } = usePopularTvSeriesApiQuery(page);
+  } = usePopularTvSeriesQuery(page);
 
   useEffect(() => {
     if (data.length) {
