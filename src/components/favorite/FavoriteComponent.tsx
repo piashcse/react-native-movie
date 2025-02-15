@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './FavoriteComponent.style.ts';
 import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
-import { Constants } from '../../constant/AppConstants.ts';
+import { AppConstants } from '../../constant/AppConstants.ts';
 import { Text } from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -23,12 +23,12 @@ const FavoriteComponent = (props: FavoriteProps) => {
         source={
           isLoading
             ? require('../../assets/placeholder.jpeg')
-            : { uri: `${Constants.IMAGE_URL}${props.poster_path}` }
+            : { uri: `${AppConstants.IMAGE_URL}${props.poster_path}` }
         }
       >
         <Image
           style={styles.imageView}
-          source={{ uri: `${Constants.IMAGE_URL}${props.poster_path}` }}
+          source={{ uri: `${AppConstants.IMAGE_URL}${props.poster_path}` }}
           onLoadEnd={() => setIsLoading(false)}
         />
         <TouchableOpacity style={styles.removeIcon} onPress={props.onRemove}>

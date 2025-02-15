@@ -18,7 +18,7 @@ import { MovieItem } from '../../types/MovieItem.ts';
 import { TvSeriesItem } from '../../types/TvSeriesItem.ts';
 import { useSearchMovieTvSeriesQuery } from '../../redux/query/RTKQuery.ts';
 import { FooterLoading } from '../loading/Loading.tsx';
-import { Constants } from '../../constant/AppConstants.ts';
+import { AppConstants } from '../../constant/AppConstants.ts';
 import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
 
 export type SearchData = MovieItem & TvSeriesItem;
@@ -55,12 +55,12 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
         <ImageBackground
           style={styles.imageView}
           imageStyle={styles.backgroundImage}
-          source={{ uri: `${Constants.IMAGE_URL}${item.poster_path}` }}
+          source={{ uri: `${AppConstants.IMAGE_URL}${item.poster_path}` }}
         >
           <Image
             style={styles.imageView}
             source={{
-              uri: `${Constants.IMAGE_URL}${item.poster_path}`,
+              uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
             }}
           />
         </ImageBackground>

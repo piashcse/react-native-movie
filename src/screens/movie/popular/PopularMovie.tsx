@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import styles from './PopularMovie.style.ts';
 import { View } from 'react-native';
-import { usePopularMovieQuery } from '../../../redux/query/RTKQuery.ts';
+import { useLazyPopularMovieQuery } from '../../../redux/query/RTKQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MovieItem } from '../../../types/MovieItem.ts';
 import {
@@ -17,18 +17,22 @@ const PopularMovie = () => {
   const navigation = useNavigation<PopularMovieNavigationProp>();
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState<Array<MovieItem>>([]);
-  const {
-    data = [],
-    error,
-    isFetching,
-    isSuccess,
-  } = usePopularMovieQuery(page);
+  const [fetchPopularMovie, { isFetching, error }] = useLazyPopularMovieQuery();
 
   useEffect(() => {
-    if (data.length) {
-      setMovies((prevMovies) => (page === 1 ? data : [...prevMovies, ...data]));
-    }
-  }, [isSuccess]);
+    const fetchMovies = async () => {
+      try {
+        const response = await fetchPopularMovie({ page }).unwrap();
+        setMovies((prevMovies) =>
+          page === 1 ? response : [...prevMovies, ...response]
+        );
+      } catch (err) {
+        console.error('Failed to fetch movies:', err);
+      }
+    };
+
+    fetchMovies();
+  }, [page]);
 
   const loadMoreMovies = () => {
     if (!isFetching && !error) {
@@ -36,7 +40,7 @@ const PopularMovie = () => {
     }
   };
 
-  if (isFetching && page == 1) return <Loading />;
+  if (isFetching && page === 1) return <Loading />;
 
   return (
     <View style={styles.mainView}>
@@ -51,4 +55,5 @@ const PopularMovie = () => {
     </View>
   );
 };
+
 export default PopularMovie;
