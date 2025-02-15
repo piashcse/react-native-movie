@@ -2,7 +2,7 @@ import React from 'react';
 import { Loading } from '../../components/loading/Loading';
 import styles from './ArtistDetail.style.ts';
 import { Image, Text, View, ScrollView } from 'react-native';
-import { Constants } from '../../constant/AppConstants';
+import { AppConstants } from '../../constant/AppConstants';
 import { useArtistDetailQuery } from '../../redux/query/RTKQuery.ts';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
@@ -26,7 +26,7 @@ const ArtistDetail = () => {
           <Image
             style={styles.imageView}
             source={{
-              uri: `${Constants.IMAGE_URL}${artistDetail?.profile_path}`,
+              uri: `${AppConstants.IMAGE_URL}${artistDetail?.profile_path}`,
             }}
           />
         </SharedElement>

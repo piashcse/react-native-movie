@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import {
   FooterLoading,
   Loading,
 } from '../../../components/loading/Loading.tsx';
 import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import styles from './UpComingMovie.style.ts';
-import { View } from 'react-native';
-import { useUpcomingMovieQuery } from '../../../redux/query/RTKQuery.ts';
+import { useLazyUpcomingMovieQuery } from '../../../redux/query/RTKQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MovieItem } from '../../../types/MovieItem.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
@@ -20,18 +20,23 @@ const UpComingMovie = () => {
   const navigation = useNavigation<UpComingMovieNavigationProp>();
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState<Array<MovieItem>>([]);
-  const {
-    data = [],
-    error,
-    isFetching,
-    isSuccess,
-  } = useUpcomingMovieQuery(page);
+  const [fetchUpcomingMovie, { isFetching, error }] =
+    useLazyUpcomingMovieQuery();
 
   useEffect(() => {
-    if (data.length) {
-      setMovies((prevMovies) => (page === 1 ? data : [...prevMovies, ...data]));
-    }
-  }, [isSuccess]);
+    const fetchMovies = async () => {
+      try {
+        const response = await fetchUpcomingMovie({ page }).unwrap();
+        setMovies((prevMovies) =>
+          page === 1 ? response : [...prevMovies, ...response]
+        );
+      } catch (err) {
+        console.error('Failed to fetch movies:', err);
+      }
+    };
+
+    fetchMovies();
+  }, [page]);
 
   const loadMoreMovies = () => {
     if (!isFetching && !error) {
@@ -39,7 +44,8 @@ const UpComingMovie = () => {
     }
   };
 
-  if (isFetching) return <Loading />;
+  if (isFetching && page === 1) return <Loading />;
+
   return (
     <View style={styles.mainView}>
       <MovieItemComponent
@@ -53,4 +59,5 @@ const UpComingMovie = () => {
     </View>
   );
 };
+
 export default UpComingMovie;

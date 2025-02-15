@@ -10,7 +10,7 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import { Constants } from '../../../constant/AppConstants.ts';
+import { AppConstants } from '../../../constant/AppConstants.ts';
 import {
   useArtistAndCrewQuery,
   useMovieDetailQuery,
@@ -66,7 +66,7 @@ const MovieDetail = () => {
         <Image
           style={styles.similarImageView}
           source={{
-            uri: `${Constants.IMAGE_URL}${item.poster_path}`,
+            uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
           }}
         />
       </TouchableOpacity>
@@ -84,7 +84,7 @@ const MovieDetail = () => {
           <Image
             style={styles.artistImageView}
             source={{
-              uri: `${Constants.IMAGE_URL}${item.profile_path}`,
+              uri: `${AppConstants.IMAGE_URL}${item.profile_path}`,
             }}
           />
           <Text style={styles.artistTitleStyle} numberOfLines={1}>
@@ -105,7 +105,7 @@ const MovieDetail = () => {
             <ImageBackground
               style={styles.backdropImageView}
               source={{
-                uri: `${Constants.IMAGE_URL}${movieDetail?.backdrop_path}`,
+                uri: `${AppConstants.IMAGE_URL}${movieDetail?.backdrop_path}`,
               }}
               blurRadius={1.56}
             />
@@ -125,7 +125,7 @@ const MovieDetail = () => {
           <Image
             style={styles.posterImageView}
             source={{
-              uri: `${Constants.IMAGE_URL}${movieDetail?.poster_path}`,
+              uri: `${AppConstants.IMAGE_URL}${movieDetail?.poster_path}`,
             }}
             resizeMode={'stretch'}
           />

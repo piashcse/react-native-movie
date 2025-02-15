@@ -8,7 +8,7 @@ import {
   FlatListProps,
 } from 'react-native';
 import styles from './MovieItem.style.ts';
-import { Constants } from '../../constant/AppConstants';
+import { AppConstants } from '../../constant/AppConstants';
 import { MovieItem } from '../../types/MovieItem';
 import { SharedElement } from 'react-navigation-shared-element';
 
@@ -37,14 +37,14 @@ const MovieItemComponent = ({
           source={
             isLoading
               ? require('../../assets/placeholder.jpeg')
-              : { uri: `${Constants.IMAGE_URL}${item.poster_path}` }
+              : { uri: `${AppConstants.IMAGE_URL}${item.poster_path}` }
           }
         >
           <SharedElement id={`movie.${item.id}.poster`}>
             <Image
               style={styles.imageView}
               source={{
-                uri: `${Constants.IMAGE_URL}${item.poster_path}`,
+                uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
               }}
               onLoadEnd={() => {
                 setIsLoading(false);
