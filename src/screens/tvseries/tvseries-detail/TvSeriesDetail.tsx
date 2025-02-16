@@ -1,14 +1,13 @@
 import React from 'react';
-import { Loading } from '../../../components/loading/Loading.tsx';
 import styles from './TvSeriesDetail.style.ts';
 import {
   FlatList,
   Image,
+  ImageBackground,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
-  ImageBackground,
 } from 'react-native';
 import { AppConstants } from '../../../constant/AppConstants.ts';
 import {
@@ -26,7 +25,7 @@ import { TvSeriesItem } from '../../../types/TvSeriesItem.ts';
 import { Cast } from '../../../types/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
+import { useFavoriteStore } from '../../../zustand-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useLocalization } from '../../../hooks/useLocalization.ts';
@@ -44,16 +43,14 @@ const TvSeriesDetail = () => {
   const navigation = useNavigation<TvSeriesDetailNavigationProp>();
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { tvSeriesId } = route.params;
-  const { data: tvSeriesDetail, isFetching: isLoadingMovieDetail } =
-    useTvSeriesDetailQuery(Number(tvSeriesId));
-  const { data: similarMovies, isFetching: isLoadingSimilarMovies } =
-    useRecommendedTvSeriesQuery(Number(tvSeriesId));
-  const { data: castAndCrew, isFetching: isLoadingCastAndCrew } =
-    useTvSeriesArtistAndCrewQuery(Number(tvSeriesId));
+  const { data: tvSeriesDetail } = useTvSeriesDetailQuery(Number(tvSeriesId));
+  const { data: similarMovies } = useRecommendedTvSeriesQuery(
+    Number(tvSeriesId)
+  );
+  const { data: castAndCrew } = useTvSeriesArtistAndCrewQuery(
+    Number(tvSeriesId)
+  );
   const { toggleFavoriteTvSeries, isFavoriteTvSeries } = useFavoriteStore();
-
-  const isLoading =
-    isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew;
 
   const onPressFavorite = () => {
     if (tvSeriesDetail) {
@@ -101,9 +98,7 @@ const TvSeriesDetail = () => {
     );
   };
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <ScrollView style={styles.mainView}>
       <View>
         <View style={styles.backdropImageView}>

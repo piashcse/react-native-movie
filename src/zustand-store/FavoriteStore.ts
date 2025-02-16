@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { MovieDetail } from '../types/MovieDetail.ts';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { TvSeriesDetail } from '../types/TvSeriesDetail.ts';
 import { zustandMMKVStorage } from './mmkv.ts';
 

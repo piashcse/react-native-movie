@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import {
-  FooterLoading,
-  Loading,
-} from '../../../components/loading/Loading.tsx';
 import styles from './PopularTvSeries.style.ts';
 import { useLazyPopularTvSeriesQuery } from '../../../redux/query/RTKQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -44,8 +40,6 @@ const PopularTvSeries = () => {
     }
   };
 
-  if (isFetching && page === 1) return <Loading />;
-
   return (
     <View style={styles.mainView}>
       <TvSeriesItemComponent
@@ -54,7 +48,6 @@ const PopularTvSeries = () => {
           navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id });
         }}
         loadMoreData={loadMoreTvSeries}
-        ListFooterComponent={isFetching && page > 1 ? <FooterLoading /> : null}
       />
     </View>
   );

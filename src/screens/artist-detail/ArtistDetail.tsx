@@ -1,11 +1,11 @@
 import React from 'react';
-import { Loading } from '../../components/loading/Loading';
 import styles from './ArtistDetail.style.ts';
-import { Image, Text, View, ScrollView } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { AppConstants } from '../../constant/AppConstants';
 import { useArtistDetailQuery } from '../../redux/query/RTKQuery.ts';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
+
 type RouteParams = {
   personId: string;
 };
@@ -13,13 +13,9 @@ type RouteParams = {
 const ArtistDetail = () => {
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { personId } = route.params;
-  const { data: artistDetail, isLoading } = useArtistDetailQuery(
-    Number(personId)
-  );
+  const { data: artistDetail } = useArtistDetailQuery(Number(personId));
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <ScrollView style={styles.mainView}>
       <View style={styles.secondContainer}>
         <SharedElement id={personId.toString()}>

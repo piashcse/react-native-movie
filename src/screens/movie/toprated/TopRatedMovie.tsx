@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import {
-  FooterLoading,
-  Loading,
-} from '../../../components/loading/Loading.tsx';
 import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import styles from './TopRatedMovie.style.ts';
 import { useLazyTopRatedMovieQuery } from '../../../redux/query/RTKQuery.ts';
@@ -44,8 +40,6 @@ const TopRatedMovie = () => {
     }
   };
 
-  if (isFetching && page === 1) return <Loading />;
-
   return (
     <View style={styles.mainView}>
       <MovieItemComponent
@@ -54,7 +48,6 @@ const TopRatedMovie = () => {
           navigation.navigate('MovieDetail', { movieId: item.id })
         }
         loadMoreData={loadMoreMovies}
-        ListFooterComponent={isFetching && page > 1 ? <FooterLoading /> : null}
       />
     </View>
   );

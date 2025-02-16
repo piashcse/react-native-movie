@@ -1,14 +1,13 @@
 import React from 'react';
-import { Loading } from '../../../components/loading/Loading.tsx';
 import styles from './MovieDetail.style.ts';
 import {
   FlatList,
   Image,
+  ImageBackground,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
-  ImageBackground,
 } from 'react-native';
 import { AppConstants } from '../../../constant/AppConstants.ts';
 import {
@@ -26,7 +25,7 @@ import { MovieItem } from '../../../types/MovieItem.ts';
 import { Cast } from '../../../types/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
+import { useFavoriteStore } from '../../../zustand-store/FavoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useLocalization } from '../../../hooks/useLocalization.ts';
@@ -40,16 +39,10 @@ const MovieDetail = () => {
   const navigation = useNavigation<MovieDetailNavigationProp>();
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { movieId } = route.params;
-  const { data: movieDetail, isFetching: isLoadingMovieDetail } =
-    useMovieDetailQuery(Number(movieId));
-  const { data: similarMovies, isFetching: isLoadingSimilarMovies } =
-    useSimilarMovieQuery(Number(movieId));
-  const { data: castAndCrew, isFetching: isLoadingCastAndCrew } =
-    useArtistAndCrewQuery(Number(movieId));
+  const { data: movieDetail } = useMovieDetailQuery(Number(movieId));
+  const { data: similarMovies } = useSimilarMovieQuery(Number(movieId));
+  const { data: castAndCrew } = useArtistAndCrewQuery(Number(movieId));
   const { toggleFavoriteMovie, isFavoriteMovie } = useFavoriteStore();
-
-  const isLoading =
-    isLoadingMovieDetail || isLoadingSimilarMovies || isLoadingCastAndCrew;
 
   const onPressFavorite = () => {
     if (movieDetail) {
@@ -95,9 +88,7 @@ const MovieDetail = () => {
     );
   };
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <ScrollView style={styles.mainView}>
       <View>
         <View style={styles.backdropImageView}>

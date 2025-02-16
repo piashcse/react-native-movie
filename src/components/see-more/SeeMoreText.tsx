@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Text,
-  TextStyle,
   NativeSyntheticEvent,
+  Text,
   TextLayoutEventData,
+  TextStyle,
 } from 'react-native';
 
 interface ReadMoreTextProps {
