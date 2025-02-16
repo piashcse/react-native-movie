@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dialog, Portal, Button, Text } from 'react-native-paper';
+import { Button, Dialog, Portal, Text } from 'react-native-paper';
 
 type ConfirmationDialogProps = {
   visible: boolean;

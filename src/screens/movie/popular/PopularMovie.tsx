@@ -5,10 +5,6 @@ import { View } from 'react-native';
 import { useLazyPopularMovieQuery } from '../../../redux/query/RTKQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MovieItem } from '../../../types/MovieItem.ts';
-import {
-  FooterLoading,
-  Loading,
-} from '../../../components/loading/Loading.tsx';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 
 type PopularMovieNavigationProp = NavigationProp<RootStackParam, 'MovieDetail'>;
@@ -40,8 +36,6 @@ const PopularMovie = () => {
     }
   };
 
-  if (isFetching && page === 1) return <Loading />;
-
   return (
     <View style={styles.mainView}>
       <MovieItemComponent
@@ -50,7 +44,6 @@ const PopularMovie = () => {
           navigation.navigate('MovieDetail', { movieId: item.id })
         }
         loadMoreData={loadMoreMovies}
-        ListFooterComponent={isFetching && page > 1 ? <FooterLoading /> : null}
       />
     </View>
   );

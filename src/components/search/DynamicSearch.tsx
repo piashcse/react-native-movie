@@ -17,7 +17,6 @@ import styles from './DynamicSearch.style.ts';
 import { MovieItem } from '../../types/MovieItem.ts';
 import { TvSeriesItem } from '../../types/TvSeriesItem.ts';
 import { useSearchMovieTvSeriesQuery } from '../../redux/query/RTKQuery.ts';
-import { FooterLoading } from '../loading/Loading.tsx';
 import { AppConstants } from '../../constant/AppConstants.ts';
 import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
 
@@ -35,7 +34,7 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
   const route = useRoute();
   const tabName = getFocusedRouteNameFromRoute(route) || 'Movie';
   const isMovie = tabName === 'Movie';
-  const { data = [], isFetching } = useSearchMovieTvSeriesQuery({
+  const { data = [] } = useSearchMovieTvSeriesQuery({
     query: searchQuery,
     isMovie: isMovie,
   });
@@ -84,7 +83,6 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
       />
       <FlatList
         style={styles.flatListContainer}
-        ListHeaderComponent={isFetching ? <FooterLoading /> : null}
         data={data}
         renderItem={searchItem}
       />

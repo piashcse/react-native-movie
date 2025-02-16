@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
   FlatList,
-  Image,
-  View,
-  TouchableOpacity,
-  ImageBackground,
   FlatListProps,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import styles from './TvSeriesItem.style.ts';
 import { AppConstants } from '../../constant/AppConstants';

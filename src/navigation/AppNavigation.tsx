@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import {
+  NavigationContainer,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -19,8 +24,6 @@ import { BackHandler, TouchableOpacity, View } from 'react-native';
 import { AnimatedFAB } from 'react-native-paper';
 import DynamicSearch from '../components/search/DynamicSearch.tsx';
 import styles from './AppNavigation.Style.ts';
-import { useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 import FavoriteMovie from '../screens/favorite/movie/FavoriteMovie.tsx';
 import FavoriteTvSeries from '../screens/favorite/tvseries/FavoriteTvSeries.tsx';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';

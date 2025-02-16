@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../constant/Colors.ts';
+
 const styles = StyleSheet.create({
   rootView: {
     flexGrow: 1,

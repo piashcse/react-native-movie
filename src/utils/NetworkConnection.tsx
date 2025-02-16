@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNetInfo, NetInfoState } from '@react-native-community/netinfo';
+import { NetInfoState, useNetInfo } from '@react-native-community/netinfo';
 import { Snackbar } from 'react-native-paper';
 
 const checkInternetConnection = () => {

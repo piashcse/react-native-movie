@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList, View } from 'react-native';
 import styles from './FavoriteMovie.style.ts';
-import { useFavoriteStore } from '../../../local-store/FavoriteStore.ts';
+import { useFavoriteStore } from '../../../zustand-store/FavoriteStore.ts';
 import FavoriteComponent from '../../../components/favorite/FavoriteComponent.tsx';
 import { MovieDetail } from '../../../types/MovieDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';

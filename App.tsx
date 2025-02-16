@@ -15,6 +15,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { I18nextProvider } from 'react-i18next';
 import { PaperProvider } from 'react-native-paper';
 import i18n from 'i18next';
+import LoadingSpinner from './src/components/loading-spinner/LoadingSpinner.tsx';
 
 const store = configureStore();
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
           <SafeAreaProvider>
             <Navigation />
             <NetworkConnection />
+            <LoadingSpinner />
           </SafeAreaProvider>
         </I18nextProvider>
       </PaperProvider>
