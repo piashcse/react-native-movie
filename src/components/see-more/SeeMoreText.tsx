@@ -19,26 +19,28 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
   textStyle,
   numberOfLines = 3,
 }: ReadMoreTextProps) => {
-  const [showMoreButton, setShowMoreButton] = useState(false);
+  const [showMoreButton, setShowMoreButton] = useState(true);
   const [textShown, setTextShown] = useState(false);
   const [numLines, setNumLines] = useState<number | undefined>(numberOfLines);
 
   const toggleTextShown = () => {
-    setTextShown(!textShown);
+    setTextShown((prev) => !prev);
   };
 
   useEffect(() => {
-    setNumLines(textShown ? undefined : numLines);
-  }, [textShown]);
+    setNumLines(textShown ? undefined : numberOfLines);
+  }, [textShown, numberOfLines]);
 
   const onTextLayout = useCallback(
     (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-      if (e.nativeEvent.lines.length > 3 && !textShown) {
+      const linesCount = e.nativeEvent.lines.length;
+      console.log('Total lines in text:', linesCount);
+
+      if (linesCount > numberOfLines && !showMoreButton) {
         setShowMoreButton(true);
-        setNumLines(numberOfLines);
       }
     },
-    [textShown]
+    [numberOfLines, showMoreButton]
   );
 
   return (
@@ -51,11 +53,12 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
       >
         {text}
       </Text>
-      {showMoreButton ? (
+
+      {showMoreButton && (
         <Text onPress={toggleTextShown} style={readMoreStyle}>
           {textShown ? 'See Less' : 'See More'}
         </Text>
-      ) : null}
+      )}
     </>
   );
 };

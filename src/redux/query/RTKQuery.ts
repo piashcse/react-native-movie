@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { MovieResult } from '../../types/MovieResult.ts';
 import { MovieItem } from '../../types/MovieItem.ts';
 import { MovieDetail } from '../../types/MovieDetail.ts';
-import { CastAndCrew } from '../../types/ArtistAndCrew.ts';
+import { Cast, CastAndCrew } from '../../types/ArtistAndCrew.ts';
 import { ArtistDetail } from '../../types/ArtistDetail.ts';
 import { TvSeriesResult } from '../../types/TvSeriesResult.ts';
 import { TvSeriesItem } from '../../types/TvSeriesItem.ts';
@@ -14,6 +14,7 @@ import {
 import baseQuery from './BaseQuery.ts';
 import { Pagination } from '../../types/ApiRequest/ApiRequest.ts';
 import { Celebrity, CelebrityItem } from '../../types/Celebrity.ts';
+import { CombinedCredit } from '../../types/CombinedCredit.ts';
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',
@@ -138,6 +139,12 @@ export const movieApi = createApi({
       }),
       transformResponse: (response: Celebrity) => response.results,
     }),
+    artistMoviesAndTvSeries: builder.query<Cast[], number>({
+      query: (personId: number) => ({
+        url: `person/${personId}/combined_credits`,
+      }),
+      transformResponse: (response: CombinedCredit) => response.cast,
+    }),
   }),
 });
 
@@ -160,4 +167,5 @@ export const {
   useSearchMovieTvSeriesQuery,
   useLazyPopularCelebrityQuery,
   useLazyTrendingCelebrityQuery,
+  useLazyArtistMoviesAndTvSeriesQuery,
 } = movieApi;
