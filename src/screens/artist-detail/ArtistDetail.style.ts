@@ -78,5 +78,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: colors.black,
   },
+  seeMoreTextStyle: { color: colors.primaryColor },
 });
 export default styles;

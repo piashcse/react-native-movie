@@ -1,19 +1,69 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ArtistDetail.style.ts';
-import { Image, ScrollView, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { AppConstants } from '../../constant/AppConstants';
-import { useArtistDetailQuery } from '../../redux/query/RTKQuery.ts';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import {
+  useArtistDetailQuery,
+  useLazyArtistMoviesAndTvSeriesQuery,
+} from '../../redux/query/RTKQuery.ts';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
+import { useLocalization } from '../../hooks/useLocalization.ts';
+import { Cast } from '../../types/ArtistAndCrew.ts';
+import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
+import SeeMoreText from '../../components/see-more/SeeMoreText.tsx';
 
 type RouteParams = {
   personId: string;
 };
+type MovieDetailNavigationProp = NavigationProp<RootStackParam, 'MovieDetail'>;
 
 const ArtistDetail = () => {
+  const localization = useLocalization();
+  const navigation = useNavigation<MovieDetailNavigationProp>();
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { personId } = route.params;
   const { data: artistDetail } = useArtistDetailQuery(Number(personId));
+  const [fetchArtistMovieAndTvSeries, { data: artistData }] =
+    useLazyArtistMoviesAndTvSeriesQuery();
+
+  useEffect(() => {
+    fetchArtistMovieAndTvSeries(1);
+  }, []);
+
+  const artistMovieAndTvSeriesItem = ({ item }: { item: Cast }) => {
+    return (
+      <TouchableOpacity
+        style={styles.movieItemContainer}
+        onPress={() => {
+          if (item.media_type == 'movie') {
+            navigation.navigate('MovieDetail', { movieId: item.id });
+          } else {
+            navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id });
+          }
+        }}
+      >
+        <Image
+          style={styles.similarImageView}
+          source={{
+            uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
+          }}
+        />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <ScrollView style={styles.mainView}>
@@ -55,7 +105,24 @@ const ArtistDetail = () => {
         </View>
       </View>
       <Text style={styles.biography}>Biography</Text>
-      <Text>{artistDetail?.biography}</Text>
+      <SeeMoreText
+        text={artistDetail?.biography ?? ''}
+        numberOfLines={3}
+        readMoreStyle={styles.seeMoreTextStyle}
+      />
+      {artistData?.length && (
+        <Text style={styles.description}>
+          {localization.artistMoviesAndTvSeries}
+        </Text>
+      )}
+      <FlatList
+        style={styles.flatListContainer}
+        data={artistData}
+        renderItem={artistMovieAndTvSeriesItem}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+      />
     </ScrollView>
   );
 };

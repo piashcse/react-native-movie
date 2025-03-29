@@ -10,4 +10,5 @@ export const AppString = {
   min: 'min',
   title: 'Remove Favorite',
   message: 'Are you want to remove this item?',
+  artistMoviesAndTvSeries: 'Artist Movies & Tv Series',
 };
