@@ -34,6 +34,9 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
   - TV Series Detail
   - Recommended TV Series
   - Favorite TV Series in local storage
+- Celebrities
+  - Popular Celebrities
+  - Trending Celebrities
 - Artist Detail
 - Pagination with RTK Query
 - Bottom Navigation
