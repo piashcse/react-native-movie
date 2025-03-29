@@ -13,9 +13,10 @@ const styles = StyleSheet.create({
   tabBarIndicatorStyle: {
     backgroundColor: colors.tabIndicatorColor,
     height: 3,
-    borderRadius: 3,
-    width: '15%',
-    marginLeft: '18%',
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    width: '8%',
+    marginLeft: '12%',
   },
   tabBarLabelStyle: {
     fontSize: 14,

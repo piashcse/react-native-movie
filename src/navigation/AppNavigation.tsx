@@ -27,6 +27,8 @@ import styles from './AppNavigation.Style.ts';
 import FavoriteMovie from '../screens/favorite/movie/FavoriteMovie.tsx';
 import FavoriteTvSeries from '../screens/favorite/tvseries/FavoriteTvSeries.tsx';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import PopularCelebrity from '../screens/celebrity/popular/PopularCelebrity.tsx';
+import TrendingCelebrity from '../screens/celebrity/trending/TrendingCelebrity.tsx';
 
 //const Stack = createStackNavigator();
 const Stack = createSharedElementStackNavigator();
@@ -74,6 +76,11 @@ const PrimaryTabView = () => {
           name="Tv Series"
           options={{ title: 'Tv Series' }}
           component={TvSeriesBottomNavigation}
+        />
+        <Tab.Screen
+          name="Celebrities"
+          options={{ title: 'Celebrities' }}
+          component={CelebrityBottomNavigation}
         />
       </Tab.Navigator>
       <DynamicSearch isVisible={isSearchBarVisible} />
@@ -210,6 +217,34 @@ const TvSeriesBottomNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="star" color={color} size={size} />
+          ),
+        }}
+      />
+    </TvSeriesBottomTab.Navigator>
+  );
+};
+const CelebrityBottomNavigation = () => {
+  return (
+    <TvSeriesBottomTab.Navigator>
+      <TvSeriesBottomTab.Screen
+        name="Popular"
+        component={PopularCelebrity}
+        options={{
+          tabBarLabel: 'Popular',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="movie" color={color} size={size} />
+          ),
+        }}
+      />
+      <TvSeriesBottomTab.Screen
+        name="Trending"
+        component={TrendingCelebrity}
+        options={{
+          tabBarLabel: 'Trending',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="timeline" color={color} size={size} />
           ),
         }}
       />

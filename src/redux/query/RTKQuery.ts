@@ -13,12 +13,12 @@ import {
 } from '../../components/search/DynamicSearch.tsx';
 import baseQuery from './BaseQuery.ts';
 import { Pagination } from '../../types/ApiRequest/ApiRequest.ts';
+import { Celebrity, CelebrityItem } from '../../types/Celebrity.ts';
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: baseQuery(),
   endpoints: (builder) => ({
-    // Movies
     nowPlayingMovie: builder.query<MovieItem[], Pagination>({
       query: (params: Pagination) => ({
         url: 'movie/now_playing',
@@ -124,6 +124,20 @@ export const movieApi = createApi({
       transformResponse: (response: MovieResult) =>
         response.results as SearchData[],
     }),
+    popularCelebrity: builder.query<CelebrityItem[], Pagination>({
+      query: (params: Pagination) => ({
+        url: `person/popular`,
+        params,
+      }),
+      transformResponse: (response: Celebrity) => response.results,
+    }),
+    trendingCelebrity: builder.query<CelebrityItem[], Pagination>({
+      query: (params: Pagination) => ({
+        url: `trending/person/week`,
+        params,
+      }),
+      transformResponse: (response: Celebrity) => response.results,
+    }),
   }),
 });
 
@@ -144,4 +158,6 @@ export const {
   useTvSeriesArtistAndCrewQuery,
   useTvSeriesDetailQuery,
   useSearchMovieTvSeriesQuery,
+  useLazyPopularCelebrityQuery,
+  useLazyTrendingCelebrityQuery,
 } = movieApi;
