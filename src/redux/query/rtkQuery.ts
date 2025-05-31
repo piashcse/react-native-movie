@@ -1,20 +1,20 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { MovieResult } from '../../types/MovieResult.ts';
-import { MovieItem } from '../../types/MovieItem.ts';
-import { MovieDetail } from '../../types/MovieDetail.ts';
-import { Cast, CastAndCrew } from '../../types/ArtistAndCrew.ts';
-import { ArtistDetail } from '../../types/ArtistDetail.ts';
-import { TvSeriesResult } from '../../types/TvSeriesResult.ts';
-import { TvSeriesItem } from '../../types/TvSeriesItem.ts';
-import { TvSeriesDetail } from '../../types/TvSeriesDetail.ts';
+import { MovieResult } from '../../types/response/MovieResult.ts';
+import { MovieItem } from '../../types/response/MovieItem.ts';
+import { MovieDetail } from '../../types/response/MovieDetail.ts';
+import { Cast, CastAndCrew } from '../../types/response/ArtistAndCrew.ts';
+import { ArtistDetail } from '../../types/response/ArtistDetail.ts';
+import { TvSeriesResult } from '../../types/response/TvSeriesResult.ts';
+import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
+import { TvSeriesDetail } from '../../types/response/TvSeriesDetail.ts';
 import {
   SearchData,
   SearchParams,
 } from '../../components/search/DynamicSearch.tsx';
-import baseQuery from './BaseQuery.ts';
+import baseQuery from './baseQuery.ts';
 import { Pagination } from '../../types/ApiRequest/ApiRequest.ts';
-import { Celebrity, CelebrityItem } from '../../types/Celebrity.ts';
-import { CombinedCredit } from '../../types/CombinedCredit.ts';
+import { Celebrity, CelebrityItem } from '../../types/response/Celebrity.ts';
+import { CombinedCredit } from '../../types/response/CombinedCredit.ts';
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',

@@ -2,15 +2,15 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import styles from './LoadingSpinner.style.ts';
 import { useSelector } from 'react-redux';
-import { selectGlobalLoading } from '../../utils/Common.ts';
-import { colors } from '../../constant/Colors.ts';
+import { selectGlobalLoading } from '../../utils/common.ts';
+import { appColors } from '../../constant/appColors.ts';
 
 const LoadingSpinner = () => {
   const isLoading = useSelector(selectGlobalLoading);
   if (!isLoading) return null;
   return (
     <View style={styles.container}>
-      <ActivityIndicator size={'large'} color={colors.primaryColor} />
+      <ActivityIndicator size={'large'} color={appColors.primaryColor} />
     </View>
   );
 };

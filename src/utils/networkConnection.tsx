@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NetInfoState, useNetInfo } from '@react-native-community/netinfo';
 import { Snackbar } from 'react-native-paper';
 
-const checkInternetConnection = () => {
+const CheckInternetConnection = () => {
   const internetState: NetInfoState = useNetInfo();
   const [visible, setVisible] = useState(false);
 
@@ -27,4 +27,4 @@ const checkInternetConnection = () => {
     </Snackbar>
   );
 };
-export default checkInternetConnection;
+export default CheckInternetConnection;

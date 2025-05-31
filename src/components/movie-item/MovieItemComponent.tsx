@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import styles from './MovieItem.style.ts';
-import { AppConstants } from '../../constant/AppConstants';
-import { MovieItem } from '../../types/MovieItem';
+import { AppConstants } from '../../constant/appConstants.ts';
+import { MovieItem } from '../../types/response/MovieItem.ts';
 import { SharedElement } from 'react-navigation-shared-element';
 
 interface MovieItemProps

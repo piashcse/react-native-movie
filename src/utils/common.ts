@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { movieApi } from '../../src/redux/query/RTKQuery.ts';
+import { movieApi } from '../redux/query/rtkQuery.ts';
 
 const selectGlobalLoading = createSelector(
   (state: any) => state[movieApi.reducerPath],

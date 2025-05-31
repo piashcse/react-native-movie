@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constant/Colors';
+import { appColors } from '../../constant/appColors.ts';
 
 const styles = StyleSheet.create({
   mainView: {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   divider: {
-    backgroundColor: colors.suggestionContainerColor,
+    backgroundColor: appColors.suggestionContainerColor,
     height: 0.5,
   },
   backgroundImage: {

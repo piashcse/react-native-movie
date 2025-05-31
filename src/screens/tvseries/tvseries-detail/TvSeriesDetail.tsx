@@ -9,23 +9,23 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { AppConstants } from '../../../constant/AppConstants.ts';
+import { AppConstants } from '../../../constant/appConstants.ts';
 import {
   useRecommendedTvSeriesQuery,
   useTvSeriesArtistAndCrewQuery,
   useTvSeriesDetailQuery,
-} from '../../../redux/query/RTKQuery.ts';
+} from '../../../redux/query/rtkQuery.ts';
 import {
   NavigationProp,
   RouteProp,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import { TvSeriesItem } from '../../../types/TvSeriesItem.ts';
-import { Cast } from '../../../types/ArtistAndCrew.ts';
+import { TvSeriesItem } from '../../../types/response/TvSeriesItem.ts';
+import { Cast } from '../../../types/response/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useFavoriteStore } from '../../../zustand-store/FavoriteStore.ts';
+import { useFavoriteStore } from '../../../zustand-store/favoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useLocalization } from '../../../hooks/useLocalization.ts';

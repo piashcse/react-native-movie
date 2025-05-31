@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styles from './FovoriteTvSeries.style.ts';
 import { FlatList, View } from 'react-native';
-import { useFavoriteStore } from '../../../zustand-store/FavoriteStore.ts';
+import { useFavoriteStore } from '../../../zustand-store/favoriteStore.ts';
 import FavoriteComponent from '../../../components/favorite/FavoriteComponent.tsx';
-import { TvSeriesDetail } from '../../../types/TvSeriesDetail.ts';
+import { TvSeriesDetail } from '../../../types/response/TvSeriesDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import ConfirmationAlert from '../../../components/alert-dialog/ConfirmationAlert.tsx';

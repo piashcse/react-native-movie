@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constant/Colors';
+import { appColors } from '../../constant/appColors.ts';
 
 const styles = StyleSheet.create({
   mainView: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: colors.black,
+    color: appColors.black,
     fontWeight: 'bold',
   },
   thirdContainer: {
@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   infoTitle: { fontSize: 12 },
-  infoTitleData: { fontSize: 14, color: colors.black, fontWeight: 'bold' },
+  infoTitleData: { fontSize: 14, color: appColors.black, fontWeight: 'bold' },
   fourthContainer: {
     flex: 1,
   },
   description: {
     marginTop: 8,
     fontSize: 19,
-    color: colors.black,
+    color: appColors.black,
     fontWeight: 'bold',
   },
   flatListContainer: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     marginHorizontal: 4,
     borderWidth: 1.5,
-    borderColor: colors.inputTextBorderColor,
+    borderColor: appColors.inputTextBorderColor,
     resizeMode: 'cover',
   },
   artistInfoContainer: {
@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
   },
   titleData: {
     fontSize: 16,
-    color: colors.black,
+    color: appColors.black,
   },
   biography: {
     fontSize: 24,
     marginTop: 16,
     marginBottom: 8,
-    color: colors.black,
+    color: appColors.black,
   },
-  seeMoreTextStyle: { color: colors.primaryColor },
+  seeMoreTextStyle: { color: appColors.primaryColor },
 });
 export default styles;

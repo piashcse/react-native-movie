@@ -14,10 +14,10 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import styles from './DynamicSearch.style.ts';
-import { MovieItem } from '../../types/MovieItem.ts';
-import { TvSeriesItem } from '../../types/TvSeriesItem.ts';
-import { useSearchMovieTvSeriesQuery } from '../../redux/query/RTKQuery.ts';
-import { AppConstants } from '../../constant/AppConstants.ts';
+import { MovieItem } from '../../types/response/MovieItem.ts';
+import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
+import { useSearchMovieTvSeriesQuery } from '../../redux/query/rtkQuery.ts';
+import { AppConstants } from '../../constant/appConstants.ts';
 import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
 
 export type SearchData = MovieItem & TvSeriesItem;

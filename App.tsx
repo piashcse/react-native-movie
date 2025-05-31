@@ -10,7 +10,7 @@ import React from 'react';
 import configureStore from './src/redux/store.ts';
 import { Provider } from 'react-redux';
 import Navigation from './src/navigation/AppNavigation';
-import NetworkConnection from './src/utils/NetworkConnection';
+import NetworkConnection from './src/utils/networkConnection.tsx';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { I18nextProvider } from 'react-i18next';
 import { PaperProvider } from 'react-native-paper';
