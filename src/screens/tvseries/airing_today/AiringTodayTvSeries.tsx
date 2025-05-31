@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import styles from './AiringTodayTvSeries.style.ts';
-import { useLazyAiringTodayTvSeriesQuery } from '../../../redux/query/RTKQuery.ts';
+import { useLazyAiringTodayTvSeriesQuery } from '../../../redux/query/rtkQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { TvSeriesItem } from '../../../types/TvSeriesItem.ts';
+import { TvSeriesItem } from '../../../types/response/TvSeriesItem.ts';
 import TvSeriesItemComponent from '../../../components/tvseries-item/TvSeriesItemComponent.tsx';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 

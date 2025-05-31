@@ -1,5 +1,5 @@
 import { isRejectedWithValue, Middleware } from '@reduxjs/toolkit';
-import { useApiErrorStore } from '../zustand-store/ApiErrorStore.ts';
+import { useApiErrorStore } from '../zustand-store/apiErrorStore.ts';
 
 interface ErrorResponse {
   status: number;
@@ -9,7 +9,7 @@ interface ErrorResponse {
   };
 }
 
-export const rtkQueryErrorMiddleware: Middleware = () => (next) => (action) => {
+export const apErrorMiddleware: Middleware = () => (next) => (action) => {
   if (isRejectedWithValue(action)) {
     const error = action.payload as ErrorResponse;
     const errorMessage =

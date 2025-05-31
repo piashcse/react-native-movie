@@ -1,4 +1,4 @@
-const colors = {
+const appColors = {
   primaryColor: '#00ecd2',
   transparentColor: 'transparent',
   whiteColor: 'white',
@@ -11,4 +11,4 @@ const colors = {
   subTitleColor: '#7a7a7a',
 };
 
-export { colors };
+export { appColors };

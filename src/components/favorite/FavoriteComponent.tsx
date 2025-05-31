@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './FavoriteComponent.style.ts';
 import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
-import { AppConstants } from '../../constant/AppConstants.ts';
+import { AppConstants } from '../../constant/appConstants.ts';
 import { Text } from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../constant/Colors.ts';
+import { appColors } from '../constant/appColors.ts';
 
 const styles = StyleSheet.create({
   rootView: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   tabBarIndicatorStyle: {
-    backgroundColor: colors.tabIndicatorColor,
+    backgroundColor: appColors.tabIndicatorColor,
     height: 3,
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3,

@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { AppConstants } from '../../constant/AppConstants';
+import { AppConstants } from '../../constant/appConstants.ts';
 import {
   useArtistDetailQuery,
   useLazyArtistMoviesAndTvSeriesQuery,
-} from '../../redux/query/RTKQuery.ts';
+} from '../../redux/query/rtkQuery.ts';
 import {
   NavigationProp,
   RouteProp,
@@ -21,7 +21,7 @@ import {
 } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useLocalization } from '../../hooks/useLocalization.ts';
-import { Cast } from '../../types/ArtistAndCrew.ts';
+import { Cast } from '../../types/response/ArtistAndCrew.ts';
 import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
 import SeeMoreText from '../../components/see-more/SeeMoreText.tsx';
 

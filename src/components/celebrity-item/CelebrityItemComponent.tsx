@@ -9,9 +9,9 @@ import {
   View,
 } from 'react-native';
 import styles from './Celebrity.style.ts';
-import { AppConstants } from '../../constant/AppConstants';
+import { AppConstants } from '../../constant/appConstants.ts';
 import { SharedElement } from 'react-navigation-shared-element';
-import { CelebrityItem } from '../../types/Celebrity.ts';
+import { CelebrityItem } from '../../types/response/Celebrity.ts';
 
 interface CelebrityItemProps
   extends Omit<FlatListProps<CelebrityItem>, 'data' | 'renderItem'> {

@@ -1,5 +1,5 @@
-import { MovieItem } from './MovieItem';
-import { Dates } from './Dates';
+import { MovieItem } from './MovieItem.ts';
+import { Dates } from './Dates.ts';
 
 export interface MovieResult {
   dates: Dates;

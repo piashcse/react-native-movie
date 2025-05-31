@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constant/Colors.ts';
+import { appColors } from '../../constant/appColors.ts';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 999,
-    backgroundColor: colors.whiteColor,
+    backgroundColor: appColors.whiteColor,
     opacity: 0.6,
   },
 });

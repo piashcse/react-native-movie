@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import { movieApi } from './query/RTKQuery.ts';
+import { movieApi } from './query/rtkQuery.ts';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { rtkQueryErrorMiddleware } from './RtkQueryErrorMiddleware.ts';
+import { apErrorMiddleware } from './apErrorMiddleware.ts';
 
 const configureAppStore = () => {
   const store = configureStore({
@@ -12,7 +12,7 @@ const configureAppStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat([
         logger,
-        rtkQueryErrorMiddleware,
+        apErrorMiddleware,
         movieApi.middleware,
       ]),
     devTools: process.env.NODE_ENV === 'development',

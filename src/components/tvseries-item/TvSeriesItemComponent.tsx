@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import styles from './TvSeriesItem.style.ts';
-import { AppConstants } from '../../constant/AppConstants';
-import { TvSeriesItem } from '../../types/TvSeriesItem.ts';
+import { AppConstants } from '../../constant/appConstants.ts';
+import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
 import { SharedElement } from 'react-navigation-shared-element';
 
 interface TvSeriesItemProps

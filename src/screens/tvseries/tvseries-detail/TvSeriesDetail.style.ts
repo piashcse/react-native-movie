@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../../constant/Colors.ts';
+import { appColors } from '../../../constant/appColors.ts';
 
 const styles = StyleSheet.create({
   mainView: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: colors.black,
+    color: appColors.black,
     fontWeight: 'bold',
   },
   thirdContainer: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 4,
   },
-  infoTitle: { fontSize: 13, color: colors.black, fontWeight: '500' },
+  infoTitle: { fontSize: 13, color: appColors.black, fontWeight: '500' },
   infoTitleData: { fontSize: 12 },
   infoContainer: {
     flexDirection: 'row',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   description: {
     marginTop: 8,
     fontSize: 19,
-    color: colors.black,
+    color: appColors.black,
     fontWeight: 'bold',
   },
   flatListContainer: {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     marginHorizontal: 4,
     borderWidth: 1.5,
-    borderColor: colors.inputTextBorderColor,
+    borderColor: appColors.inputTextBorderColor,
     resizeMode: 'cover',
   },
   favoriteContainer: {
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
   },
-  seeMoreTextStyle: { color: colors.primaryColor },
+  seeMoreTextStyle: { color: appColors.primaryColor },
   artistTitleStyle: {
     flex: 1,
     width: 80,
     fontSize: 10,
     alignSelf: 'center',
     textAlign: 'center',
-    color: colors.subTitleColor,
+    color: appColors.subTitleColor,
   },
 });
 export default styles;
