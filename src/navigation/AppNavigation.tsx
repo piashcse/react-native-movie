@@ -29,6 +29,7 @@ import FavoriteTvSeries from '../screens/favorite/tvseries/FavoriteTvSeries.tsx'
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import PopularCelebrity from '../screens/celebrity/popular/PopularCelebrity.tsx';
 import TrendingCelebrity from '../screens/celebrity/trending/TrendingCelebrity.tsx';
+import { useLocalization } from '../hooks/useLocalization.ts';
 
 //const Stack = createStackNavigator();
 const Stack = createSharedElementStackNavigator();
@@ -40,6 +41,7 @@ const TvSeriesBottomTab = createBottomTabNavigator();
 const PrimaryTabView = () => {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const navigation = useNavigation();
+  const localization = useLocalization();
 
   useFocusEffect(() => {
     const backAction = () => {
@@ -69,17 +71,17 @@ const PrimaryTabView = () => {
       >
         <Tab.Screen
           name="Movie"
-          options={{ title: 'Movie' }}
+          options={{ title: localization.MOVIE }}
           component={MovieBottomNavigation}
         />
         <Tab.Screen
-          name="Tv Series"
-          options={{ title: 'Tv Series' }}
+          name="TV Series"
+          options={{ title: localization.TV_SERIES }}
           component={TvSeriesBottomNavigation}
         />
         <Tab.Screen
           name="Celebrities"
-          options={{ title: 'Celebrities' }}
+          options={{ title: localization.CELEBRITIES }}
           component={CelebrityBottomNavigation}
         />
       </Tab.Navigator>
@@ -99,6 +101,7 @@ const PrimaryTabView = () => {
 };
 
 const FavoriteTavView = () => {
+  const localization = useLocalization();
   return (
     <FavoriteTab.Navigator
       screenOptions={{
@@ -110,27 +113,28 @@ const FavoriteTavView = () => {
         name={'FavMovie'}
         component={FavoriteMovie}
         options={{
-          title: 'Movie',
+          title: localization.MOVIE,
         }}
       />
       <FavoriteTab.Screen
         name={'FavTvSeries'}
         component={FavoriteTvSeries}
         options={{
-          title: 'Tv Series',
+          title: localization.TV_SERIES,
         }}
       />
     </FavoriteTab.Navigator>
   );
 };
 const MovieBottomNavigation = () => {
+  const localization = useLocalization();
   return (
     <MovieBottomTab.Navigator>
       <MovieBottomTab.Screen
         name="NowPlaying"
         component={NowPlayingMovie}
         options={{
-          tabBarLabel: 'NowPlaying',
+          tabBarLabel: localization.NOW_PLAYING,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="movie" color={color} size={size} />
@@ -141,7 +145,7 @@ const MovieBottomNavigation = () => {
         name="Popular"
         component={PopularMovie}
         options={{
-          tabBarLabel: 'Popular',
+          tabBarLabel: localization.POPULAR,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="favorite" color={color} size={size} />
@@ -152,7 +156,7 @@ const MovieBottomNavigation = () => {
         name="TopRated"
         component={TopRatedMovie}
         options={{
-          tabBarLabel: 'Top Rated',
+          tabBarLabel: localization.TOP_RATED,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="star" color={color} size={size} />
@@ -163,7 +167,7 @@ const MovieBottomNavigation = () => {
         name="UpComing"
         component={UpComingMovie}
         options={{
-          tabBarLabel: 'UpComing',
+          tabBarLabel: localization.UP_COMING,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="keyboard-arrow-up" color={color} size={size} />
@@ -174,13 +178,14 @@ const MovieBottomNavigation = () => {
   );
 };
 const TvSeriesBottomNavigation = () => {
+  const localization = useLocalization();
   return (
     <TvSeriesBottomTab.Navigator>
       <TvSeriesBottomTab.Screen
         name="AiringTodayTvSeries"
         component={AiringTodayTvSeries}
         options={{
-          tabBarLabel: 'AiringToday',
+          tabBarLabel: localization.AIRING_TODAY,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="movie" color={color} size={size} />
@@ -191,7 +196,7 @@ const TvSeriesBottomNavigation = () => {
         name="OnTheAirTvSeries"
         component={OnTheAirTvSeries}
         options={{
-          tabBarLabel: 'OnTheAir',
+          tabBarLabel: localization.ON_THE_AIR,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="timeline" color={color} size={size} />
@@ -202,7 +207,7 @@ const TvSeriesBottomNavigation = () => {
         name="PopularTvSeries"
         component={PopularTvSeries}
         options={{
-          tabBarLabel: 'Popular',
+          tabBarLabel: localization.POPULAR,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="favorite" color={color} size={size} />
@@ -213,7 +218,7 @@ const TvSeriesBottomNavigation = () => {
         name="TopRatedTvSeries"
         component={UpComingTvSeries}
         options={{
-          tabBarLabel: 'TopRated ',
+          tabBarLabel: localization.TOP_RATED,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="star" color={color} size={size} />
@@ -224,13 +229,14 @@ const TvSeriesBottomNavigation = () => {
   );
 };
 const CelebrityBottomNavigation = () => {
+  const localization = useLocalization();
   return (
     <TvSeriesBottomTab.Navigator>
       <TvSeriesBottomTab.Screen
         name="Popular"
         component={PopularCelebrity}
         options={{
-          tabBarLabel: 'Popular',
+          tabBarLabel: localization.POPULAR,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="movie" color={color} size={size} />
@@ -241,7 +247,7 @@ const CelebrityBottomNavigation = () => {
         name="Trending"
         component={TrendingCelebrity}
         options={{
-          tabBarLabel: 'Trending',
+          tabBarLabel: localization.TRENDING,
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="timeline" color={color} size={size} />
