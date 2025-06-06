@@ -61,8 +61,8 @@ const FavoriteTvSeries = () => {
       />
       <ConfirmationAlert
         visible={visible}
-        title={localization.title}
-        message={localization.message}
+        title={localization.TITLE}
+        message={localization.MESSAGE}
         onConfirm={confirmRemoveFavorite}
         onCancel={hideDialog}
       />

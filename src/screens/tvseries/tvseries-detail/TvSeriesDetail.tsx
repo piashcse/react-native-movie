@@ -137,13 +137,13 @@ const TvSeriesDetail = () => {
             <View>
               <View style={styles.titleAndInfoContainer}>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{localization.language}</Text>
+                  <Text style={styles.infoTitle}>{localization.LANGUAGE}</Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.original_language}
                   </Text>
                 </View>
                 <View style={styles.fourthContainer}>
-                  <Text style={styles.infoTitle}>{localization.rating}</Text>
+                  <Text style={styles.infoTitle}>{localization.RATING}</Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.vote_average?.toFixed(1)}
                   </Text>
@@ -152,7 +152,7 @@ const TvSeriesDetail = () => {
               <View style={styles.infoContainer}>
                 <View style={styles.fourthContainer}>
                   <Text style={styles.infoTitle}>
-                    {localization.numberOfEpisode}
+                    {localization.NUMBER_OF_EPISODE}
                   </Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.number_of_episodes}
@@ -160,7 +160,7 @@ const TvSeriesDetail = () => {
                 </View>
                 <View style={styles.fourthContainer}>
                   <Text style={styles.infoTitle}>
-                    {localization.releaseDate}
+                    {localization.RELEASE_DATE}
                   </Text>
                   <Text style={styles.infoTitleData}>
                     {tvSeriesDetail?.first_air_date}
@@ -172,14 +172,14 @@ const TvSeriesDetail = () => {
         </View>
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.description}>{localization.description}</Text>
+        <Text style={styles.description}>{localization.DESCRIPTION}</Text>
         <SeeMoreText
           text={tvSeriesDetail?.overview ?? ''}
           readMoreStyle={styles.seeMoreTextStyle}
           numberOfLines={2}
         />
         {similarMovies?.length && (
-          <Text style={styles.description}>{localization.similar}</Text>
+          <Text style={styles.description}>{localization.SIMILAR}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}
@@ -190,7 +190,7 @@ const TvSeriesDetail = () => {
           showsHorizontalScrollIndicator={false}
         />
         {castAndCrew?.cast?.length && (
-          <Text style={styles.description}>{localization.artist}</Text>
+          <Text style={styles.description}>{localization.ARTIST}</Text>
         )}
         <FlatList
           style={styles.flatListContainer}

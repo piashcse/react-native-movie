@@ -112,7 +112,7 @@ const ArtistDetail = () => {
       />
       {artistData?.length && (
         <Text style={styles.description}>
-          {localization.artistMoviesAndTvSeries}
+          {localization.ARTIST_TV_SERIES_AND_MOVIES}
         </Text>
       )}
       <FlatList
