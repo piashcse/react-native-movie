@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import styles from './Celebrity.style.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
-import { SharedElement } from 'react-navigation-shared-element';
 import { CelebrityItem } from '../../types/response/Celebrity.ts';
 
 interface CelebrityItemProps
@@ -42,17 +41,15 @@ const CelebrityItemComponent = ({
                 : { uri: `${AppConstants.IMAGE_URL}${item.profile_path}` }
             }
           >
-            <SharedElement id={`tvSeries.${item.id}.poster`}>
-              <Image
-                style={styles.imageView}
-                source={{
-                  uri: `${AppConstants.IMAGE_URL}${item.profile_path}`,
-                }}
-                onLoadEnd={() => {
-                  setIsLoading(false);
-                }}
-              />
-            </SharedElement>
+            <Image
+              style={styles.imageView}
+              source={{
+                uri: `${AppConstants.IMAGE_URL}${item.profile_path}`,
+              }}
+              onLoadEnd={() => {
+                setIsLoading(false);
+              }}
+            />
           </ImageBackground>
           <Text style={styles.title}>{item.name}</Text>
           <Text style={styles.popularity}>
