@@ -10,7 +10,6 @@ import {
 import styles from './TvSeriesItem.style.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
 import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
-import { SharedElement } from 'react-navigation-shared-element';
 
 interface TvSeriesItemProps
   extends Omit<FlatListProps<TvSeriesItem>, 'data' | 'renderItem'> {
@@ -40,17 +39,15 @@ const MovieItemComponent = ({
               : { uri: `${AppConstants.IMAGE_URL}${item.poster_path}` }
           }
         >
-          <SharedElement id={`tvSeries.${item.id}.poster`}>
-            <Image
-              style={styles.imageView}
-              source={{
-                uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
-              }}
-              onLoadEnd={() => {
-                setIsLoading(false);
-              }}
-            />
-          </SharedElement>
+          <Image
+            style={styles.imageView}
+            source={{
+              uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
+            }}
+            onLoadEnd={() => {
+              setIsLoading(false);
+            }}
+          />
         </ImageBackground>
       </TouchableOpacity>
     );

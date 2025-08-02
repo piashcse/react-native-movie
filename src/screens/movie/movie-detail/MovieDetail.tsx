@@ -27,7 +27,6 @@ import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFavoriteStore } from '../../../zustand-store/favoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
-import { SharedElement } from 'react-navigation-shared-element';
 import { useLocalization } from '../../../hooks/useLocalization.ts';
 
 type RouteParams = {
@@ -73,7 +72,7 @@ const MovieDetail = () => {
           navigation.navigate('ArtistDetail', { personId: item.id });
         }}
       >
-        <SharedElement id={item.id.toString()}>
+        <View>
           <Image
             style={styles.artistImageView}
             source={{
@@ -83,7 +82,7 @@ const MovieDetail = () => {
           <Text style={styles.artistTitleStyle} numberOfLines={1}>
             {item.name}
           </Text>
-        </SharedElement>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -92,15 +91,13 @@ const MovieDetail = () => {
     <ScrollView style={styles.mainView}>
       <View>
         <View style={styles.backdropImageView}>
-          <SharedElement id={`movie.${movieId}.poster`}>
-            <ImageBackground
-              style={styles.backdropImageView}
-              source={{
-                uri: `${AppConstants.IMAGE_URL}${movieDetail?.backdrop_path}`,
-              }}
-              blurRadius={1.56}
-            />
-          </SharedElement>
+          <ImageBackground
+            style={styles.backdropImageView}
+            source={{
+              uri: `${AppConstants.IMAGE_URL}${movieDetail?.backdrop_path}`,
+            }}
+            blurRadius={1.56}
+          />
           <TouchableOpacity
             style={styles.favoriteContainer}
             onPress={onPressFavorite}

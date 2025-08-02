@@ -23,6 +23,9 @@ target 'react_native_movie' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # 👇 Add this manually
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(

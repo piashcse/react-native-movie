@@ -19,7 +19,6 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import { SharedElement } from 'react-navigation-shared-element';
 import { useLocalization } from '../../hooks/useLocalization.ts';
 import { Cast } from '../../types/response/ArtistAndCrew.ts';
 import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
@@ -68,14 +67,13 @@ const ArtistDetail = () => {
   return (
     <ScrollView style={styles.mainView}>
       <View style={styles.secondContainer}>
-        <SharedElement id={personId.toString()}>
-          <Image
-            style={styles.imageView}
-            source={{
-              uri: `${AppConstants.IMAGE_URL}${artistDetail?.profile_path}`,
-            }}
-          />
-        </SharedElement>
+        <Image
+          style={styles.imageView}
+          source={{
+            uri: `${AppConstants.IMAGE_URL}${artistDetail?.profile_path}`,
+          }}
+        />
+
         <View>
           <View style={styles.artistInfoContainer}>
             <Text style={styles.artistName}>{artistDetail?.name}</Text>

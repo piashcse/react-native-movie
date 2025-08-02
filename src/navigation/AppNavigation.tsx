@@ -26,13 +26,13 @@ import DynamicSearch from '../components/search/DynamicSearch.tsx';
 import styles from './AppNavigation.Style.ts';
 import FavoriteMovie from '../screens/favorite/movie/FavoriteMovie.tsx';
 import FavoriteTvSeries from '../screens/favorite/tvseries/FavoriteTvSeries.tsx';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import PopularCelebrity from '../screens/celebrity/popular/PopularCelebrity.tsx';
 import TrendingCelebrity from '../screens/celebrity/trending/TrendingCelebrity.tsx';
 import { useLocalization } from '../hooks/useLocalization.ts';
+import { createStackNavigator } from '@react-navigation/stack';
 
 //const Stack = createStackNavigator();
-const Stack = createSharedElementStackNavigator();
+const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 const FavoriteTab = createMaterialTopTabNavigator();
 const MovieBottomTab = createBottomTabNavigator();
