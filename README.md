@@ -20,27 +20,31 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
   <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741964832_100.PNG" />
 </p>
 
-# Main Features
+## ✨ Main Features  
 
-- Movie
-  - Movie List
-  - Movie Search
-  - Movie Detail
-  - Recommended Movie
-  - Favorite Movie in local storage
-- TV Series
-  - TV Series List
-  - TV Series Search
-  - TV Series Detail
-  - Recommended TV Series
-  - Favorite TV Series in local storage
-- Celebrities
-  - Popular Celebrities
-  - Trending Celebrities
-- Artist Detail
-- Pagination with RTK Query
-- Bottom Navigation
-- Network connection state with SnackBar
+### 🎬 Movies  
+- 📃 Browse **Movie List**  
+- 🔍 Search **Movies**  
+- 📖 View **Movie Details**  
+- 🎯 Discover **Recommended Movies**  
+- ❤️ Save **Favorite Movies** (Local Storage)  
+
+### 📺 TV Series  
+- 📃 Browse **TV Series List**  
+- 🔍 Search **TV Series**  
+- 📖 View **TV Series Details**  
+- 🎯 Discover **Recommended TV Series**  
+- ❤️ Save **Favorite TV Series** (Local Storage)  
+
+### 🌟 Celebrities  
+- 👑 **Popular Celebrities**  
+- 🔥 **Trending Celebrities**  
+- 🎤 **Artist Detail**  
+
+### ⚡ App Experience  
+- 📚 Seamless **Pagination** with *RTK Query*  
+- 🧭 Smooth **Bottom Navigation**  
+- 📡 Network Connection Awareness with **SnackBar**  
 
 ## Architecture
 
@@ -54,15 +58,16 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 
 ## Built With 🛠
 
-- [React-Native](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform.
-- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) RTK Query is a powerful data fetching and caching tool. It is designed to simplify common cases for loading data in a web application, eliminating the need to hand-write data fetching & caching logic yourself.
-- [Axios](https://axios-http.com/) - Axios is a simple promise based HTTP client for the browser and node.js. Axios provides a simple to use library in a small package with a very extensible interface.
-- [Redux-toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development
-- [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
-- [React-Navigation 7](https://reactnavigation.org/) - Routing and navigation for your React Native apps.
-- [Zustand](https://zustand-demo.pmnd.rs/) - A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy API based on hooks, isn't boilerplatey or opinionated.
-- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) - ⚡️ The fastest key/value storage for React Native. ~30x faster than AsyncStorage!
-
+- [React-Native](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform.  
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) - RTK Query is a powerful data fetching and caching tool. It is designed to simplify common cases for loading data in a web application, eliminating the need to hand-write data fetching & caching logic yourself.  
+- [Axios](https://axios-http.com/) - Axios is a simple promise based HTTP client for the browser and node.js. Axios provides a simple to use library in a small package with a very extensible interface.  
+- [Redux-toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development.  
+- [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.  
+- [React-Navigation 7](https://reactnavigation.org/) - Routing and navigation for your React Native apps.  
+- [Zustand](https://zustand-demo.pmnd.rs/) - A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy API based on hooks, isn't boilerplatey or opinionated.  
+- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) - ⚡️ The fastest key/value storage for React Native. ~30x faster than AsyncStorage!  
+- [FlashList](https://shopify.github.io/flash-list/) - A high-performance list component for React Native, built by Shopify. It provides better performance than FlatList by optimizing rendering for large datasets.
+  
 ## Requirements
 
 - [Node.js](https://nodejs.org/) (latest)
