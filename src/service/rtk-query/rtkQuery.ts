@@ -11,7 +11,7 @@ import {
   SearchData,
   SearchParams,
 } from '../../components/search/DynamicSearch.tsx';
-import baseQuery from './baseQuery.ts';
+import baseQuery from '../baseQuery.ts';
 import { Pagination } from '../../types/ApiRequest/ApiRequest.ts';
 import { Celebrity, CelebrityItem } from '../../types/response/Celebrity.ts';
 import { CombinedCredit } from '../../types/response/CombinedCredit.ts';

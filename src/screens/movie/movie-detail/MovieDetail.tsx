@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './MovieDetail.style.ts';
 import {
-  FlatList,
   Image,
   ImageBackground,
   ScrollView,
@@ -9,12 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { AppConstants } from '../../../constant/appConstants.ts';
 import {
   useArtistAndCrewQuery,
   useMovieDetailQuery,
   useSimilarMovieQuery,
-} from '../../../redux/query/rtkQuery.ts';
+} from '../../../service/rtk-query/rtkQuery.ts';
 import {
   NavigationProp,
   RouteProp,
@@ -25,7 +25,7 @@ import { MovieItem } from '../../../types/response/MovieItem.ts';
 import { Cast } from '../../../types/response/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useFavoriteStore } from '../../../zustand-store/favoriteStore.ts';
+import { useFavoriteStore } from '../../../store/zustand/favoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 import { useLocalization } from '../../../hooks/useLocalization.ts';
 
@@ -166,7 +166,7 @@ const MovieDetail = () => {
         {similarMovies?.length && (
           <Text style={styles.description}>{localization.SIMILAR}</Text>
         )}
-        <FlatList
+        <FlashList
           style={styles.flatListContainer}
           data={similarMovies}
           renderItem={recommendedMovieItem}
@@ -177,7 +177,7 @@ const MovieDetail = () => {
         {castAndCrew?.cast?.length && (
           <Text style={styles.description}>{localization.ARTIST}</Text>
         )}
-        <FlatList
+        <FlashList
           style={styles.flatListContainer}
           data={castAndCrew?.cast}
           renderItem={artistItem}

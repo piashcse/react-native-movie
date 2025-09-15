@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import { movieApi } from './query/rtkQuery.ts';
+import { movieApi } from '../service/rtk-query/rtkQuery.ts';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { apErrorMiddleware } from './apErrorMiddleware.ts';
 

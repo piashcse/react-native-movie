@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from './FovoriteTvSeries.style.ts';
-import { FlatList, View } from 'react-native';
-import { useFavoriteStore } from '../../../zustand-store/favoriteStore.ts';
+import { View } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
+import { useFavoriteStore } from '../../../store/zustand/favoriteStore.ts';
 import FavoriteComponent from '../../../components/favorite/FavoriteComponent.tsx';
 import { TvSeriesDetail } from '../../../types/response/TvSeriesDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -54,10 +55,11 @@ const FavoriteTvSeries = () => {
   };
   return (
     <View style={styles.mainView}>
-      <FlatList
+      <FlashList
         style={styles.flatListStyle}
         data={favoriteTvSeries}
         renderItem={favorite}
+        keyExtractor={(item) => item.id.toString()}
       />
       <ConfirmationAlert
         visible={visible}

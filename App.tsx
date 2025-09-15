@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import configureStore from './src/redux/store.ts';
+import configureStore from './src/store/store.ts';
 import { Provider } from 'react-redux';
 import Navigation from './src/navigation/AppNavigation';
 import NetworkConnection from './src/utils/networkConnection.tsx';

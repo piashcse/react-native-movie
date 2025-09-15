@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './TvSeriesDetail.style.ts';
 import {
-  FlatList,
   Image,
   ImageBackground,
   ScrollView,
@@ -9,12 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { AppConstants } from '../../../constant/appConstants.ts';
 import {
   useRecommendedTvSeriesQuery,
   useTvSeriesArtistAndCrewQuery,
   useTvSeriesDetailQuery,
-} from '../../../redux/query/rtkQuery.ts';
+} from '../../../service/rtk-query/rtkQuery.ts';
 import {
   NavigationProp,
   RouteProp,
@@ -25,7 +25,7 @@ import { TvSeriesItem } from '../../../types/response/TvSeriesItem.ts';
 import { Cast } from '../../../types/response/ArtistAndCrew.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useFavoriteStore } from '../../../zustand-store/favoriteStore.ts';
+import { useFavoriteStore } from '../../../store/zustand/favoriteStore.ts';
 import SeeMoreText from '../../../components/see-more/SeeMoreText.tsx';
 import { useLocalization } from '../../../hooks/useLocalization.ts';
 
@@ -178,7 +178,7 @@ const TvSeriesDetail = () => {
         {similarMovies?.length && (
           <Text style={styles.description}>{localization.SIMILAR}</Text>
         )}
-        <FlatList
+        <FlashList
           style={styles.flatListContainer}
           data={similarMovies}
           renderItem={recommendedTvSeriesItem}
@@ -189,7 +189,7 @@ const TvSeriesDetail = () => {
         {castAndCrew?.cast?.length && (
           <Text style={styles.description}>{localization.ARTIST}</Text>
         )}
-        <FlatList
+        <FlashList
           style={styles.flatListContainer}
           data={castAndCrew?.cast}
           renderItem={artistItem}

@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
-import {
-  FlatList,
-  FlatListProps,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
+import { FlashList, FlashListProps } from '@shopify/flash-list';
 import styles from './TvSeriesItem.style.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
 import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
 
 interface TvSeriesItemProps
-  extends Omit<FlatListProps<TvSeriesItem>, 'data' | 'renderItem'> {
+  extends Omit<FlashListProps<TvSeriesItem>, 'data' | 'renderItem'> {
   tvSeries: Array<TvSeriesItem>;
   onPress: (item: TvSeriesItem) => void;
   loadMoreData: () => void;
 }
 
-const MovieItemComponent = ({
+const TvSeriesItemComponent = ({
   tvSeries,
   onPress,
   loadMoreData,
@@ -55,7 +49,7 @@ const MovieItemComponent = ({
 
   return (
     <View style={styles.mainView}>
-      <FlatList
+      <FlashList
         style={styles.flatListContainer}
         data={tvSeries}
         renderItem={TvSeriesItem}
@@ -69,4 +63,4 @@ const MovieItemComponent = ({
   );
 };
 
-export default MovieItemComponent;
+export default TvSeriesItemComponent;

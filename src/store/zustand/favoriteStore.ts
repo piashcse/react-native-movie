@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { MovieDetail } from '../types/response/MovieDetail.ts';
+import { MovieDetail } from '../../types/response/MovieDetail.ts';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { TvSeriesDetail } from '../types/response/TvSeriesDetail.ts';
+import { TvSeriesDetail } from '../../types/response/TvSeriesDetail.ts';
 import { zustandMMKVStorage } from './mmkv.ts';
 
 interface FavoriteMoviesTvSeriesStore {

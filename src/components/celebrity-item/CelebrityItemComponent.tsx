@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import {
-  FlatList,
-  FlatListProps,
   Image,
   ImageBackground,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { FlashList, FlashListProps } from '@shopify/flash-list';
 import styles from './Celebrity.style.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
 import { CelebrityItem } from '../../types/response/Celebrity.ts';
 
 interface CelebrityItemProps
-  extends Omit<FlatListProps<CelebrityItem>, 'data' | 'renderItem'> {
+  extends Omit<FlashListProps<CelebrityItem>, 'data' | 'renderItem'> {
   celebrities: Array<CelebrityItem>;
   onPress: (item: CelebrityItem) => void;
   loadMoreData: () => void;
@@ -62,7 +61,7 @@ const CelebrityItemComponent = ({
 
   return (
     <View style={styles.mainView}>
-      <FlatList
+      <FlashList
         style={styles.flatListContainer}
         data={celebrities}
         renderItem={CelebrityItem}
