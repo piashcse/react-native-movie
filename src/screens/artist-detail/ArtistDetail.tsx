@@ -33,7 +33,7 @@ const ArtistDetail = () => {
     useLazyArtistMoviesAndTvSeriesQuery();
 
   useEffect(() => {
-    fetchArtistMovieAndTvSeries(1);
+    fetchArtistMovieAndTvSeries(Number(personId));
   }, []);
 
   const artistMovieAndTvSeriesItem = ({ item }: { item: Cast }) => {

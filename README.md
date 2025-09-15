@@ -39,6 +39,7 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 ### 🌟 Celebrities  
 - 👑 **Popular Celebrities**  
 - 🔥 **Trending Celebrities**  
+- 🔍 **Search Celebrities**
 - 🎤 **Artist Detail**  
 
 ### ⚡ App Experience  
