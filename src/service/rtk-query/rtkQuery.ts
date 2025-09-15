@@ -125,6 +125,13 @@ export const movieApi = createApi({
       transformResponse: (response: MovieResult) =>
         response.results as SearchData[],
     }),
+    searchCelebrity: builder.query<CelebrityItem[], string>({
+      query: (query) => ({
+        url: `search/person`,
+        params: { query },
+      }),
+      transformResponse: (response: Celebrity) => response.results,
+    }),
     popularCelebrity: builder.query<CelebrityItem[], Pagination>({
       query: (params: Pagination) => ({
         url: `person/popular`,
@@ -165,6 +172,7 @@ export const {
   useTvSeriesArtistAndCrewQuery,
   useTvSeriesDetailQuery,
   useSearchMovieTvSeriesQuery,
+  useSearchCelebrityQuery,
   useLazyPopularCelebrityQuery,
   useLazyTrendingCelebrityQuery,
   useLazyArtistMoviesAndTvSeriesQuery,
