@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
 import { View } from 'react-native';
 import styles from './NowPlayingMovie.style.ts';
-import { useLazyNowPlayingMovieQuery } from '../../../redux/query/rtkQuery.ts';
+import { useLazyNowPlayingMovieQuery } from '../../../service/rtk-query/rtkQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MovieItem } from '../../../types/response/MovieItem.ts';
 import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';

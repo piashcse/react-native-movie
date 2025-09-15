@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react';
 import styles from './ArtistDetail.style.ts';
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { AppConstants } from '../../constant/appConstants.ts';
 import {
   useArtistDetailQuery,
   useLazyArtistMoviesAndTvSeriesQuery,
-} from '../../redux/query/rtkQuery.ts';
+} from '../../service/rtk-query/rtkQuery.ts';
 import {
   NavigationProp,
   RouteProp,
@@ -113,7 +107,7 @@ const ArtistDetail = () => {
           {localization.ARTIST_TV_SERIES_AND_MOVIES}
         </Text>
       )}
-      <FlatList
+      <FlashList
         style={styles.flatListContainer}
         data={artistData}
         renderItem={artistMovieAndTvSeriesItem}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import styles from './OnTheAirTvSeries.style.ts';
-import { useLazyOnTheAirTvSeriesQuery } from '../../../redux/query/rtkQuery.ts';
+import { useLazyOnTheAirTvSeriesQuery } from '../../../service/rtk-query/rtkQuery.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { TvSeriesItem } from '../../../types/response/TvSeriesItem.ts';
 import TvSeriesItemComponent from '../../../components/tvseries-item/TvSeriesItemComponent.tsx';

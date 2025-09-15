@@ -1,10 +1,4 @@
-import {
-  FlatList,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { Searchbar, Text } from 'react-native-paper';
 import {
@@ -13,10 +7,11 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import { FlashList } from '@shopify/flash-list';
 import styles from './DynamicSearch.style.ts';
 import { MovieItem } from '../../types/response/MovieItem.ts';
 import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
-import { useSearchMovieTvSeriesQuery } from '../../redux/query/rtkQuery.ts';
+import { useSearchMovieTvSeriesQuery } from '../../service/rtk-query/rtkQuery.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
 import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
 
@@ -81,7 +76,7 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
         onChangeText={setSearchQuery}
         value={searchQuery}
       />
-      <FlatList
+      <FlashList
         style={styles.flatListContainer}
         data={data}
         renderItem={searchItem}

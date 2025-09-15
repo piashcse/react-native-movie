@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { View } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import styles from './FavoriteMovie.style.ts';
-import { useFavoriteStore } from '../../../zustand-store/favoriteStore.ts';
+import { useFavoriteStore } from '../../../store/zustand/favoriteStore.ts';
 import FavoriteComponent from '../../../components/favorite/FavoriteComponent.tsx';
 import { MovieDetail } from '../../../types/response/MovieDetail.ts';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -50,7 +51,7 @@ const FavoriteMovie = () => {
 
   return (
     <View style={styles.mainView}>
-      <FlatList
+      <FlashList
         style={styles.flatListStyle}
         data={favoriteMovies}
         renderItem={favorite}
