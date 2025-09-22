@@ -23,29 +23,153 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
 ## ✨ Main Features  
 
 ### 🎬 Movies  
-- 📃 Browse **Movie List**  
-- 🔍 Search **Movies**  
-- 📖 View **Movie Details**  
-- 🎯 Discover **Recommended Movies**  
-- ❤️ Save **Favorite Movies** (Local Storage)  
+- 📃 Browse Movie List  
+- 🔍 Search Movies  
+- 📖 View Movie Details  
+- 🎯 Discover Recommended Movies  
+- ❤️ Save Favorite Movies (Local Storage)  
 
 ### 📺 TV Series  
-- 📃 Browse **TV Series List**  
-- 🔍 Search **TV Series**  
-- 📖 View **TV Series Details**  
-- 🎯 Discover **Recommended TV Series**  
-- ❤️ Save **Favorite TV Series** (Local Storage)  
+- 📃 Browse TV Series List  
+- 🔍 Search TV Series  
+- 📖 View TV Series Details  
+- 🎯 Discover Recommended TV Series  
+- ❤️ Save Favorite TV Series (Local Storage)  
 
 ### 🌟 Celebrities  
-- 👑 **Popular Celebrities**  
-- 🔥 **Trending Celebrities**  
-- 🔍 **Search Celebrities**
-- 🎤 **Artist Detail**  
+- 👑 Popular Celebrities  
+- 🔥 Trending Celebrities  
+- 🔍 Search Celebrities
+- 🎤 Artist Detail  
 
 ### ⚡ App Experience  
-- 📚 Seamless **Pagination** with *RTK Query*  
-- 🧭 Smooth **Bottom Navigation**  
-- 📡 Network Connection Awareness with **SnackBar**  
+- 📚 Seamless Pagination with *RTK Query*  
+- 🧭 Smooth Bottom Navigation  
+- 📡 Network Connection Awareness with SnackBar  
+
+## Project Structure
+
+```
+src/
+├── assets/
+│   └── placeholder.jpeg
+├── components/
+│   ├── alert-dialog/
+│   │   ├── ConfirmationAlert.tsx
+│   ├── celebrity-item/
+│   │   ├── Celebrity.style.ts
+│   │   └── CelebrityItemComponent.tsx
+│   ├── favorite/
+│   │   ├── FavoriteComponent.style.ts
+│   │   └── FavoriteComponent.tsx
+│   ├── loading-spinner/
+│   │   ├── LoadingSpinner.style.ts
+│   │   └── LoadingSpinner.tsx
+│   ├── movie-item/
+│   │   ├── MovieItem.style.ts
+│   │   └── MovieItemComponent.tsx
+│   ├── search/
+│   │   ├── DynamicSearch.style.ts
+│   │   └── DynamicSearch.tsx
+│   ├── see-more/
+│   │   └── SeeMoreText.tsx
+│   └── tvseries-item/
+│       ├── TvSeriesItem.style.ts
+│       └── TvSeriesItemComponent.tsx
+├── constant/
+│   ├── appColors.ts
+│   └── appConstants.ts
+├── hooks/
+│   └── useLocalization.ts
+├── localization/
+│   ├── appString.ts
+│   └── i18nLocale.ts
+├── navigation/
+│   ├── AppNavigation.Style.ts
+│   └── AppNavigation.tsx
+├── screens/
+│   ├── artist-detail/
+│   │   ├── ArtistDetail.style.ts
+│   │   └── ArtistDetail.tsx
+│   ├── celebrity/
+│   │   ├── popular/
+│   │   │   ├── PopularCelebrity.style.ts
+│   │   │   └── PopularCelebrity.tsx
+│   │   └── trending/
+│   │       ├── TrendingCelebrity.style.ts
+│   │       └── TrendingCelebrity.tsx
+│   ├── favorite/
+│   │   ├── movie/
+│   │   │   ├── FavoriteMovie.style.ts
+│   │   │   └── FavoriteMovie.tsx
+│   │   └── tvseries/
+│   │       ├── FavoriteTvSeries.tsx
+│   │       └── FovoriteTvSeries.style.ts
+│   ├── movie/
+│   │   ├── movie-detail/
+│   │   │   ├── MovieDetail.style.ts
+│   │   │   └── MovieDetail.tsx
+│   │   ├── nowplaying/
+│   │   │   ├── NowPlayingMovie.style.ts
+│   │   │   └── NowPlayingMovie.tsx
+│   │   ├── popular/
+│   │   │   ├── PopularMovie.style.ts
+│   │   │   └── PopularMovie.tsx
+│   │   ├── toprated/
+│   │   │   ├── TopRatedMovie.style.ts
+│   │   │   └── TopRatedMovie.tsx
+│   │   └── upcoming/
+│   │       ├── UpComingMovie.style.ts
+│   │       └── UpComingMovie.tsx
+│   └── tvseries/
+│       ├── airing_today/
+│       │   ├── AiringTodayTvSeries.style.ts
+│       │   └── AiringTodayTvSeries.tsx
+│       ├── on_the_air/
+│       │   ├── OnTheAirTvSeries.style.ts
+│       │   └── OnTheAirTvSeries.tsx
+│       ├── popular/
+│       │   ├── PopularTvSeries.style.ts
+│       │   └── PopularTvSeries.tsx
+│       ├── top_rated/
+│       │   ├── TopRatedTvSeries.style.ts
+│       │   └── TopRatedTvSeries.tsx
+│       └── tvseries-detail/
+│           ├── TvSeriesDetail.style.ts
+│           └── TvSeriesDetail.tsx
+├── service/
+│   ├── axiosInstance.ts
+│   ├── baseQuery.ts
+│   └── rtk-query/
+│       └── rtkQuery.ts
+├── store/
+│   ├── apErrorMiddleware.ts
+│   ├── store.ts
+│   └── zustand/
+│       ├── apiErrorStore.ts
+│       ├── favoriteStore.ts
+│       └── mmkv.ts
+├── types/
+│   ├── ApiRequest/
+│   │   └── ApiRequest.ts
+│   ├── navigation/
+│   │   └── NavigationTypes.ts
+│   └── response/
+│       ├── ArtistAndCrew.ts
+│       ├── ArtistDetail.ts
+│       ├── Celebrity.ts
+│       ├── CombinedCredit.ts
+│       ├── Dates.ts
+│       ├── MovieDetail.ts
+│       ├── MovieItem.ts
+│       ├── MovieResult.ts
+│       ├── TvSeriesDetail.ts
+│       ├── TvSeriesItem.ts
+│       └── TvSeriesResult.ts
+├── utils/
+│   ├── common.ts
+│   └── networkConnection.tsx
+```
 
 ## Architecture
 
