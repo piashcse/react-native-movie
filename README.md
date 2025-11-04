@@ -1,6 +1,6 @@
 # React Native Movie 🚀
 
-[![React Native](https://img.shields.io/badge/React%20Native-v0.81.4-green.svg)](https://facebook.github.io/react-native/)
+[![React Native](https://img.shields.io/badge/React%20Native-v0.82.1-green.svg)](https://facebook.github.io/react-native/)
 [![Redux](https://img.shields.io/badge/Redux-5.0.1-764ABC?logo=redux)](https://redux.js.org/)
 [![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-v2.9.0-00BFFF?logo=redux)](https://redux-toolkit.js.org/)
 [![Zustand](https://img.shields.io/badge/Zustand-v5.0.8-FF0099?logo=react)](https://github.com/pmndrs/zustand)
