@@ -224,6 +224,8 @@ npm run android
 | Command                    | Description                                 |
 | -------------------------- | ------------------------------------------- |
 | `npm start`                | Start the Metro bundler                     |
+| `npm run start:clean`      | Start Metro with a reset transform cache    |
+| `npm run clean`            | Clear Watchman and Metro caches             |
 | `npm run ios`              | Build and run on the iOS simulator          |
 | `npm run android`          | Build and run on an Android emulator/device |
 | `npm test`                 | Run Jest tests                              |
@@ -235,6 +237,17 @@ npm run android
 | `npm run fix:lintPrettier` | Run Prettier and ESLint fixes together      |
 
 CI runs `typecheck`, `lint`, and tests through `.github/workflows/ci.yml`.
+
+## Troubleshooting
+
+If Metro reports that it cannot resolve a newly added module such as `src/config/env.ts`, the running watcher has a stale cache. Stop Metro and restart cleanly:
+
+```bash
+npm run clean
+npm run start:clean
+```
+
+Then rebuild the app (`npm run ios` or `npm run android`).
 
 ## React Native 0.88 Notes
 

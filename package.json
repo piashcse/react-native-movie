@@ -13,7 +13,9 @@
     "fix:lintPrettier": "npm run prettierFixAll && npm run lintFixAll",
     "install-package": "rm -rf node_modules && npm i --save && watchman watch-del-all ",
     "typecheck": "tsc --noEmit",
-    "test:ci": "jest --runInBand --coverage"
+    "test:ci": "jest --runInBand --coverage",
+    "start:clean": "react-native start --reset-cache",
+    "clean": "watchman watch-del-all && rm -rf $TMPDIR/metro-* $TMPDIR/react-*"
   },
   "dependencies": {
     "@react-native-community/netinfo": "12.0.1",
