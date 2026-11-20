@@ -6,7 +6,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTranslation } from 'react-i18next';
@@ -26,6 +25,7 @@ import { Cast } from '../../types/response/ArtistAndCrew.ts';
 import SeeMoreText from '../../components/see-more/SeeMoreText.tsx';
 import PosterImage from '../../components/media/PosterImage.tsx';
 import MediaPosterCard from '../../components/media/MediaPosterCard.tsx';
+import HorizontalList from '../../components/media/HorizontalList.tsx';
 import { mediaDetailStyles as styles } from './MediaDetail.styles.ts';
 import { appColors } from '../../constant/appColors.ts';
 
@@ -241,13 +241,10 @@ const MediaDetail = ({ kind, id }: MediaDetailProps) => {
         {similarItems.length > 0 ? (
           <>
             <Text style={styles.sectionTitle}>{t('common.similar')}</Text>
-            <FlashList
-              style={styles.horizontalList}
+            <HorizontalList
               data={similarItems}
-              renderItem={({ item }) => renderSimilarItem(item)}
+              renderItem={renderSimilarItem}
               keyExtractor={(item) => String(item.id)}
-              horizontal
-              showsHorizontalScrollIndicator={false}
             />
           </>
         ) : null}
@@ -255,13 +252,10 @@ const MediaDetail = ({ kind, id }: MediaDetailProps) => {
         {cast.length > 0 ? (
           <>
             <Text style={styles.sectionTitle}>{t('common.artists')}</Text>
-            <FlashList
-              style={styles.horizontalList}
+            <HorizontalList
               data={cast}
-              renderItem={({ item }) => renderCastItem(item)}
+              renderItem={renderCastItem}
               keyExtractor={(item) => String(item.id)}
-              horizontal
-              showsHorizontalScrollIndicator={false}
             />
           </>
         ) : null}

@@ -99,16 +99,8 @@ export const mediaDetailStyles = StyleSheet.create({
   seeMore: {
     color: appColors.primaryColor,
   },
-  horizontalList: {
-    marginTop: 4,
-  },
-  similarImage: {
-    height: 160,
-    width: 120,
-    borderRadius: 12,
-    resizeMode: 'cover',
-  },
   castContainer: {
+    width: 88,
     margin: 4,
     alignItems: 'center',
   },

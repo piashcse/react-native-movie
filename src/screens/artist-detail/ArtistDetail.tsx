@@ -6,7 +6,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import {
@@ -21,6 +20,7 @@ import { Cast } from '../../types/response/ArtistAndCrew.ts';
 import SeeMoreText from '../../components/see-more/SeeMoreText.tsx';
 import PosterImage from '../../components/media/PosterImage.tsx';
 import MediaPosterCard from '../../components/media/MediaPosterCard.tsx';
+import HorizontalList from '../../components/media/HorizontalList.tsx';
 import { mediaDetailStyles } from '../media-detail/MediaDetail.styles.ts';
 import { appColors } from '../../constant/appColors.ts';
 import styles from './ArtistDetail.style.ts';
@@ -134,13 +134,10 @@ const ArtistDetail = () => {
           <Text style={styles.description}>
             {t('artist.moviesAndTvSeries')}
           </Text>
-          <FlashList
-            style={styles.flatListContainer}
+          <HorizontalList
             data={credits}
-            renderItem={({ item }) => renderCredit(item)}
+            renderItem={renderCredit}
             keyExtractor={(item) => String(item.id)}
-            horizontal
-            showsHorizontalScrollIndicator={false}
           />
         </>
       ) : null}

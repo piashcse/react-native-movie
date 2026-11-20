@@ -18,7 +18,10 @@ const MediaPosterCard = ({
   variant = 'poster',
 }: MediaPosterCardProps) => (
   <Pressable
-    style={styles.container}
+    style={[
+      styles.container,
+      variant === 'poster' ? styles.posterContainer : styles.thumbnailContainer,
+    ]}
     onPress={onPress}
     accessibilityRole="button"
     accessibilityLabel={accessibilityLabel}
@@ -38,8 +41,13 @@ const MediaPosterCard = ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     margin: 4,
+  },
+  posterContainer: {
+    flex: 1,
+  },
+  thumbnailContainer: {
+    width: 120,
   },
   poster: {
     height: 270,
