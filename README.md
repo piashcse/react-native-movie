@@ -1,15 +1,17 @@
 # React Native Movie 🚀
 
-[![React Native](https://img.shields.io/badge/React%20Native-v0.85.0-green.svg)](https://facebook.github.io/react-native/)
+[![React Native](https://img.shields.io/badge/React%20Native-v0.88.1-green.svg)](https://reactnative.dev/)
+[![React](https://img.shields.io/badge/React-19.3.1-61DAFB?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Redux](https://img.shields.io/badge/Redux-5.0.1-764ABC?logo=redux)](https://redux.js.org/)
-[![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-v2.11.2-00BFFF?logo=redux)](https://redux-toolkit.js.org/)
-[![Zustand](https://img.shields.io/badge/Zustand-v5.0.12-FF0099?logo=react)](https://github.com/pmndrs/zustand)
+[![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-v2.15.0-00BFFF?logo=redux)](https://redux-toolkit.js.org/)
+[![Zustand](https://img.shields.io/badge/Zustand-v5.1.0-FF0099?logo=react)](https://github.com/pmndrs/zustand)
 ![badge-Android](https://img.shields.io/badge/Platform-Android-brightgreen)
 ![badge-iOS](https://img.shields.io/badge/Platform-iOS-lightgray)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 <a href="https://github.com/piashcse"><img alt="License" src="https://img.shields.io/static/v1?label=GitHub&message=piashcse&color=C51162"/></a>
 
-React Native Movie App 🎬 - A cross-platform react native app for exploring [The Movie DB](https://www.themoviedb.org) using RTK Query and Redux Toolkit for optimized state and API management.<br>
+React Native Movie App 🎬 - A cross-platform React Native app for exploring [The Movie DB](https://www.themoviedb.org) using RTK Query and Redux Toolkit for optimized state and API management. Built with **React Native 0.88**, **React 19**, and the **New Architecture** enabled.<br>
 
 <p align="center">
   <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741954753_100.PNG" />
@@ -20,32 +22,36 @@ React Native Movie App 🎬 - A cross-platform react native app for exploring [T
   <img width="30%" height="50%" src="https://github.com/piashcse/react-native-movie/blob/main/screenshots/1730741964832_100.PNG" />
 </p>
 
-## ✨ Main Features  
+## ✨ Main Features
 
-### 🎬 Movies  
-- 📃 Browse Movie List  
-- 🔍 Search Movies  
-- 📖 View Movie Details  
-- 🎯 Discover Recommended Movies  
-- ❤️ Save Favorite Movies (Local Storage)  
+### 🎬 Movies
 
-### 📺 TV Series  
-- 📃 Browse TV Series List  
-- 🔍 Search TV Series  
-- 📖 View TV Series Details  
-- 🎯 Discover Recommended TV Series  
-- ❤️ Save Favorite TV Series (Local Storage)  
+- 📃 Browse Movie List
+- 🔍 Search Movies
+- 📖 View Movie Details
+- 🎯 Discover Recommended Movies
+- ❤️ Save Favorite Movies (Local Storage)
 
-### 🌟 Celebrities  
-- 👑 Popular Celebrities  
-- 🔥 Trending Celebrities  
+### 📺 TV Series
+
+- 📃 Browse TV Series List
+- 🔍 Search TV Series
+- 📖 View TV Series Details
+- 🎯 Discover Recommended TV Series
+- ❤️ Save Favorite TV Series (Local Storage)
+
+### 🌟 Celebrities
+
+- 👑 Popular Celebrities
+- 🔥 Trending Celebrities
 - 🔍 Search Celebrities
-- 🎤 Artist Detail  
+- 🎤 Artist Detail
 
-### ⚡ App Experience  
-- 📚 Seamless Pagination with *RTK Query*  
-- 🧭 Smooth Bottom Navigation  
-- 📡 Network Connection Awareness with SnackBar  
+### ⚡ App Experience
+
+- 📚 Seamless Pagination with _RTK Query_
+- 🧭 Smooth Bottom Navigation
+- 📡 Network Connection Awareness with SnackBar
 
 ## Project Structure
 
@@ -175,6 +181,7 @@ src/
 
 - RTK Query-Based Architecture (RTK Query - Hooks - reducer)
 - Redux
+
 <p float="left"> 
   <a href='https://redux-toolkit.js.org/rtk-query/overview'>
   <img src='https://redux-toolkit.js.org/img/redux-logo-landscape.png' height='50' alt='RTK Query Logo' aria-label='redux-toolkit.js.org/rtk-query' />
@@ -183,30 +190,85 @@ src/
 
 ## Built With 🛠
 
-- [React-Native](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform.  
-- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) - RTK Query is a powerful data fetching and caching tool. It is designed to simplify common cases for loading data in a web application, eliminating the need to hand-write data fetching & caching logic yourself.  
-- [Axios](https://axios-http.com/) - Axios is a simple promise based HTTP client for the browser and node.js. Axios provides a simple to use library in a small package with a very extensible interface.  
-- [Redux-toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development.  
-- [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.  
-- [React-Navigation 7](https://reactnavigation.org/) - Routing and navigation for your React Native apps.  
-- [Zustand](https://zustand-demo.pmnd.rs/) - A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy API based on hooks, isn't boilerplatey or opinionated.  
-- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) - ⚡️ The fastest key/value storage for React Native. ~30x faster than AsyncStorage!  
+- [React Native 0.88](https://reactnative.dev/) - React Native brings React's declarative UI framework to iOS and Android. This project uses the New Architecture with TurboModules and Fabric.
+- [React 19](https://react.dev/) - The library for web and native user interfaces.
+- [TypeScript 6](https://www.typescriptlang.org/) - Strongly typed JavaScript for safer, more maintainable code.
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) - RTK Query is a powerful data fetching and caching tool. It is designed to simplify common cases for loading data in a web application, eliminating the need to hand-write data fetching & caching logic yourself.
+- [Axios](https://axios-http.com/) - Axios is a simple promise based HTTP client for the browser and node.js. Axios provides a simple to use library in a small package with a very extensible interface.
+- [Redux Toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development.
+- [Redux](https://redux.js.org/) - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
+- [React Navigation 7](https://reactnavigation.org/) - Routing and navigation for your React Native apps.
+- [Zustand](https://zustand-demo.pmnd.rs/) - A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy API based on hooks, isn't boilerplatey or opinionated.
+- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) - ⚡️ The fastest key/value storage for React Native. ~30x faster than AsyncStorage!
 - [FlashList](https://shopify.github.io/flash-list/) - A high-performance list component for React Native, built by Shopify. It provides better performance than FlatList by optimizing rendering for large datasets.
-  
+- [React Native Reanimated 4](https://docs.swmansion.com/react-native-reanimated/) - Smooth animations and gestures powered by Worklets.
+- [i18next](https://www.i18next.com/) - Internationalization with English and Bengali translations.
+
 ## Requirements
 
-- [Node.js](https://nodejs.org/) (latest)
-- [Yarn](https://yarnpkg.com/) (latest)
+- [Node.js](https://nodejs.org/) **>= 22.11.0** (required by React Native 0.88)
+- npm **>= 10**
+- [CocoaPods](https://cocoapods.org/) for iOS
+- [Xcode](https://developer.apple.com/xcode/) 16+ for iOS
+- [Android Studio](https://developer.android.com/studio) with **Android SDK 37**, **Build Tools 37**, and **JDK 17** for Android
+- [Watchman](https://facebook.github.io/watchman/) (recommended for Metro)
 
 ## How to run
 
-- `git clone git@github.com:piashcse/react-native-movie.git`
-- `yarn install`
+1. Clone the repository:
 
-Now, you can choose a command to run the project:
+```bash
+git clone git@github.com:piashcse/react-native-movie.git
+cd react-native-movie
+```
 
-- `yarn ios` to run on iOS simulator
-- `yarn android` to run on Android simulator
+2. Install JavaScript dependencies:
+
+```bash
+npm install
+```
+
+3. Install iOS pods (macOS only):
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+4. Start Metro:
+
+```bash
+npm start
+```
+
+5. Run the app on your preferred platform:
+
+```bash
+npm run ios
+npm run android
+```
+
+## Available Scripts
+
+| Command                    | Description                                 |
+| -------------------------- | ------------------------------------------- |
+| `npm start`                | Start the Metro bundler                     |
+| `npm run ios`              | Build and run on the iOS simulator          |
+| `npm run android`          | Build and run on an Android emulator/device |
+| `npm test`                 | Run Jest tests                              |
+| `npm run lint`             | Run ESLint                                  |
+| `npm run lintFixAll`       | Auto-fix ESLint issues                      |
+| `npm run prettierFixAll`   | Format files with Prettier                  |
+| `npm run fix:lintPrettier` | Run Prettier and ESLint fixes together      |
+| `npx tsc --noEmit`         | Type-check the project                      |
+
+## React Native 0.88 Notes
+
+- New Architecture is enabled (`newArchEnabled=true`).
+- iOS uses the `SceneDelegate` lifecycle and requires `pod install` after dependency changes.
+- Android uses **compileSdk/buildTools 37**, **Kotlin 2.2.0**, and **Gradle 9.4.1**.
+- A minimum of **Node.js 22.11.0** is required.
 
 ## 👨 Developed By
 
