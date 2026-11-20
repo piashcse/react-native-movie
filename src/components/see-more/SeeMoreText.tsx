@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Text, TextLayoutEvent, TextStyle } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 interface ReadMoreTextProps {
   readMoreStyle?: TextStyle;
@@ -14,46 +15,45 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
   textStyle,
   numberOfLines = 3,
 }: ReadMoreTextProps) => {
-  const [showMoreButton, setShowMoreButton] = useState(true);
+  const { t } = useTranslation();
+  const [showMoreButton, setShowMoreButton] = useState(false);
   const [textShown, setTextShown] = useState(false);
-  const [numLines, setNumLines] = useState<number | undefined>(numberOfLines);
-
-  const toggleTextShown = () => {
-    setTextShown((prev) => !prev);
-  };
 
   useEffect(() => {
-    setNumLines(textShown ? undefined : numberOfLines);
-  }, [textShown, numberOfLines]);
+    setShowMoreButton(false);
+    setTextShown(false);
+  }, [text, numberOfLines]);
 
   const onTextLayout = useCallback(
-    (e: TextLayoutEvent) => {
-      const linesCount = e.nativeEvent.lines.length;
-      console.log('Total lines in text:', linesCount);
-
-      if (linesCount > numberOfLines && !showMoreButton) {
+    (event: TextLayoutEvent) => {
+      const linesCount = event.nativeEvent.lines.length;
+      if (linesCount > numberOfLines) {
         setShowMoreButton(true);
       }
     },
-    [numberOfLines, showMoreButton]
+    [numberOfLines]
   );
 
   return (
     <>
       <Text
         onTextLayout={onTextLayout}
-        numberOfLines={numLines}
+        numberOfLines={textShown ? undefined : numberOfLines}
         style={textStyle}
         ellipsizeMode="tail"
       >
         {text}
       </Text>
 
-      {showMoreButton && (
-        <Text onPress={toggleTextShown} style={readMoreStyle}>
-          {textShown ? 'See Less' : 'See More'}
+      {showMoreButton ? (
+        <Text
+          onPress={() => setTextShown((previous) => !previous)}
+          style={readMoreStyle}
+          accessibilityRole="button"
+        >
+          {textShown ? t('common.seeLess') : t('common.seeMore')}
         </Text>
-      )}
+      ) : null}
     </>
   );
 };

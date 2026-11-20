@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Dialog, Portal, Text } from 'react-native-paper';
 
 type ConfirmationDialogProps = {
@@ -16,6 +17,8 @@ const ConfirmationDialog = ({
   onConfirm,
   onCancel,
 }: ConfirmationDialogProps) => {
+  const { t } = useTranslation();
+
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={onCancel}>
@@ -24,8 +27,8 @@ const ConfirmationDialog = ({
           <Text>{message}</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={onCancel}>Cancel</Button>
-          <Button onPress={onConfirm}>Yes</Button>
+          <Button onPress={onCancel}>{t('common.cancel')}</Button>
+          <Button onPress={onConfirm}>{t('common.yes')}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

@@ -12,22 +12,22 @@ export interface Cast {
   name: string;
   original_name: string;
   popularity: number;
-  profile_path?: string;
-  cast_id: number;
-  character: string;
-  credit_id: string;
-  order: number;
-  backdrop_path?: string;
-  genre_ids: number[];
-  original_language: string;
-  original_title: string;
-  overview: string;
-  poster_path?: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
+  profile_path: string | null;
+  cast_id?: number;
+  character?: string;
+  credit_id?: string;
+  order?: number;
+  backdrop_path?: string | null;
+  genre_ids?: number[];
+  original_language?: string;
+  original_title?: string;
+  overview?: string;
+  poster_path?: string | null;
+  release_date?: string;
+  title?: string;
+  video?: boolean;
+  vote_average?: number;
+  vote_count?: number;
   media_type: string;
 }
 
@@ -39,8 +39,8 @@ export interface Crew {
   name: string;
   original_name: string;
   popularity: number;
-  profile_path?: string;
-  credit_id: string;
+  profile_path: string | null;
+  credit_id?: string;
   department: string;
   job: string;
 }

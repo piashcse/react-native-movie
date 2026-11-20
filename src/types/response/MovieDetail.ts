@@ -1,26 +1,26 @@
 export interface MovieDetail {
   adult: boolean;
-  backdrop_path: string;
+  backdrop_path: string | null;
   belongs_to_collection: unknown;
   budget: number;
   genres: Genre[];
-  homepage: string;
+  homepage: string | null;
   id: number;
-  imdb_id: string;
+  imdb_id: string | null;
   origin_country: string[];
   original_language: string;
   original_title: string;
   overview: string;
   popularity: number;
-  poster_path: string;
+  poster_path: string | null;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
   release_date: string;
   revenue: number;
-  runtime: number;
+  runtime: number | null;
   spoken_languages: SpokenLanguage[];
   status: string;
-  tagline: string;
+  tagline: string | null;
   title: string;
   video: boolean;
   vote_average: number;
@@ -34,7 +34,7 @@ export interface Genre {
 
 export interface ProductionCompany {
   id: number;
-  logo_path?: string;
+  logo_path: string | null;
   name: string;
   origin_country: string;
 }

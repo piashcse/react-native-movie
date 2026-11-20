@@ -1,121 +1,148 @@
-import React, { useEffect } from 'react';
-import styles from './ArtistDetail.style.ts';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
-import { AppConstants } from '../../constant/appConstants.ts';
+import React, { useCallback } from 'react';
+import {
+  ActivityIndicator,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import {
   useArtistDetailQuery,
-  useLazyArtistMoviesAndTvSeriesQuery,
+  useArtistMoviesAndTvSeriesQuery,
 } from '../../service/rtk-query/rtkQuery.ts';
 import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
-import { useLocalization } from '../../hooks/useLocalization.ts';
+  RootStackNavigationProp,
+  RootStackParamList,
+} from '../../types/navigation/NavigationTypes.ts';
 import { Cast } from '../../types/response/ArtistAndCrew.ts';
-import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
 import SeeMoreText from '../../components/see-more/SeeMoreText.tsx';
-
-type RouteParams = {
-  personId: string;
-};
-type MovieDetailNavigationProp = NavigationProp<RootStackParam, 'MovieDetail'>;
+import PosterImage from '../../components/media/PosterImage.tsx';
+import MediaPosterCard from '../../components/media/MediaPosterCard.tsx';
+import HorizontalList from '../../components/media/HorizontalList.tsx';
+import { mediaDetailStyles } from '../media-detail/MediaDetail.styles.ts';
+import { appColors } from '../../constant/appColors.ts';
+import styles from './ArtistDetail.style.ts';
 
 const ArtistDetail = () => {
-  const localization = useLocalization();
-  const navigation = useNavigation<MovieDetailNavigationProp>();
-  const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
+  const { t } = useTranslation();
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const route = useRoute<RouteProp<RootStackParamList, 'ArtistDetail'>>();
   const { personId } = route.params;
-  const { data: artistDetail } = useArtistDetailQuery(Number(personId));
-  const [fetchArtistMovieAndTvSeries, { data: artistData }] =
-    useLazyArtistMoviesAndTvSeriesQuery();
+  const artistQuery = useArtistDetailQuery(personId);
+  const creditsQuery = useArtistMoviesAndTvSeriesQuery(personId);
 
-  useEffect(() => {
-    fetchArtistMovieAndTvSeries(Number(personId));
-  }, []);
+  const artist = artistQuery.data;
+  const credits: Cast[] = creditsQuery.data ?? [];
 
-  const artistMovieAndTvSeriesItem = ({ item }: { item: Cast }) => {
-    return (
-      <TouchableOpacity
-        style={styles.movieItemContainer}
+  const gender =
+    artist?.gender === 1
+      ? t('common.female')
+      : artist?.gender === 2
+        ? t('common.male')
+        : '-';
+
+  const renderCredit = useCallback(
+    (item: Cast) => (
+      <MediaPosterCard
+        variant="thumbnail"
+        posterPath={item.poster_path}
         onPress={() => {
-          if (item.media_type == 'movie') {
+          if (item.media_type === 'movie') {
             navigation.navigate('MovieDetail', { movieId: item.id });
           } else {
             navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id });
           }
         }}
-      >
-        <Image
-          style={styles.similarImageView}
-          source={{
-            uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
-          }}
-        />
-      </TouchableOpacity>
+        accessibilityLabel={item.title || item.name}
+      />
+    ),
+    [navigation]
+  );
+
+  if (artistQuery.isLoading) {
+    return (
+      <View style={mediaDetailStyles.centered}>
+        <ActivityIndicator size="large" color={appColors.primaryColor} />
+        <Text style={mediaDetailStyles.message}>{t('common.loading')}</Text>
+      </View>
     );
-  };
+  }
+
+  if (artistQuery.isError) {
+    return (
+      <View style={mediaDetailStyles.centered}>
+        <Text style={mediaDetailStyles.title}>{t('common.errorTitle')}</Text>
+        <Text style={mediaDetailStyles.message}>
+          {t('common.errorMessage')}
+        </Text>
+        <Pressable
+          style={mediaDetailStyles.retryButton}
+          onPress={() => artistQuery.refetch()}
+          accessibilityRole="button"
+        >
+          <Text style={mediaDetailStyles.retryText}>{t('common.retry')}</Text>
+        </Pressable>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.mainView}>
       <View style={styles.secondContainer}>
-        <Image
+        <PosterImage
+          path={artist?.profile_path}
+          size="w342"
           style={styles.imageView}
-          source={{
-            uri: `${AppConstants.IMAGE_URL}${artistDetail?.profile_path}`,
-          }}
+          accessibilityLabel={artist?.name}
         />
-
-        <View>
-          <View style={styles.artistInfoContainer}>
-            <Text style={styles.artistName}>{artistDetail?.name}</Text>
-            <View style={styles.otherInfoContainer}>
-              <Text style={styles.titleContent}>known for</Text>
-              <Text style={styles.titleData}>
-                {artistDetail?.known_for_department}
-              </Text>
-            </View>
-            <View style={styles.otherInfoContainer}>
-              <Text style={styles.titleContent}>Gender</Text>
-              <Text style={styles.titleData}>
-                {artistDetail?.gender === 1 ? 'Female' : 'Male'}
-              </Text>
-            </View>
-            <View style={styles.otherInfoContainer}>
-              <Text style={styles.titleContent}>Birthday</Text>
-              <Text style={styles.titleData}>{artistDetail?.birthday}</Text>
-            </View>
-            <View style={styles.otherInfoContainer}>
-              <Text style={styles.titleContent}>Place of Birth</Text>
-              <Text style={styles.titleData}>
-                {artistDetail?.place_of_birth}
-              </Text>
-            </View>
+        <View style={styles.artistInfoContainer}>
+          <Text style={styles.artistName}>{artist?.name}</Text>
+          <View style={styles.otherInfoContainer}>
+            <Text style={styles.titleContent}>{t('common.knownFor')}</Text>
+            <Text style={styles.titleData}>
+              {artist?.known_for_department ?? '-'}
+            </Text>
+          </View>
+          <View style={styles.otherInfoContainer}>
+            <Text style={styles.titleContent}>{t('common.gender')}</Text>
+            <Text style={styles.titleData}>{gender}</Text>
+          </View>
+          <View style={styles.otherInfoContainer}>
+            <Text style={styles.titleContent}>{t('common.birthday')}</Text>
+            <Text style={styles.titleData}>{artist?.birthday ?? '-'}</Text>
+          </View>
+          <View style={styles.otherInfoContainer}>
+            <Text style={styles.titleContent}>{t('common.placeOfBirth')}</Text>
+            <Text style={styles.titleData}>
+              {artist?.place_of_birth ?? '-'}
+            </Text>
           </View>
         </View>
       </View>
-      <Text style={styles.biography}>Biography</Text>
+
+      <Text style={styles.biography}>{t('common.biography')}</Text>
       <SeeMoreText
-        text={artistDetail?.biography ?? ''}
+        text={artist?.biography ?? ''}
         numberOfLines={3}
         readMoreStyle={styles.seeMoreTextStyle}
       />
-      {artistData?.length && (
-        <Text style={styles.description}>
-          {localization.ARTIST_TV_SERIES_AND_MOVIES}
-        </Text>
-      )}
-      <FlashList
-        style={styles.flatListContainer}
-        data={artistData}
-        renderItem={artistMovieAndTvSeriesItem}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-      />
+
+      {credits.length > 0 ? (
+        <>
+          <Text style={styles.description}>
+            {t('artist.moviesAndTvSeries')}
+          </Text>
+          <HorizontalList
+            data={credits}
+            renderItem={renderCredit}
+            keyExtractor={(item) => String(item.id)}
+          />
+        </>
+      ) : null}
     </ScrollView>
   );
 };
+
 export default ArtistDetail;

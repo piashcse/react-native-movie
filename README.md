@@ -55,126 +55,82 @@ React Native Movie App 🎬 - A cross-platform React Native app for exploring [T
 
 ## Project Structure
 
-```
+```text
 src/
 ├── assets/
 │   └── placeholder.jpeg
 ├── components/
-│   ├── alert-dialog/
-│   │   ├── ConfirmationAlert.tsx
-│   ├── celebrity-item/
-│   │   ├── Celebrity.style.ts
-│   │   └── CelebrityItemComponent.tsx
-│   ├── favorite/
-│   │   ├── FavoriteComponent.style.ts
-│   │   └── FavoriteComponent.tsx
-│   ├── loading-spinner/
-│   │   ├── LoadingSpinner.style.ts
-│   │   └── LoadingSpinner.tsx
-│   ├── movie-item/
-│   │   ├── MovieItem.style.ts
-│   │   └── MovieItemComponent.tsx
-│   ├── search/
-│   │   ├── DynamicSearch.style.ts
-│   │   └── DynamicSearch.tsx
-│   ├── see-more/
-│   │   └── SeeMoreText.tsx
-│   └── tvseries-item/
-│       ├── TvSeriesItem.style.ts
-│       └── TvSeriesItemComponent.tsx
+│   ├── alert-dialog/           # Confirmation dialog
+│   ├── api-error-snackbar/     # Global API error feedback
+│   ├── error-boundary/         # App-level error boundary
+│   ├── favorite/               # Favorite card
+│   ├── media/                  # PosterImage, MediaPosterCard, CelebrityCard, PaginatedMediaList
+│   ├── search/                 # Debounced dynamic search
+│   └── see-more/               # Expandable text
+├── config/
+│   └── env.ts                  # Typed environment configuration
 ├── constant/
 │   ├── appColors.ts
 │   └── appConstants.ts
 ├── hooks/
-│   └── useLocalization.ts
+│   ├── __tests__/
+│   ├── useDebouncedValue.ts
+│   └── usePaginatedQuery.ts    # Shared pagination, dedupe, retry, refresh
 ├── localization/
-│   ├── appString.ts
+│   ├── locale-json/
+│   │   ├── bn.json
+│   │   └── en.json
 │   └── i18nLocale.ts
 ├── navigation/
 │   ├── AppNavigation.Style.ts
-│   └── AppNavigation.tsx
+│   └── AppNavigation.tsx       # Fully typed navigators
 ├── screens/
 │   ├── artist-detail/
-│   │   ├── ArtistDetail.style.ts
-│   │   └── ArtistDetail.tsx
 │   ├── celebrity/
 │   │   ├── popular/
-│   │   │   ├── PopularCelebrity.style.ts
-│   │   │   └── PopularCelebrity.tsx
 │   │   └── trending/
-│   │       ├── TrendingCelebrity.style.ts
-│   │       └── TrendingCelebrity.tsx
 │   ├── favorite/
 │   │   ├── movie/
-│   │   │   ├── FavoriteMovie.style.ts
-│   │   │   └── FavoriteMovie.tsx
 │   │   └── tvseries/
-│   │       ├── FavoriteTvSeries.tsx
-│   │       └── FovoriteTvSeries.style.ts
+│   ├── media-detail/           # Shared movie/TV detail screen
 │   ├── movie/
 │   │   ├── movie-detail/
-│   │   │   ├── MovieDetail.style.ts
-│   │   │   └── MovieDetail.tsx
 │   │   ├── nowplaying/
-│   │   │   ├── NowPlayingMovie.style.ts
-│   │   │   └── NowPlayingMovie.tsx
 │   │   ├── popular/
-│   │   │   ├── PopularMovie.style.ts
-│   │   │   └── PopularMovie.tsx
 │   │   ├── toprated/
-│   │   │   ├── TopRatedMovie.style.ts
-│   │   │   └── TopRatedMovie.tsx
 │   │   └── upcoming/
-│   │       ├── UpComingMovie.style.ts
-│   │       └── UpComingMovie.tsx
 │   └── tvseries/
 │       ├── airing_today/
-│       │   ├── AiringTodayTvSeries.style.ts
-│       │   └── AiringTodayTvSeries.tsx
 │       ├── on_the_air/
-│       │   ├── OnTheAirTvSeries.style.ts
-│       │   └── OnTheAirTvSeries.tsx
 │       ├── popular/
-│       │   ├── PopularTvSeries.style.ts
-│       │   └── PopularTvSeries.tsx
 │       ├── top_rated/
-│       │   ├── TopRatedTvSeries.style.ts
-│       │   └── TopRatedTvSeries.tsx
 │       └── tvseries-detail/
-│           ├── TvSeriesDetail.style.ts
-│           └── TvSeriesDetail.tsx
 ├── service/
-│   ├── axiosInstance.ts
+│   ├── axiosInstance.ts        # Timeout + redacted dev logging
 │   ├── baseQuery.ts
 │   └── rtk-query/
 │       └── rtkQuery.ts
 ├── store/
-│   ├── apErrorMiddleware.ts
+│   ├── apiErrorMiddleware.ts
+│   ├── hooks.ts                # Typed Redux hooks
 │   ├── store.ts
 │   └── zustand/
 │       ├── apiErrorStore.ts
-│       ├── favoriteStore.ts
+│       ├── favoriteStore.ts    # Minimal persisted favorites
 │       └── mmkv.ts
+├── styles/
+│   └── screenStyles.ts
 ├── types/
-│   ├── ApiRequest/
-│   │   └── ApiRequest.ts
+│   ├── api.ts
+│   ├── env.d.ts
+│   ├── favorite.ts
 │   ├── navigation/
-│   │   └── NavigationTypes.ts
 │   └── response/
-│       ├── ArtistAndCrew.ts
-│       ├── ArtistDetail.ts
-│       ├── Celebrity.ts
-│       ├── CombinedCredit.ts
-│       ├── Dates.ts
-│       ├── MovieDetail.ts
-│       ├── MovieItem.ts
-│       ├── MovieResult.ts
-│       ├── TvSeriesDetail.ts
-│       ├── TvSeriesItem.ts
-│       └── TvSeriesResult.ts
-├── utils/
-│   ├── common.ts
-│   └── networkConnection.tsx
+└── utils/
+    ├── __tests__/
+    ├── error.ts
+    ├── image.ts
+    └── networkConnection.tsx
 ```
 
 ## Architecture
@@ -222,13 +178,27 @@ git clone git@github.com:piashcse/react-native-movie.git
 cd react-native-movie
 ```
 
-2. Install JavaScript dependencies:
+2. Create your local environment file and add a TMDB API key:
+
+```bash
+cp .env.example .env
+```
+
+```ini
+TMDB_API_KEY=your_tmdb_api_key_here
+TMDB_BASE_URL=https://api.themoviedb.org/3/
+TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p
+```
+
+> `.env` is git-ignored. Never commit real API keys.
+
+3. Install JavaScript dependencies:
 
 ```bash
 npm install
 ```
 
-3. Install iOS pods (macOS only):
+4. Install iOS pods (macOS only):
 
 ```bash
 cd ios
@@ -236,13 +206,13 @@ pod install
 cd ..
 ```
 
-4. Start Metro:
+5. Start Metro:
 
 ```bash
 npm start
 ```
 
-5. Run the app on your preferred platform:
+6. Run the app on your preferred platform:
 
 ```bash
 npm run ios
@@ -254,14 +224,30 @@ npm run android
 | Command                    | Description                                 |
 | -------------------------- | ------------------------------------------- |
 | `npm start`                | Start the Metro bundler                     |
+| `npm run start:clean`      | Start Metro with a reset transform cache    |
+| `npm run clean`            | Clear Watchman and Metro caches             |
 | `npm run ios`              | Build and run on the iOS simulator          |
 | `npm run android`          | Build and run on an Android emulator/device |
 | `npm test`                 | Run Jest tests                              |
+| `npm run test:ci`          | Run tests with coverage                     |
+| `npm run typecheck`        | Type-check the project with TypeScript      |
 | `npm run lint`             | Run ESLint                                  |
 | `npm run lintFixAll`       | Auto-fix ESLint issues                      |
 | `npm run prettierFixAll`   | Format files with Prettier                  |
 | `npm run fix:lintPrettier` | Run Prettier and ESLint fixes together      |
-| `npx tsc --noEmit`         | Type-check the project                      |
+
+CI runs `typecheck`, `lint`, and tests through `.github/workflows/ci.yml`.
+
+## Troubleshooting
+
+If Metro reports that it cannot resolve a newly added module such as `src/config/env.ts`, the running watcher has a stale cache. Stop Metro and restart cleanly:
+
+```bash
+npm run clean
+npm run start:clean
+```
+
+Then rebuild the app (`npm run ios` or `npm run android`).
 
 ## React Native 0.88 Notes
 

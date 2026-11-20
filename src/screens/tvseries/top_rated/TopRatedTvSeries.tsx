@@ -1,53 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
-import styles from './TopRatedTvSeries.style.ts';
+import { useNavigation } from '@react-navigation/native';
 import { useLazyTopRatedTvSeriesQuery } from '../../../service/rtk-query/rtkQuery.ts';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { usePaginatedQuery } from '../../../hooks/usePaginatedQuery.ts';
+import PaginatedMediaList from '../../../components/media/PaginatedMediaList.tsx';
+import MediaPosterCard from '../../../components/media/MediaPosterCard.tsx';
+import { screenStyles } from '../../../styles/screenStyles.ts';
+import { RootStackNavigationProp } from '../../../types/navigation/NavigationTypes.ts';
 import { TvSeriesItem } from '../../../types/response/TvSeriesItem.ts';
-import TvSeriesItemComponent from '../../../components/tvseries-item/TvSeriesItemComponent.tsx';
-import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 
-type TopRatedTvSeriesNavigationProp = NavigationProp<
-  RootStackParam,
-  'TvSeriesDetail'
->;
+const getId = (item: TvSeriesItem) => item.id;
+const keyExtractor = (item: TvSeriesItem) => String(item.id);
 
 const TopRatedTvSeries = () => {
-  const navigation = useNavigation<TopRatedTvSeriesNavigationProp>();
-  const [page, setPage] = useState(1);
-  const [tvSeries, setTvSeries] = useState<Array<TvSeriesItem>>([]);
-  const [fetchTopRatedTvSeries, { isFetching, error }] =
-    useLazyTopRatedTvSeriesQuery();
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const [fetchTopRated] = useLazyTopRatedTvSeriesQuery();
+  const fetchPage = useCallback(
+    (page: number) => fetchTopRated({ page }).unwrap(),
+    [fetchTopRated]
+  );
+  const list = usePaginatedQuery({ fetchPage, getId });
 
-  useEffect(() => {
-    const fetchTvSeries = async () => {
-      try {
-        const response = await fetchTopRatedTvSeries({ page }).unwrap();
-        setTvSeries((prevTvSeries) =>
-          page === 1 ? response : [...prevTvSeries, ...response]
-        );
-      } catch (err) {
-        console.error('Failed to fetch TV series:', err);
-      }
-    };
-
-    fetchTvSeries();
-  }, [page]);
-
-  const loadMoreTvSeries = () => {
-    if (!isFetching && !error) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
+  const renderItem = useCallback(
+    (item: TvSeriesItem) => (
+      <MediaPosterCard
+        posterPath={item.poster_path}
+        onPress={() =>
+          navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id })
+        }
+        accessibilityLabel={item.name}
+      />
+    ),
+    [navigation]
+  );
 
   return (
-    <View style={styles.mainView}>
-      <TvSeriesItemComponent
-        tvSeries={tvSeries}
-        onPress={(item) => {
-          navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id });
-        }}
-        loadMoreData={loadMoreTvSeries}
+    <View style={screenStyles.container}>
+      <PaginatedMediaList
+        items={list.items}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        onEndReached={list.loadMore}
+        isLoading={list.isLoading}
+        isFetchingMore={list.isFetchingMore}
+        isRefreshing={list.isRefreshing}
+        onRefresh={list.refresh}
+        error={list.error}
+        onRetry={list.retry}
       />
     </View>
   );

@@ -4,16 +4,13 @@ import bn from './locale-json/bn.json';
 import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'react-native-localize';
 
-// Define the type for supported languages
 export type TranslationKeys = keyof typeof en;
 
-// Detect the device language
 const getDeviceLanguage = (): string => {
   const locales = getLocales();
-  return locales[0]?.languageTag || 'en';
+  return locales[0]?.languageCode || 'en';
 };
 
-// Initialize i18next
 i18n.use(initReactI18next).init({
   resources: {
     en: { translation: en },

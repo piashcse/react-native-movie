@@ -1,14 +1,62 @@
 {
-  "releaseDate": "Release Date",
-  "description": "Description",
-  "duration": "Duration",
-  "rating": "Rating",
-  "numberOfEpisode": "Number Of Episode",
-  "language": "Language",
-  "similar": "Similar",
-  "artist": "Artist",
-  "min": "min",
-  "Remove Favorite": "Remove Favorite",
-  "Are you want to remove this item?": "Are you want to remove this item?",
-  "Artist Movies & Tv Series": "Artist Movies & Tv Series"
+  "app": {
+    "title": "RN Movie"
+  },
+  "navigation": {
+    "movie": "Movie",
+    "tvSeries": "TV Series",
+    "celebrities": "Celebrities",
+    "nowPlaying": "Now Playing",
+    "popular": "Popular",
+    "topRated": "Top Rated",
+    "upComing": "Up Coming",
+    "airingToday": "Airing Today",
+    "onTheAir": "On The Air",
+    "trending": "Trending",
+    "favorite": "Favorite",
+    "movieDetail": "Movie Detail",
+    "artistDetail": "Artist Detail",
+    "tvSeriesDetail": "TV Series Detail"
+  },
+  "common": {
+    "search": "Search",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "dismiss": "Dismiss",
+    "description": "Description",
+    "duration": "Duration",
+    "rating": "Rating",
+    "releaseDate": "Release Date",
+    "numberOfEpisodes": "Number Of Episodes",
+    "language": "Language",
+    "similar": "Similar",
+    "artist": "Artist",
+    "artists": "Artists",
+    "min": "min",
+    "biography": "Biography",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "placeOfBirth": "Place of Birth",
+    "knownFor": "Known For",
+    "popularity": "Popularity",
+    "noResults": "No results found",
+    "loading": "Loading...",
+    "errorTitle": "Something went wrong",
+    "errorMessage": "Please try again. If the problem continues, restart the app.",
+    "retry": "Try again",
+    "emptyFavorites": "No favorites yet",
+    "seeMore": "See More",
+    "seeLess": "See Less",
+    "networkUnavailable": "Network connection is unavailable.",
+    "remove": "Remove",
+    "female": "Female",
+    "male": "Male"
+  },
+  "favorite": {
+    "title": "Remove Favorite",
+    "message": "Are you sure you want to remove this item?"
+  },
+  "artist": {
+    "moviesAndTvSeries": "Artist Movies & TV Series"
+  }
 }

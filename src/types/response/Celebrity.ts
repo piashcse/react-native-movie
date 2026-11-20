@@ -13,17 +13,17 @@ export interface CelebrityItem {
   name: string;
   original_name: string;
   popularity: number;
-  profile_path: string;
+  profile_path: string | null;
   known_for: KnownFor[];
 }
 
 export interface KnownFor {
-  backdrop_path: string;
+  backdrop_path: string | null;
   id: number;
   name?: string;
   original_name?: string;
   overview: string;
-  poster_path: string;
+  poster_path: string | null;
   media_type: string;
   adult: boolean;
   original_language: string;
