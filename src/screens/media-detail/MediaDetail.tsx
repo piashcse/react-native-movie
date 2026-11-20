@@ -1,11 +1,5 @@
 import React, { useCallback } from 'react';
-import {
-  ActivityIndicator,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTranslation } from 'react-i18next';
@@ -26,8 +20,8 @@ import SeeMoreText from '../../components/see-more/SeeMoreText.tsx';
 import PosterImage from '../../components/media/PosterImage.tsx';
 import MediaPosterCard from '../../components/media/MediaPosterCard.tsx';
 import HorizontalList from '../../components/media/HorizontalList.tsx';
+import DetailSkeleton from '../../components/media/DetailSkeleton.tsx';
 import { mediaDetailStyles as styles } from './MediaDetail.styles.ts';
-import { appColors } from '../../constant/appColors.ts';
 
 type MediaKind = 'movie' | 'tv';
 
@@ -149,12 +143,7 @@ const MediaDetail = ({ kind, id }: MediaDetailProps) => {
   );
 
   if (detailQuery.isLoading) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color={appColors.primaryColor} />
-        <Text style={styles.message}>{t('common.loading')}</Text>
-      </View>
-    );
+    return <DetailSkeleton variant="media" />;
   }
 
   if (detailQuery.isError) {

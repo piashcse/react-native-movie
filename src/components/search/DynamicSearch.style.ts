@@ -33,9 +33,6 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 16,
   },
-  loader: {
-    paddingVertical: 16,
-  },
   emptyText: {
     padding: 24,
     color: '#666',

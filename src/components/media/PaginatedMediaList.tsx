@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import {
-  ActivityIndicator,
   StyleProp,
   StyleSheet,
   Text,
@@ -11,6 +10,8 @@ import {
 import { FlashList } from '@shopify/flash-list';
 import { useTranslation } from 'react-i18next';
 import { appColors } from '../../constant/appColors.ts';
+import MediaListSkeleton from './MediaListSkeleton.tsx';
+import ShimmerBlock from './ShimmerBlock.tsx';
 
 interface PaginatedMediaListProps<T> {
   items: T[];
@@ -44,12 +45,7 @@ const PaginatedMediaList = <T,>({
   const { t } = useTranslation();
 
   if (isLoading && items.length === 0) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color={appColors.primaryColor} />
-        <Text style={styles.message}>{t('common.loading')}</Text>
-      </View>
-    );
+    return <MediaListSkeleton numColumns={numColumns} />;
   }
 
   if (error && items.length === 0) {
@@ -86,10 +82,9 @@ const PaginatedMediaList = <T,>({
       }
       ListFooterComponent={
         isFetchingMore ? (
-          <ActivityIndicator
-            style={styles.footer}
-            color={appColors.primaryColor}
-          />
+          <View style={styles.footer}>
+            <ShimmerBlock width={120} height={10} borderRadius={5} />
+          </View>
         ) : error ? (
           <TouchableOpacity
             style={styles.footerRetry}
@@ -138,6 +133,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingVertical: 16,
+    alignItems: 'center',
   },
   footerRetry: {
     marginVertical: 16,
