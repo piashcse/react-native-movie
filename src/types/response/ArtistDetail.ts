@@ -3,7 +3,7 @@ export interface ArtistDetail {
   also_known_as: string[];
   biography: string;
   birthday: string;
-  deathday: any;
+  deathday: string | null;
   gender: number;
   homepage: string;
   id: number;

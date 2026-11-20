@@ -11,8 +11,10 @@ import styles from './Celebrity.style.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
 import { CelebrityItem } from '../../types/response/Celebrity.ts';
 
-interface CelebrityItemProps
-  extends Omit<FlashListProps<CelebrityItem>, 'data' | 'renderItem'> {
+interface CelebrityItemProps extends Omit<
+  FlashListProps<CelebrityItem>,
+  'data' | 'renderItem'
+> {
   celebrities: Array<CelebrityItem>;
   onPress: (item: CelebrityItem) => void;
   loadMoreData: () => void;

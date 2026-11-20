@@ -34,7 +34,7 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
   const tabName = getFocusedRouteNameFromRoute(route) || 'Movie';
   const isMovie = tabName === 'Movie';
   const isCelebrity = tabName === 'Celebrities';
-  
+
   const { data: movieTvData = [] } = useSearchMovieTvSeriesQuery(
     {
       query: searchQuery,
@@ -42,7 +42,7 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
     },
     { skip: isCelebrity || !searchQuery }
   );
-  
+
   const { data: celebrityData = [] } = useSearchCelebrityQuery(searchQuery, {
     skip: !isCelebrity || !searchQuery,
   });

@@ -7,7 +7,11 @@ import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-  { languageOptions: { globals: globals.browser } },
+  {
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node, ...globals.jest },
+    },
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
@@ -18,6 +22,7 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'no-unused-vars': 'warn',
+      '@typescript-eslint/no-require-imports': 'off',
       'react-native/no-inline-styles': 'off',
       'prettier/prettier': 'error', // Enforce Prettier rules
     },

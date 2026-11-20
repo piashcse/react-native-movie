@@ -5,8 +5,10 @@ import styles from './TvSeriesItem.style.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
 import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
 
-interface TvSeriesItemProps
-  extends Omit<FlashListProps<TvSeriesItem>, 'data' | 'renderItem'> {
+interface TvSeriesItemProps extends Omit<
+  FlashListProps<TvSeriesItem>,
+  'data' | 'renderItem'
+> {
   tvSeries: Array<TvSeriesItem>;
   onPress: (item: TvSeriesItem) => void;
   loadMoreData: () => void;

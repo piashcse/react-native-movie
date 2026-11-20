@@ -5,8 +5,10 @@ import styles from './MovieItem.style.ts';
 import { AppConstants } from '../../constant/appConstants.ts';
 import { MovieItem } from '../../types/response/MovieItem.ts';
 
-interface MovieItemProps
-  extends Omit<FlashListProps<MovieItem>, 'data' | 'renderItem'> {
+interface MovieItemProps extends Omit<
+  FlashListProps<MovieItem>,
+  'data' | 'renderItem'
+> {
   movies: Array<MovieItem>;
   onPress: (item: MovieItem) => void;
   loadMoreData: () => void;
