@@ -1,72 +1,68 @@
-import React, { useState } from 'react';
-import styles from './FovoriteTvSeries.style.ts';
-import { View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { Text, View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
+import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { useFavoriteStore } from '../../../store/zustand/favoriteStore.ts';
 import FavoriteComponent from '../../../components/favorite/FavoriteComponent.tsx';
-import { TvSeriesDetail } from '../../../types/response/TvSeriesDetail.ts';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 import ConfirmationAlert from '../../../components/alert-dialog/ConfirmationAlert.tsx';
-import { useLocalization } from '../../../hooks/useLocalization.ts';
-
-type FavoriteTvSeriesNavigationProp = NavigationProp<
-  RootStackParam,
-  'TvSeriesDetail'
->;
+import { RootStackNavigationProp } from '../../../types/navigation/NavigationTypes.ts';
+import { FavoriteTvSeries as FavoriteTvSeriesType } from '../../../types/favorite.ts';
+import { screenStyles } from '../../../styles/screenStyles.ts';
 
 const FavoriteTvSeries = () => {
-  const navigation = useNavigation<FavoriteTvSeriesNavigationProp>();
-  const { favoriteTvSeries, toggleFavoriteTvSeries } = useFavoriteStore();
-  const localization = useLocalization();
+  const { t } = useTranslation();
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const favoriteTvSeries = useFavoriteStore((state) => state.favoriteTvSeries);
+  const removeFavoriteTvSeries = useFavoriteStore(
+    (state) => state.removeFavoriteTvSeries
+  );
 
-  const [visible, setVisible] = useState(false);
-  const [tvSeriesToRemove, setTvSeriesToRemove] =
-    useState<TvSeriesDetail | null>(null);
+  const [tvSeriesToRemove, setTvSeriesToRemove] = useState<number | null>(null);
 
-  const showDialog = (movie: TvSeriesDetail) => {
-    setTvSeriesToRemove(movie);
-    setVisible(true);
-  };
-
-  const hideDialog = () => {
-    setVisible(false);
+  const confirmRemoveFavorite = () => {
+    if (tvSeriesToRemove !== null) {
+      removeFavoriteTvSeries(tvSeriesToRemove);
+    }
     setTvSeriesToRemove(null);
   };
 
-  const confirmRemoveFavorite = () => {
-    if (tvSeriesToRemove) {
-      toggleFavoriteTvSeries(tvSeriesToRemove);
-    }
-    hideDialog();
-  };
-
-  const favorite = ({ item }: { item: TvSeriesDetail }) => {
-    return (
+  const renderItem = useCallback(
+    (item: FavoriteTvSeriesType) => (
       <FavoriteComponent
         title={item.name}
-        poster_path={item.poster_path}
-        onPress={() => {
-          navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id });
-        }}
-        onRemove={() => showDialog(item)}
+        posterPath={item.poster_path}
+        onPress={() =>
+          navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id })
+        }
+        onRemove={() => setTvSeriesToRemove(item.id)}
+        removeLabel={t('favorite.title')}
       />
-    );
-  };
+    ),
+    [navigation, t]
+  );
+
   return (
-    <View style={styles.mainView}>
+    <View style={screenStyles.container}>
       <FlashList
-        style={styles.flatListStyle}
+        style={screenStyles.list}
         data={favoriteTvSeries}
-        renderItem={favorite}
-        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => renderItem(item)}
+        keyExtractor={(item) => String(item.id)}
+        ListEmptyComponent={
+          <View style={screenStyles.empty}>
+            <Text style={screenStyles.emptyText}>
+              {t('common.emptyFavorites')}
+            </Text>
+          </View>
+        }
       />
       <ConfirmationAlert
-        visible={visible}
-        title={localization.TITLE}
-        message={localization.MESSAGE}
+        visible={tvSeriesToRemove !== null}
+        title={t('favorite.title')}
+        message={t('favorite.message')}
         onConfirm={confirmRemoveFavorite}
-        onCancel={hideDialog}
+        onCancel={() => setTvSeriesToRemove(null)}
       />
     </View>
   );

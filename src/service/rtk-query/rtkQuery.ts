@@ -7,57 +7,70 @@ import { ArtistDetail } from '../../types/response/ArtistDetail.ts';
 import { TvSeriesResult } from '../../types/response/TvSeriesResult.ts';
 import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
 import { TvSeriesDetail } from '../../types/response/TvSeriesDetail.ts';
-import {
-  SearchData,
-  SearchParams,
-} from '../../components/search/DynamicSearch.tsx';
 import baseQuery from '../baseQuery.ts';
-import { Pagination } from '../../types/ApiRequest/ApiRequest.ts';
 import { Celebrity, CelebrityItem } from '../../types/response/Celebrity.ts';
 import { CombinedCredit } from '../../types/response/CombinedCredit.ts';
+import {
+  PaginatedResult,
+  Pagination,
+  SearchData,
+  SearchParams,
+} from '../../types/api.ts';
+
+const toPaginatedResult = <T>(response: {
+  results: T[];
+  page: number;
+  total_pages: number;
+  total_results: number;
+}): PaginatedResult<T> => ({
+  items: response.results,
+  page: response.page,
+  totalPages: response.total_pages,
+  totalResults: response.total_results,
+});
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: baseQuery(),
   endpoints: (builder) => ({
-    nowPlayingMovie: builder.query<MovieItem[], Pagination>({
+    nowPlayingMovie: builder.query<PaginatedResult<MovieItem>, Pagination>({
       query: (params: Pagination) => ({
         url: 'movie/now_playing',
         params,
       }),
-      transformResponse: (response: MovieResult) => response.results,
+      transformResponse: (response: MovieResult) => toPaginatedResult(response),
     }),
-    popularMovie: builder.query<MovieItem[], Pagination>({
+    popularMovie: builder.query<PaginatedResult<MovieItem>, Pagination>({
       query: (params: Pagination) => ({
         url: 'movie/popular',
         params,
       }),
-      transformResponse: (response: MovieResult) => response.results,
+      transformResponse: (response: MovieResult) => toPaginatedResult(response),
     }),
-    topRatedMovie: builder.query<MovieItem[], Pagination>({
+    topRatedMovie: builder.query<PaginatedResult<MovieItem>, Pagination>({
       query: (params: Pagination) => ({
         url: 'movie/top_rated',
         params,
       }),
-      transformResponse: (response: MovieResult) => response.results,
+      transformResponse: (response: MovieResult) => toPaginatedResult(response),
     }),
-    upcomingMovie: builder.query<MovieItem[], Pagination>({
+    upcomingMovie: builder.query<PaginatedResult<MovieItem>, Pagination>({
       query: (params: Pagination) => ({
         url: 'movie/upcoming',
         params,
       }),
-      transformResponse: (response: MovieResult) => response.results,
+      transformResponse: (response: MovieResult) => toPaginatedResult(response),
     }),
     movieDetail: builder.query<MovieDetail, number>({
       query: (movieId: number) => ({
         url: `movie/${movieId}`,
       }),
     }),
-    similarMovie: builder.query<MovieItem[], number>({
+    similarMovie: builder.query<PaginatedResult<MovieItem>, number>({
       query: (movieId: number) => ({
         url: `movie/${movieId}/recommendations`,
       }),
-      transformResponse: (response: MovieResult) => response.results,
+      transformResponse: (response: MovieResult) => toPaginatedResult(response),
     }),
     artistAndCrew: builder.query<CastAndCrew, number>({
       query: (movieId: number) => ({
@@ -71,44 +84,52 @@ export const movieApi = createApi({
     }),
 
     // TV Series
-    airingTodayTvSeries: builder.query<TvSeriesItem[], Pagination>({
+    airingTodayTvSeries: builder.query<
+      PaginatedResult<TvSeriesItem>,
+      Pagination
+    >({
       query: (params: Pagination) => ({
         url: 'tv/airing_today',
         params,
       }),
-      transformResponse: (response: TvSeriesResult) => response.results,
+      transformResponse: (response: TvSeriesResult) =>
+        toPaginatedResult(response),
     }),
-    onTheAirTvSeries: builder.query<TvSeriesItem[], Pagination>({
+    onTheAirTvSeries: builder.query<PaginatedResult<TvSeriesItem>, Pagination>({
       query: (params: Pagination) => ({
         url: 'tv/on_the_air',
         params,
       }),
-      transformResponse: (response: TvSeriesResult) => response.results,
+      transformResponse: (response: TvSeriesResult) =>
+        toPaginatedResult(response),
     }),
-    popularTvSeries: builder.query<TvSeriesItem[], Pagination>({
+    popularTvSeries: builder.query<PaginatedResult<TvSeriesItem>, Pagination>({
       query: (params: Pagination) => ({
         url: 'tv/popular',
         params,
       }),
-      transformResponse: (response: TvSeriesResult) => response.results,
+      transformResponse: (response: TvSeriesResult) =>
+        toPaginatedResult(response),
     }),
-    topRatedTvSeries: builder.query<TvSeriesItem[], Pagination>({
+    topRatedTvSeries: builder.query<PaginatedResult<TvSeriesItem>, Pagination>({
       query: (params: Pagination) => ({
         url: 'tv/top_rated',
         params,
       }),
-      transformResponse: (response: TvSeriesResult) => response.results,
+      transformResponse: (response: TvSeriesResult) =>
+        toPaginatedResult(response),
     }),
     tvSeriesDetail: builder.query<TvSeriesDetail, number>({
       query: (tvSeriesId: number) => ({
         url: `tv/${tvSeriesId}`,
       }),
     }),
-    recommendedTvSeries: builder.query<TvSeriesItem[], number>({
+    recommendedTvSeries: builder.query<PaginatedResult<TvSeriesItem>, number>({
       query: (tvSeriesId: number) => ({
         url: `tv/${tvSeriesId}/recommendations`,
       }),
-      transformResponse: (response: TvSeriesResult) => response.results,
+      transformResponse: (response: TvSeriesResult) =>
+        toPaginatedResult(response),
     }),
     tvSeriesArtistAndCrew: builder.query<CastAndCrew, number>({
       query: (tvSeriesId: number) => ({
@@ -132,19 +153,24 @@ export const movieApi = createApi({
       }),
       transformResponse: (response: Celebrity) => response.results,
     }),
-    popularCelebrity: builder.query<CelebrityItem[], Pagination>({
-      query: (params: Pagination) => ({
-        url: `person/popular`,
-        params,
-      }),
-      transformResponse: (response: Celebrity) => response.results,
-    }),
-    trendingCelebrity: builder.query<CelebrityItem[], Pagination>({
+    popularCelebrity: builder.query<PaginatedResult<CelebrityItem>, Pagination>(
+      {
+        query: (params: Pagination) => ({
+          url: `person/popular`,
+          params,
+        }),
+        transformResponse: (response: Celebrity) => toPaginatedResult(response),
+      }
+    ),
+    trendingCelebrity: builder.query<
+      PaginatedResult<CelebrityItem>,
+      Pagination
+    >({
       query: (params: Pagination) => ({
         url: `trending/person/week`,
         params,
       }),
-      transformResponse: (response: Celebrity) => response.results,
+      transformResponse: (response: Celebrity) => toPaginatedResult(response),
     }),
     artistMoviesAndTvSeries: builder.query<Cast[], number>({
       query: (personId: number) => ({
@@ -176,4 +202,5 @@ export const {
   useLazyPopularCelebrityQuery,
   useLazyTrendingCelebrityQuery,
   useLazyArtistMoviesAndTvSeriesQuery,
+  useArtistMoviesAndTvSeriesQuery,
 } = movieApi;

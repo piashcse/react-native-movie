@@ -1,141 +1,167 @@
+import React, { useCallback, useState } from 'react';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import {
   getFocusedRouteNameFromRoute,
-  NavigationProp,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
-import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
-import { Searchbar, Text } from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 import styles from './DynamicSearch.style.ts';
-import { AppConstants } from '../../constant/appConstants.ts';
 import { CelebrityItem } from '../../types/response/Celebrity.ts';
-import { MovieItem } from '../../types/response/MovieItem.ts';
-import { RootStackParam } from '../../types/navigation/NavigationTypes.ts';
-import { TvSeriesItem } from '../../types/response/TvSeriesItem.ts';
+import { RootStackNavigationProp } from '../../types/navigation/NavigationTypes.ts';
+import { SearchData } from '../../types/api.ts';
 import {
   useSearchCelebrityQuery,
   useSearchMovieTvSeriesQuery,
 } from '../../service/rtk-query/rtkQuery.ts';
+import { useDebouncedValue } from '../../hooks/useDebouncedValue.ts';
+import PosterImage from '../media/PosterImage.tsx';
+import { appColors } from '../../constant/appColors.ts';
 
-export type SearchData = MovieItem & TvSeriesItem;
-
-export interface SearchParams {
-  query: string;
-  isMovie: boolean;
-}
-type SearchNavigationProp = NavigationProp<RootStackParam, 'SearchNavigation'>;
+const MIN_SEARCH_LENGTH = 2;
 
 const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
-  const navigation = useNavigation<SearchNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const route = useRoute();
   const tabName = getFocusedRouteNameFromRoute(route) || 'Movie';
   const isMovie = tabName === 'Movie';
   const isCelebrity = tabName === 'Celebrities';
+  const debouncedQuery = useDebouncedValue(searchQuery.trim(), 400);
+  const canSearch = debouncedQuery.length >= MIN_SEARCH_LENGTH;
 
-  const { data: movieTvData = [] } = useSearchMovieTvSeriesQuery(
+  const movieTvQuery = useSearchMovieTvSeriesQuery(
     {
-      query: searchQuery,
-      isMovie: isMovie,
+      query: debouncedQuery,
+      isMovie,
     },
-    { skip: isCelebrity || !searchQuery }
+    { skip: isCelebrity || !canSearch }
   );
 
-  const { data: celebrityData = [] } = useSearchCelebrityQuery(searchQuery, {
-    skip: !isCelebrity || !searchQuery,
+  const celebrityQuery = useSearchCelebrityQuery(debouncedQuery, {
+    skip: !isCelebrity || !canSearch,
   });
 
-  const renderMovieTvItem = ({ item }: { item: SearchData }) => {
-    return (
-      <TouchableOpacity
-        style={styles.itemListContainer}
-        onPress={() => {
-          if (isMovie) {
-            navigation.navigate('MovieDetail', { movieId: item.id });
-          } else {
-            navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id });
-          }
-        }}
-      >
-        <ImageBackground
-          style={styles.imageView}
-          imageStyle={styles.backgroundImage}
-          source={{ uri: `${AppConstants.IMAGE_URL}${item.poster_path}` }}
-        >
-          <Image
-            style={styles.imageView}
-            source={{
-              uri: `${AppConstants.IMAGE_URL}${item.poster_path}`,
-            }}
-          />
-        </ImageBackground>
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleStyle}>
-            {isMovie ? item.title : item.name}
-          </Text>
-          <Text>{isMovie ? item.release_date : item.first_air_date}</Text>
-          <Text>Rating: {isMovie ? item.vote_average : item.vote_average}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+  const renderMovieTvItem = useCallback(
+    (item: SearchData) => {
+      const title = 'title' in item ? item.title : item.name;
+      const date =
+        'release_date' in item ? item.release_date : item.first_air_date;
 
-  const renderCelebrityItem = ({ item }: { item: CelebrityItem }) => {
-    return (
-      <TouchableOpacity
-        style={styles.itemListContainer}
-        onPress={() => {
-          navigation.navigate('ArtistDetail', { personId: item.id });
-        }}
-      >
-        <ImageBackground
-          style={styles.imageView}
-          imageStyle={styles.backgroundImage}
-          source={{ uri: `${AppConstants.IMAGE_URL}${item.profile_path}` }}
+      return (
+        <Pressable
+          style={styles.itemListContainer}
+          onPress={() => {
+            if (isMovie) {
+              navigation.navigate('MovieDetail', { movieId: item.id });
+            } else {
+              navigation.navigate('TvSeriesDetail', { tvSeriesId: item.id });
+            }
+          }}
+          accessibilityRole="button"
+          accessibilityLabel={title}
         >
-          <Image
+          <PosterImage
+            path={item.poster_path}
+            size="w185"
             style={styles.imageView}
-            source={{
-              uri: `${AppConstants.IMAGE_URL}${item.profile_path}`,
-            }}
+            accessibilityLabel={title}
           />
-        </ImageBackground>
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleStyle}>{title}</Text>
+            <Text>{date}</Text>
+            <Text>
+              {t('common.rating')}: {item.vote_average}
+            </Text>
+          </View>
+        </Pressable>
+      );
+    },
+    [isMovie, navigation, t]
+  );
+
+  const renderCelebrityItem = useCallback(
+    (item: CelebrityItem) => (
+      <Pressable
+        style={styles.itemListContainer}
+        onPress={() =>
+          navigation.navigate('ArtistDetail', { personId: item.id })
+        }
+        accessibilityRole="button"
+        accessibilityLabel={item.name}
+      >
+        <PosterImage
+          path={item.profile_path}
+          size="w185"
+          style={styles.imageView}
+          accessibilityLabel={item.name}
+        />
         <View style={styles.titleContainer}>
           <Text style={styles.titleStyle}>{item.name}</Text>
-          <Text>Popularity: {item.popularity.toFixed(1)}</Text>
-          <Text>Known for: {item.known_for_department}</Text>
+          <Text>
+            {t('common.popularity')}: {item.popularity.toFixed(1)}
+          </Text>
+          <Text>
+            {t('common.knownFor')}: {item.known_for_department}
+          </Text>
         </View>
-      </TouchableOpacity>
-    );
-  };
+      </Pressable>
+    ),
+    [navigation, t]
+  );
 
-  return isVisible ? (
+  if (!isVisible) {
+    return null;
+  }
+
+  const activeQuery = isCelebrity ? celebrityQuery : movieTvQuery;
+  const data = isCelebrity ? celebrityQuery.data : movieTvQuery.data;
+
+  return (
     <View style={styles.rootView}>
       <Searchbar
         style={styles.searchBarContainer}
-        placeholder="Search"
+        placeholder={t('common.search')}
         onChangeText={setSearchQuery}
         value={searchQuery}
+        accessibilityLabel={t('common.search')}
       />
+      {activeQuery.isFetching && !data?.length ? (
+        <ActivityIndicator
+          style={styles.loader}
+          color={appColors.primaryColor}
+        />
+      ) : null}
       {isCelebrity ? (
         <FlashList
           style={styles.flatListContainer}
-          data={celebrityData}
-          renderItem={renderCelebrityItem}
-          keyExtractor={(item: CelebrityItem) => item.id.toString()}
+          data={celebrityQuery.data ?? []}
+          renderItem={({ item }) => renderCelebrityItem(item)}
+          keyExtractor={(item) => String(item.id)}
+          ListEmptyComponent={
+            canSearch ? (
+              <Text style={styles.emptyText}>{t('common.noResults')}</Text>
+            ) : null
+          }
         />
       ) : (
         <FlashList
           style={styles.flatListContainer}
-          data={movieTvData}
-          renderItem={renderMovieTvItem}
-          keyExtractor={(item: SearchData) => item.id.toString()}
+          data={(movieTvQuery.data ?? []) as SearchData[]}
+          renderItem={({ item }) => renderMovieTvItem(item)}
+          keyExtractor={(item) => String(item.id)}
+          ListEmptyComponent={
+            canSearch ? (
+              <Text style={styles.emptyText}>{t('common.noResults')}</Text>
+            ) : null
+          }
         />
       )}
     </View>
-  ) : null;
+  );
 };
 
 export default DynamicSearch;

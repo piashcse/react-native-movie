@@ -1,14 +1,62 @@
 {
-  "releaseDate": "Release Date",
-  "description": "Description",
-  "duration": "Duration",
-  "rating": "Rating",
-  "numberOfEpisode": "Number Of Episode",
-  "language": "Language",
-  "similar": "Similar",
-  "artist": "Artist",
-  "min": "min",
-  "Remove Favorite": "ফেবারিট রিমুভ",
-  "Are you want to remove this item?": "আপনি কি এ আইটেমটি রিমুভ করতে চাচ্ছেন?",
-  "Artist Movies & Tv Series": "Artist Movies & Tv Series"
+  "app": {
+    "title": "আরএন মুভি"
+  },
+  "navigation": {
+    "movie": "সিনেমা",
+    "tvSeries": "টিভি সিরিজ",
+    "celebrities": "সেলিব্রিটি",
+    "nowPlaying": "এখন চলছে",
+    "popular": "জনপ্রিয়",
+    "topRated": "সেরা রেটিং",
+    "upComing": "আসছে",
+    "airingToday": "আজ সম্প্রচারিত",
+    "onTheAir": "সম্প্রচারে",
+    "trending": "ট্রেন্ডিং",
+    "favorite": "প্রিয়",
+    "movieDetail": "সিনেমার বিস্তারিত",
+    "artistDetail": "শিল্পীর বিস্তারিত",
+    "tvSeriesDetail": "টিভি সিরিজের বিস্তারিত"
+  },
+  "common": {
+    "search": "খুঁজুন",
+    "cancel": "বাতিল",
+    "yes": "হ্যাঁ",
+    "dismiss": "বন্ধ করুন",
+    "description": "বিবরণ",
+    "duration": "সময়কাল",
+    "rating": "রেটিং",
+    "releaseDate": "মুক্তির তারিখ",
+    "numberOfEpisodes": "পর্ব সংখ্যা",
+    "language": "ভাষা",
+    "similar": "সাদৃশ্য",
+    "artist": "শিল্পী",
+    "artists": "শিল্পীরা",
+    "min": "মিনিট",
+    "biography": "জীবনী",
+    "gender": "লিঙ্গ",
+    "birthday": "জন্মদিন",
+    "placeOfBirth": "জন্মস্থান",
+    "knownFor": "পরিচিত",
+    "popularity": "জনপ্রিয়তা",
+    "noResults": "কোনো ফলাফল পাওয়া যায়নি",
+    "loading": "লোড হচ্ছে...",
+    "errorTitle": "কিছু একটা সমস্যা হয়েছে",
+    "errorMessage": "আবার চেষ্টা করুন। সমস্যা চলতে থাকলে অ্যাপটি আবার চালু করুন।",
+    "retry": "আবার চেষ্টা করুন",
+    "emptyFavorites": "এখনও কোনো প্রিয় নেই",
+    "seeMore": "আরও দেখুন",
+    "seeLess": "কম দেখুন",
+    "networkUnavailable": "ইন্টারনেট সংযোগ নেই।",
+    "remove": "সরান",
+    "female": "মহিলা",
+    "male": "পুরুষ"
+  },
+  "favorite": {
+    "title": "প্রিয় তালিকা থেকে সরান",
+    "message": "আপনি কি এই আইটেমটি সরাতে চান?"
+  },
+  "artist": {
+    "moviesAndTvSeries": "শিল্পীর সিনেমা ও টিভি সিরিজ"
+  }
 }

@@ -1,6 +1,6 @@
 import { AxiosError, AxiosRequestConfig } from 'axios';
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
-import { AppConstants } from '../constant/appConstants.ts';
+import { env } from '../config/env.ts';
 import axiosInstance from './axiosInstance.ts';
 
 type AxiosBaseQueryArgs = {
@@ -14,10 +14,18 @@ type AxiosQueryParams = {
   params?: AxiosRequestConfig['params'];
   headers?: AxiosRequestConfig['headers'];
 };
+
+type ApiError = {
+  status: number;
+  data: unknown;
+};
+
 const axiosBaseQuery =
-  (
-    { baseUrl }: AxiosBaseQueryArgs = { baseUrl: AppConstants.BASE_URL }
-  ): BaseQueryFn<AxiosQueryParams, unknown, unknown> =>
+  ({ baseUrl = env.baseUrl }: AxiosBaseQueryArgs = {}): BaseQueryFn<
+    AxiosQueryParams,
+    unknown,
+    ApiError
+  > =>
   async ({ url, method = 'GET', data, params, headers }) => {
     try {
       const result = await axiosInstance({
@@ -26,7 +34,7 @@ const axiosBaseQuery =
         data,
         params: {
           ...params,
-          api_key: AppConstants.API_KEY, // Add API key here
+          api_key: env.apiKey,
         },
         headers,
       });
@@ -35,8 +43,8 @@ const axiosBaseQuery =
       const error = axiosError as AxiosError;
       return {
         error: {
-          status: error.response?.status || 500,
-          data: error.response?.data || error.message,
+          status: error.response?.status ?? 500,
+          data: error.response?.data ?? error.message,
         },
       };
     }

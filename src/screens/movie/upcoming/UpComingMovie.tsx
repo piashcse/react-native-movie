@@ -1,53 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
-import MovieItemComponent from '../../../components/movie-item/MovieItemComponent.tsx';
-import styles from './UpComingMovie.style.ts';
+import { useNavigation } from '@react-navigation/native';
 import { useLazyUpcomingMovieQuery } from '../../../service/rtk-query/rtkQuery.ts';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { usePaginatedQuery } from '../../../hooks/usePaginatedQuery.ts';
+import PaginatedMediaList from '../../../components/media/PaginatedMediaList.tsx';
+import MediaPosterCard from '../../../components/media/MediaPosterCard.tsx';
+import { screenStyles } from '../../../styles/screenStyles.ts';
+import { RootStackNavigationProp } from '../../../types/navigation/NavigationTypes.ts';
 import { MovieItem } from '../../../types/response/MovieItem.ts';
-import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
 
-type UpComingMovieNavigationProp = NavigationProp<
-  RootStackParam,
-  'MovieDetail'
->;
+const getId = (item: MovieItem) => item.id;
+const keyExtractor = (item: MovieItem) => String(item.id);
 
 const UpComingMovie = () => {
-  const navigation = useNavigation<UpComingMovieNavigationProp>();
-  const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState<Array<MovieItem>>([]);
-  const [fetchUpcomingMovie, { isFetching, error }] =
-    useLazyUpcomingMovieQuery();
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const [fetchUpcoming] = useLazyUpcomingMovieQuery();
+  const fetchPage = useCallback(
+    (page: number) => fetchUpcoming({ page }).unwrap(),
+    [fetchUpcoming]
+  );
+  const list = usePaginatedQuery({ fetchPage, getId });
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetchUpcomingMovie({ page }).unwrap();
-        setMovies((prevMovies) =>
-          page === 1 ? response : [...prevMovies, ...response]
-        );
-      } catch (err) {
-        console.error('Failed to fetch movies:', err);
-      }
-    };
-
-    fetchMovies();
-  }, [page]);
-
-  const loadMoreMovies = () => {
-    if (!isFetching && !error) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
+  const renderItem = useCallback(
+    (item: MovieItem) => (
+      <MediaPosterCard
+        posterPath={item.poster_path}
+        onPress={() => navigation.navigate('MovieDetail', { movieId: item.id })}
+        accessibilityLabel={item.title}
+      />
+    ),
+    [navigation]
+  );
 
   return (
-    <View style={styles.mainView}>
-      <MovieItemComponent
-        movies={movies}
-        onPress={(item) =>
-          navigation.navigate('MovieDetail', { movieId: item.id })
-        }
-        loadMoreData={loadMoreMovies}
+    <View style={screenStyles.container}>
+      <PaginatedMediaList
+        items={list.items}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        onEndReached={list.loadMore}
+        isLoading={list.isLoading}
+        isFetchingMore={list.isFetchingMore}
+        isRefreshing={list.isRefreshing}
+        onRefresh={list.refresh}
+        error={list.error}
+        onRetry={list.retry}
       />
     </View>
   );

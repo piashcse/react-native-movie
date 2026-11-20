@@ -1,53 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import styles from './TrendingCelebrity.style.ts';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useLazyTrendingCelebrityQuery } from '../../../service/rtk-query/rtkQuery.ts';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParam } from '../../../types/navigation/NavigationTypes.ts';
+import { usePaginatedQuery } from '../../../hooks/usePaginatedQuery.ts';
+import PaginatedMediaList from '../../../components/media/PaginatedMediaList.tsx';
+import CelebrityCard from '../../../components/media/CelebrityCard.tsx';
+import { screenStyles } from '../../../styles/screenStyles.ts';
+import { RootStackNavigationProp } from '../../../types/navigation/NavigationTypes.ts';
 import { CelebrityItem } from '../../../types/response/Celebrity.ts';
-import CelebrityItemComponent from '../../../components/celebrity-item/CelebrityItemComponent.tsx';
 
-type TrendingCelebrityNavigationProp = NavigationProp<
-  RootStackParam,
-  'ArtistDetail'
->;
+const getId = (item: CelebrityItem) => item.id;
+const keyExtractor = (item: CelebrityItem) => String(item.id);
 
 const TrendingCelebrity = () => {
-  const navigation = useNavigation<TrendingCelebrityNavigationProp>();
-  const [page, setPage] = useState(1);
-  const [celebrities, setCelebrities] = useState<Array<CelebrityItem>>([]);
-  const [fetchTrendingMovie, { isFetching, error }] =
-    useLazyTrendingCelebrityQuery();
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const [fetchTrending] = useLazyTrendingCelebrityQuery();
+  const fetchPage = useCallback(
+    (page: number) => fetchTrending({ page }).unwrap(),
+    [fetchTrending]
+  );
+  const list = usePaginatedQuery({ fetchPage, getId });
 
-  useEffect(() => {
-    const fetchTrendingCelebrities = async () => {
-      try {
-        const response = await fetchTrendingMovie({ page }).unwrap();
-        setCelebrities((prevCelebrities) =>
-          page === 1 ? response : [...prevCelebrities, ...response]
-        );
-      } catch (err) {
-        console.error('Failed to fetch celebrities:', err);
-      }
-    };
-
-    fetchTrendingCelebrities();
-  }, [page]);
-
-  const loadMoreCelebrities = () => {
-    if (!isFetching && !error) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  return (
-    <View style={styles.mainView}>
-      <CelebrityItemComponent
-        celebrities={celebrities}
-        onPress={(item) =>
+  const renderItem = useCallback(
+    (item: CelebrityItem) => (
+      <CelebrityCard
+        name={item.name}
+        profilePath={item.profile_path}
+        popularity={item.popularity}
+        onPress={() =>
           navigation.navigate('ArtistDetail', { personId: item.id })
         }
-        loadMoreData={loadMoreCelebrities}
+        accessibilityLabel={item.name}
+      />
+    ),
+    [navigation]
+  );
+
+  return (
+    <View style={screenStyles.container}>
+      <PaginatedMediaList
+        items={list.items}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        onEndReached={list.loadMore}
+        isLoading={list.isLoading}
+        isFetchingMore={list.isFetchingMore}
+        isRefreshing={list.isRefreshing}
+        onRefresh={list.refresh}
+        error={list.error}
+        onRetry={list.retry}
       />
     </View>
   );

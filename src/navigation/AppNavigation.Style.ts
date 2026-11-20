@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
     right: 16,
     position: 'absolute',
   },
+  headerIcon: {
+    marginRight: 16,
+  },
   tabBarIndicatorStyle: {
     backgroundColor: appColors.tabIndicatorColor,
     height: 3,

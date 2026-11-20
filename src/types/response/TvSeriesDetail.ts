@@ -1,18 +1,18 @@
 export interface TvSeriesDetail {
   adult: boolean;
-  backdrop_path: string;
+  backdrop_path: string | null;
   created_by: unknown[];
   episode_run_time: number[];
   first_air_date: string;
   genres: Genre[];
-  homepage: string;
+  homepage: string | null;
   id: number;
   in_production: boolean;
   languages: string[];
-  last_air_date: string;
-  last_episode_to_air: LastEpisodeToAir;
+  last_air_date: string | null;
+  last_episode_to_air: LastEpisodeToAir | null;
   name: string;
-  next_episode_to_air: NextEpisodeToAir;
+  next_episode_to_air: NextEpisodeToAir | null;
   networks: Network[];
   number_of_episodes: number;
   number_of_seasons: number;
@@ -21,13 +21,13 @@ export interface TvSeriesDetail {
   original_name: string;
   overview: string;
   popularity: number;
-  poster_path: string;
+  poster_path: string | null;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
   seasons: Season[];
   spoken_languages: SpokenLanguage[];
   status: string;
-  tagline: string;
+  tagline: string | null;
   type: string;
   vote_average: number;
   vote_count: number;
@@ -51,7 +51,7 @@ export interface LastEpisodeToAir {
   runtime: number | null;
   season_number: number;
   show_id: number;
-  still_path: string;
+  still_path: string | null;
 }
 
 export interface NextEpisodeToAir {
@@ -67,19 +67,19 @@ export interface NextEpisodeToAir {
   runtime: number | null;
   season_number: number;
   show_id: number;
-  still_path: string;
+  still_path: string | null;
 }
 
 export interface Network {
   id: number;
-  logo_path: string;
+  logo_path: string | null;
   name: string;
   origin_country: string;
 }
 
 export interface ProductionCompany {
   id: number;
-  logo_path?: string;
+  logo_path: string | null;
   name: string;
   origin_country: string;
 }
@@ -90,12 +90,12 @@ export interface ProductionCountry {
 }
 
 export interface Season {
-  air_date: string;
+  air_date: string | null;
   episode_count: number;
   id: number;
   name: string;
   overview: string;
-  poster_path: string;
+  poster_path: string | null;
   season_number: number;
   vote_average: number;
 }

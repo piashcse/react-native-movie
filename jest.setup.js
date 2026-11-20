@@ -1,5 +1,7 @@
 import 'react-native-gesture-handler/jestSetup';
 
+jest.mock('redux-logger', () => () => (next) => (action) => next(action));
+
 jest.mock('@react-native-community/netinfo', () =>
   require('@react-native-community/netinfo/jest/netinfo-mock.js')
 );
