@@ -1,7 +1,7 @@
 export interface TvSeriesDetail {
   adult: boolean;
   backdrop_path: string;
-  created_by: any[];
+  created_by: unknown[];
   episode_run_time: number[];
   first_air_date: string;
   genres: Genre[];
@@ -48,7 +48,7 @@ export interface LastEpisodeToAir {
   episode_number: number;
   episode_type: string;
   production_code: string;
-  runtime: any;
+  runtime: number | null;
   season_number: number;
   show_id: number;
   still_path: string;
@@ -64,7 +64,7 @@ export interface NextEpisodeToAir {
   episode_number: number;
   episode_type: string;
   production_code: string;
-  runtime: any;
+  runtime: number | null;
   season_number: number;
   show_id: number;
   still_path: string;

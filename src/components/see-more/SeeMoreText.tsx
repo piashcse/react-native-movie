@@ -1,10 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  NativeSyntheticEvent,
-  Text,
-  TextLayoutEventData,
-  TextStyle,
-} from 'react-native';
+import { Text, TextLayoutEvent, TextStyle } from 'react-native';
 
 interface ReadMoreTextProps {
   readMoreStyle?: TextStyle;
@@ -32,7 +27,7 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
   }, [textShown, numberOfLines]);
 
   const onTextLayout = useCallback(
-    (e: NativeSyntheticEvent<TextLayoutEventData>) => {
+    (e: TextLayoutEvent) => {
       const linesCount = e.nativeEvent.lines.length;
       console.log('Total lines in text:', linesCount);
 
