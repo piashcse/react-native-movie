@@ -1,11 +1,5 @@
 import React, { useCallback } from 'react';
-import {
-  ActivityIndicator,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import {
@@ -21,8 +15,8 @@ import SeeMoreText from '../../components/see-more/SeeMoreText.tsx';
 import PosterImage from '../../components/media/PosterImage.tsx';
 import MediaPosterCard from '../../components/media/MediaPosterCard.tsx';
 import HorizontalList from '../../components/media/HorizontalList.tsx';
+import DetailSkeleton from '../../components/media/DetailSkeleton.tsx';
 import { mediaDetailStyles } from '../media-detail/MediaDetail.styles.ts';
-import { appColors } from '../../constant/appColors.ts';
 import styles from './ArtistDetail.style.ts';
 
 const ArtistDetail = () => {
@@ -62,12 +56,7 @@ const ArtistDetail = () => {
   );
 
   if (artistQuery.isLoading) {
-    return (
-      <View style={mediaDetailStyles.centered}>
-        <ActivityIndicator size="large" color={appColors.primaryColor} />
-        <Text style={mediaDetailStyles.message}>{t('common.loading')}</Text>
-      </View>
-    );
+    return <DetailSkeleton variant="artist" />;
   }
 
   if (artistQuery.isError) {

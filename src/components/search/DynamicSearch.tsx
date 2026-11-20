@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import {
   getFocusedRouteNameFromRoute,
   useNavigation,
@@ -18,7 +18,7 @@ import {
 } from '../../service/rtk-query/rtkQuery.ts';
 import { useDebouncedValue } from '../../hooks/useDebouncedValue.ts';
 import PosterImage from '../media/PosterImage.tsx';
-import { appColors } from '../../constant/appColors.ts';
+import SearchListSkeleton from '../media/SearchListSkeleton.tsx';
 
 const MIN_SEARCH_LENGTH = 2;
 
@@ -119,6 +119,7 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
 
   const activeQuery = isCelebrity ? celebrityQuery : movieTvQuery;
   const data = isCelebrity ? celebrityQuery.data : movieTvQuery.data;
+  const isInitialLoading = activeQuery.isFetching && !data?.length;
 
   return (
     <View style={styles.rootView}>
@@ -129,13 +130,9 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
         value={searchQuery}
         accessibilityLabel={t('common.search')}
       />
-      {activeQuery.isFetching && !data?.length ? (
-        <ActivityIndicator
-          style={styles.loader}
-          color={appColors.primaryColor}
-        />
-      ) : null}
-      {isCelebrity ? (
+      {isInitialLoading ? (
+        <SearchListSkeleton />
+      ) : isCelebrity ? (
         <FlashList
           style={styles.flatListContainer}
           data={celebrityQuery.data ?? []}
@@ -150,7 +147,7 @@ const DynamicSearch = ({ isVisible }: { isVisible: boolean }) => {
       ) : (
         <FlashList
           style={styles.flatListContainer}
-          data={(movieTvQuery.data ?? []) as SearchData[]}
+          data={movieTvQuery.data ?? []}
           renderItem={({ item }) => renderMovieTvItem(item)}
           keyExtractor={(item) => String(item.id)}
           ListEmptyComponent={
